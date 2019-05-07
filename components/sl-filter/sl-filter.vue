@@ -30,7 +30,7 @@
 			themeColor: {
 				type: String,
 				default () {
-					return '#D1372C'
+					return '#000000'
 				}
 			},
 		},

@@ -9400,7 +9400,7 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
         themeColor: {
           type: String,
           default: function _default() {
-            return '#D1372C';
+            return '#000000';
           } } },
 
 
