@@ -1,4 +1,4 @@
-#sl-filter 筛选
+=sl-filter 筛选
 筛选组件，组件名：sl-filter
 
 ###简介
