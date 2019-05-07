@@ -1,0 +1,18 @@
+
+.popup-layer {
+	position: fixed;
+	z-index: 999999;
+	background: rgba(0, 0, 0, .3);
+	height: 100%;
+	width: 100%;
+	left: 0px;
+}
+.popup-content {
+	position: fixed;
+	z-index: 1000000;
+	background: #FFFFFF;
+	-webkit-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	transition: all .3s ease;
+}
+

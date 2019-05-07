@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'sl-font';  
+  src: url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.eot');
+  src: url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.woff2') format('woff2'),
+  url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.svg#iconfont') format('svg');
+}
+
+.sl-font {
+  font-family: "sl-font" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sl-down:before {
+  content: "\e61a";
+}
+
+.sl-up:before {
+  content: "\e61c";
+}
+

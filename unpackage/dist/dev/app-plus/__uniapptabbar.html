@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <title>TabBar</title>
+
+        <script>
+            document.addEventListener('plusready', function() {
+                plus.webview.postMessageToUniNView({
+                    type: 'UniWebviewReady-' + plus.webview.currentWebview().id
+                }, '__uniapp__service');
+            })
+        </script>
+    </head>
+    <body>
+    </body>
+
+</html>

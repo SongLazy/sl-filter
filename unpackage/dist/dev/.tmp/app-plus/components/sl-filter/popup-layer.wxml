@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['ableClose',['$event']]]],['touchmove',[['',['$event']]]]]}}" hidden="{{!(ifshow)}}" class="popup-layer" bindtap="__e" catchtouchmove="__e" bind:__l="__l"><view data-ref="popRef" data-event-opts="{{[['tap',[['stopEvent',['$event']]]]]}}" class="popup-content vue-ref" style="{{(_location)}}" catchtap="__e"><slot></slot></view></view>
