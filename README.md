@@ -1,7 +1,7 @@
 # sl-filter 筛选
 筛选组件，组件名：sl-filter
 
-dcloud插件市场地址 [sl-filter](https://github.com/SongLazy/sl-filter)
+dcloud插件市场地址 [sl-filter](http://ext.dcloud.net.cn/plugin?id=381)
 
 ## 简介
 
