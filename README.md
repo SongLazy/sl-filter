@@ -1,6 +1,3 @@
-# sl-filter
-uni -app filter component
-
 #sl-filter 筛选
 筛选组件，组件名：sl-filter
 
@@ -68,30 +65,6 @@ uni -app filter component
 							{
 								'title': 'iOS开发',
 								'value': 'iOS'
-							},
-							{
-								'title': '测试工程师',
-								'value': '测试'
-							},
-							{
-								'title': 'UI设计',
-								'value': 'UI'
-							},
-							{
-								'title': 'Ruby开发',
-								'value': 'Ruby'
-							},
-							{
-								'title': 'C#开发',
-								'value': 'C#'
-							},
-							{
-								'title': 'PHP开发',
-								'value': 'php'
-							},
-							{
-								'title': 'Python开发',
-								'value': 'Python'
 							}
 						]
 
@@ -104,30 +77,6 @@ uni -app filter component
 						'detailList': [{
 								'title': '不限',
 								'value': ''
-							},
-							{
-								'title': '0~2000',
-								'value': '0~2000'
-							},
-							{
-								'title': '2000~3000',
-								'value': '2000~3000'
-							},
-							{
-								'title': '3000~4000',
-								'value': '3000~4000'
-							},
-							{
-								'title': '4000~5000',
-								'value': '4000~5000'
-							},
-							{
-								'title': '5000~6000',
-								'value': '5000~6000'
-							},
-							{
-								'title': '6000~7000',
-								'value': '6000~7000'
 							},
 							{
 								'title': '7000~8000',
@@ -176,19 +125,7 @@ uni -app filter component
 							{
 								'title': '条件5',
 								'value': 'test_5'
-							},
-							{
-								'title': '条件6',
-								'value': 'test_6'
-							},
-							{
-								'title': '条件7',
-								'value': 'test_7'
-							},
-							{
-								'title': '条件8',
-								'value': 'test_8'
-							},
+							}
 						]
 					},
 					{
@@ -228,4 +165,3 @@ uni -app filter component
 	}
 </script>
 ```
-
