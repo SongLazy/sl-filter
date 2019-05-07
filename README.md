@@ -12,7 +12,7 @@ uni -app filter component
 
 在`script`中引用组件
 
-```
+```Vue
  	import slFilter from '@/components/sl-filter/sl-filter.vue';
  	export default {
 		components: {
