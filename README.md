@@ -23,7 +23,7 @@ uni -app filter component
 
 ###使用示例
 
-```
+```Vue
 <template>
 	<view class="content">
 		<sl-filter :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
