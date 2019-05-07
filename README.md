@@ -47,6 +47,7 @@ themeColor | String | #000000 | 按钮选中颜色和确认按钮颜色
 title | String |  | 一级筛选菜单名称
 detailTitle | String |  | 子标题，可作为说明
 isMutiple | Boolean | false | 是否多选。为true时，可选择多个条件；为false时，只能单选。
+isSort | Boolean |  | 为true时，为单选排序筛选方式。不填写此字段为默认筛选方式。
 key | String |  | 字段名称，作为result返回的条件的key
 detailList | Array |  | 条件列表
 
