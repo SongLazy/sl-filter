@@ -1,11 +1,21 @@
 # sl-filter 筛选
 筛选组件，组件名：sl-filter
 
-### 简介
+dcloud组件地址 [sl-filter](https://github.com/SongLazy/sl-filter)
+
+## 简介
 
 一款使用简单的筛选组件
 
-### 使用方式
+>下拉菜单使用了 [popup 弹出层组件](https://ext.dcloud.net.cn/plugin?id=254)
+
+>作者：[1501324336@qq.com](https://ext.dcloud.net.cn/publisher?id=110319)
+
+> 感谢分享
+
+## 使用方式
+
+将`sl-filter`文件夹放入`components`文件夹下
 
 在`script`中引用组件
 
@@ -18,7 +28,112 @@
 	}
 ```
 
-### 使用示例
+## 属性说明
+
+### Props
+
+属性名 | 类型 | 默认值 | 说明
+---- | ---- | ---- | ----
+menuList | Array |  | 数组元素的个数为菜单item个数
+themeColor | String | #000000 | 按钮选中颜色和确认按钮颜色
+@result | function |  | 选中条件的回调。参数为回调的条件对象
+
+## 数据源
+
+### menuList
+
+属性名 | 类型 | 默认值 | 说明
+---- | ---- | ---- | ----
+title | String |  | 一级筛选菜单名称
+detailTitle | String |  | 子标题，可作为说明
+isMutiple | Boolean | false | 是否多选。为true时，可选择多个条件；为false时，只能单选。
+key | String |  | 字段名称，作为result返回的条件的key
+detailList | Array |  | 条件列表
+
+### detailList
+
+属性名 | 类型 | 默认值 | 说明
+---- | ---- | ---- | ----
+title | String |  | 条件名称
+value | String |  | 条件值
+
+### 数据源格式
+
+```Vue
+menuList: [
+	{
+		'title': '菜单1',
+		'detailTitle': '子标题1',
+		'isMutiple': true,
+		'key': 'key_1',
+		'detailList': [
+			{
+				'title': '不限',
+				'value': ''
+			},
+			{
+				'title': '条件_1_1',
+				'value': 'val_1_1'
+			},
+			{
+				'title': '条件1_2',
+				'value': 'val_1_2'
+			}
+		]
+	},
+	{
+		'title': '菜单2',
+		'detailTitle': '子标题2',
+		'key': 'key_2',
+		'isMutiple': false,
+		'detailList': [
+			{
+				'title': '不限',
+				'value': ''
+			},
+			{
+				'title': '条件_2_1',
+				'value': 'val_2_1'
+			},
+			{
+				'title': '条件_2_2',
+				'value': 'val_2_2'
+			}
+		]
+	},
+	{
+		'title': '菜单3',
+		'detailTitle': '子标题3',
+		'key': 'key_3',
+		'isMutiple': false,
+		'detailList': [
+			{
+				'title': '不限',
+				'value': ''
+			},
+			{
+				'title': '条件_3_1',
+				'value': 'val_3_1'
+			},
+			{
+				'title': '条件_3_2',
+				'value': 'val_3_2'
+			}
+		]
+	}
+]
+```
+
+## 特别说明
+
+* 请严格按照说明设置数据源
+* menuList元素的个数，即为最外层菜单的个数
+* 多选条件返回的数据类型是Array，其他为String
+* 目前，条件的第一项为“不限”，返回值可以自由设置。当点击了“不限”时，会清空当前条件菜单的条件，与“重置”功能一样。目前不可不设置。
+
+## 使用示例
+
+详细代码见 [github demo](https://github.com/SongLazy/sl-filter)
 
 ```Vue
 <template>
@@ -165,31 +280,5 @@
 	}
 </script>
 ```
-
-### 属性说明
-
-#### Props
-
-属性名 | 类型 | 默认值 | 说明
----- | ---- | ---- | ----
-menuList | Array |  | 数组元素的个数为菜单item个数
-themeColor | String | #000000 | 按钮选中颜色和确认按钮颜色
-
-#### 数据源
-
-##### menuList
-
-属性名 | 类型 | 默认值 | 说明
----- | ---- | ---- | ----
-title | String |  | 最外层菜单名称
-detailTitle | String |  | 子标题，可作为说明
-isMutiple | Boolean | false | 是否多选。为true时，可选择多个条件；为false时，只能单选。
-key | String |  | 字段名称，作为result返回的条件的key
-detailList | Array |  | 条件列表
-
-##### detailList
-
-属性名 | 类型 | 默认值 | 说明
----- | ---- | ---- | ----
-title | String |  | 条件名称
-value | String |  | 条件值
+## PS
+>如果能够帮助到你，希望能在github给个星星，谢谢~
