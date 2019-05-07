@@ -165,3 +165,31 @@
 	}
 </script>
 ```
+--
+### 属性说明
+
+####Props
+
+属性名 | 类型 | 默认值 | 说明
+---- | ---- | ---- | ----
+menuList | Array |  | 数组元素的个数为菜单item个数
+themeColor | String | #000000 | 按钮选中颜色和确认按钮颜色
+
+#### 数据源
+
+##### menuList
+
+属性名 | 类型 | 默认值 | 说明
+---- | ---- | ---- | ----
+title | String |  | 最外层菜单名称
+detailTitle | String |  | 子标题，可作为说明
+isMutiple | Boolean | false | 是否多选。为true时，可选择多个条件；为false时，只能单选。
+key | String |  | 字段名称，作为result返回的条件的key
+detailList | Array |  | 条件列表
+
+##### detailList
+
+属性名 | 类型 | 默认值 | 说明
+---- | ---- | ---- | ----
+title | String |  | 条件名称
+value | String |  | 条件值
