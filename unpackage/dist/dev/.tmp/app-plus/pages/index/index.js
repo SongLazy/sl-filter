@@ -178,7 +178,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '月薪',
         'key': 'salary',
         'isMutiple': true,
-        'detailTitle': '请选择月薪范围（可多选）',
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -299,7 +298,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/index/index.vue:202");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/index/index.vue:201");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 

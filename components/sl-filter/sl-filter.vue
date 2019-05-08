@@ -114,18 +114,22 @@
 
 <style>
 	@import 'iconfont/iconfont.css';
+
 	.select-tab {
 		border-bottom: #F7F7F7 1px solid;
 		display: flex;
 	}
+
 	.arrows {
 		margin-left: 5px;
 	}
+
 	.select-tab .select-tab-item {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
+
 	.select-tab .select-tab-item text {
 		color: #666666;
 		font-size: 14px;

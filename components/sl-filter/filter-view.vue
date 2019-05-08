@@ -12,7 +12,7 @@
 					</view>
 				</view>
 				<view v-else>
-					<view class="filter-content-title">
+					<view class="filter-content-title" v-if="item.detailTitle.length">
 						<text>{{item.detailTitle}}</text>
 					</view>
 					<view class="filter-content-detail">

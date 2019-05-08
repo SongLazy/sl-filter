@@ -78,7 +78,6 @@
 						'title': '月薪',
 						'key': 'salary',
 						'isMutiple': true,
-						'detailTitle': '请选择月薪范围（可多选）',
 						'detailList': [{
 								'title': '不限',
 								'value': ''

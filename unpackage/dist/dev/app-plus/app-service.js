@@ -1065,6 +1065,9 @@ Z([3,'item'])
 Z([[7],[3,'menuList']])
 Z(z[1])
 Z([[2,'=='],[[7],[3,'menuIndex']],[[7],[3,'index']]])
+Z([3,'filter-content'])
+Z([[6],[[7],[3,'item']],[3,'isSort']])
+Z([[6],[[6],[[7],[3,'item']],[3,'detailTitle']],[3,'length']])
 })(__WXML_GLOBAL__.ops_cached.$gwx_1);return __WXML_GLOBAL__.ops_cached.$gwx_1
 }
 function gz$gwx_2(){
@@ -1138,6 +1141,29 @@ var cI=_v()
 _(hG,cI)
 if(_oz(z,5,cF,fE,gg)){cI.wxVkey=1
 cs.push("./components/sl-filter/filter-view.wxml:block:1:158")
+cs.push("./components/sl-filter/filter-view.wxml:view:1:194")
+var oJ=_n('view')
+_rz(z,oJ,'class',6,cF,fE,gg)
+var lK=_v()
+_(oJ,lK)
+if(_oz(z,7,cF,fE,gg)){lK.wxVkey=1
+cs.push("./components/sl-filter/filter-view.wxml:block:1:223")
+cs.pop()
+}
+else{lK.wxVkey=2
+cs.push("./components/sl-filter/filter-view.wxml:block:1:766")
+var aL=_v()
+_(lK,aL)
+if(_oz(z,8,cF,fE,gg)){aL.wxVkey=1
+cs.push("./components/sl-filter/filter-view.wxml:block:1:787")
+cs.pop()
+}
+aL.wxXCkey=1
+cs.pop()
+}
+lK.wxXCkey=1
+cs.pop()
+_(cI,oJ)
 cs.pop()
 }
 cI.wxXCkey=1
@@ -1155,17 +1181,17 @@ d_[x[1]]={}
 var m1=function(e,s,r,gg){
 var z=gz$gwx_2()
 cs.push("./components/sl-filter/popup-layer.wxml:view:1:1")
-var lK=_mz(z,'view',['bind:__l',0,'bindtap',1,'catchtouchmove',1,'class',2,'data-event-opts',3,'hidden',4],[],e,s,gg)
+var eN=_mz(z,'view',['bind:__l',0,'bindtap',1,'catchtouchmove',1,'class',2,'data-event-opts',3,'hidden',4],[],e,s,gg)
 cs.push("./components/sl-filter/popup-layer.wxml:view:1:191")
-var aL=_mz(z,'view',['catchtap',6,'class',1,'data-event-opts',2,'data-ref',3,'style',4],[],e,s,gg)
+var bO=_mz(z,'view',['catchtap',6,'class',1,'data-event-opts',2,'data-ref',3,'style',4],[],e,s,gg)
 cs.push("./components/sl-filter/popup-layer.wxml:slot:1:343")
-var tM=_n('slot')
+var oP=_n('slot')
 cs.pop()
-_(aL,tM)
+_(bO,oP)
 cs.pop()
-_(lK,aL)
+_(eN,bO)
 cs.pop()
-_(r,lK)
+_(r,eN)
 return r
 }
 e_[x[1]]={f:m1,j:[],i:[],ti:[],ic:[]}
@@ -1173,17 +1199,17 @@ d_[x[2]]={}
 var m2=function(e,s,r,gg){
 var z=gz$gwx_3()
 cs.push("./components/sl-filter/sl-filter.wxml:view:1:1")
-var bO=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
+var oR=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 cs.push("./components/sl-filter/sl-filter.wxml:popup-layer:1:492")
-var oP=_mz(z,'popup-layer',['bind:close',2,'class',1,'data-event-opts',2,'data-ref',3,'direction',4,'isTransNav',5,'navHeight',6,'tabHeight',7,'vueSlots',8],[],e,s,gg)
+var fS=_mz(z,'popup-layer',['bind:close',2,'class',1,'data-event-opts',2,'data-ref',3,'direction',4,'isTransNav',5,'navHeight',6,'tabHeight',7,'vueSlots',8],[],e,s,gg)
 cs.push("./components/sl-filter/sl-filter.wxml:sl-filter-view:1:727")
-var xQ=_mz(z,'sl-filter-view',['bind:confirm',11,'class',1,'data-event-opts',2,'data-ref',3,'menuList',4,'themeColor',5],[],e,s,gg)
+var cT=_mz(z,'sl-filter-view',['bind:confirm',11,'class',1,'data-event-opts',2,'data-ref',3,'menuList',4,'themeColor',5],[],e,s,gg)
 cs.pop()
-_(oP,xQ)
+_(fS,cT)
 cs.pop()
-_(bO,oP)
+_(oR,fS)
 cs.pop()
-_(r,bO)
+_(r,oR)
 return r
 }
 e_[x[2]]={f:m2,j:[],i:[],ti:[],ic:[]}
@@ -1191,13 +1217,13 @@ d_[x[3]]={}
 var m3=function(e,s,r,gg){
 var z=gz$gwx_4()
 cs.push("./pages/index/index.wxml:view:1:1")
-var fS=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
+var oV=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 cs.push("./pages/index/index.wxml:sl-filter:1:38")
-var cT=_mz(z,'sl-filter',['bind:result',2,'color',1,'data-event-opts',2,'menuList',3,'themeColor',4],[],e,s,gg)
+var cW=_mz(z,'sl-filter',['bind:result',2,'color',1,'data-event-opts',2,'menuList',3,'themeColor',4],[],e,s,gg)
 cs.pop()
-_(fS,cT)
+_(oV,cW)
 cs.pop()
-_(r,fS)
+_(r,oV)
 return r
 }
 e_[x[3]]={f:m3,j:[],i:[],ti:[],ic:[]}
@@ -9168,7 +9194,7 @@ define('components/sl-filter/popup-layer.js',function(require, module, exports, 
         _location: function _location() {
           var positionValue = {
             'top': 'bottom:0px;width:100%;',
-            'bottom': 'top:${this.tabHeight}px;width:100%;',
+            'bottom': "top:".concat(this.tabHeight, "px;width:100%;"),
             'left': 'right:0px;height:100%;',
             'right': 'left:0px;height:100%;' };
 
@@ -9705,7 +9731,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '月薪',
         'key': 'salary',
         'isMutiple': true,
-        'detailTitle': '请选择月薪范围（可多选）',
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -9826,7 +9851,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/index/index.vue:202");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/index/index.vue:201");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 

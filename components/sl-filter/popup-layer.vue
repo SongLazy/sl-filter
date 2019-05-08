@@ -53,7 +53,7 @@
 			_location() {
 				const positionValue = {
 					'top': 'bottom:0px;width:100%;',
-					'bottom': 'top:${this.tabHeight}px;width:100%;',
+					'bottom': `top:${this.tabHeight}px;width:100%;`,
 					'left': 'right:0px;height:100%;',
 					'right': 'left:0px;height:100%;',
 				};
