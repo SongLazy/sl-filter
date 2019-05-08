@@ -15,8 +15,6 @@ dcloud插件市场地址 [sl-filter](http://ext.dcloud.net.cn/plugin?id=381)
 
 ## 使用方式
 
-将`sl-filter`文件夹放入`components`文件夹下
-
 在`script`中引用组件
 
 ```Vue
@@ -45,7 +43,7 @@ themeColor | String | #000000 | 按钮选中颜色和确认按钮颜色
 属性名 | 类型 | 默认值 | 说明
 ---- | ---- | ---- | ----
 title | String |  | 一级筛选菜单名称
-detailTitle | String |  | 子标题，可作为说明
+detailTitle | String |  | 子标题，可作为说明。可不设置此字段
 isMutiple | Boolean | false | 是否多选。为true时，可选择多个条件；为false时，只能单选。
 isSort | Boolean |  | 为true时，为单选排序筛选方式。不填写此字段为默认筛选方式。
 key | String |  | 字段名称，作为result返回的条件的key
@@ -284,3 +282,14 @@ menuList: [
 ```
 ## PS
 >如果能够帮助到你，希望能在github给个星星，谢谢~
+
+
+## 更新记录
+
+### 1.0.1
+
+修改了color属性未定义报错的bug
+
+### 1.0.2
+
+修复了当不设置子标题时，显示空行的bug
