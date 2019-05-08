@@ -1114,6 +1114,7 @@ __WXML_GLOBAL__.ops_cached.$gwx_4=[];
 Z([3,'__l'])
 Z([3,'content'])
 Z([3,'__e'])
+Z([[7],[3,'titleColor']])
 Z([[4],[[5],[[4],[[5],[[5],[1,'^result']],[[4],[[5],[[4],[[5],[1,'result']]]]]]]]])
 Z([[7],[3,'menuList']])
 Z([[7],[3,'themeColor']])
@@ -1192,7 +1193,7 @@ var z=gz$gwx_4()
 cs.push("./pages/index/index.wxml:view:1:1")
 var fS=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 cs.push("./pages/index/index.wxml:sl-filter:1:38")
-var cT=_mz(z,'sl-filter',['bind:result',2,'data-event-opts',1,'menuList',2,'themeColor',3],[],e,s,gg)
+var cT=_mz(z,'sl-filter',['bind:result',2,'color',1,'data-event-opts',2,'menuList',3,'themeColor',4],[],e,s,gg)
 cs.pop()
 _(fS,cT)
 cs.pop()
@@ -8865,12 +8866,6 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
 
       },
       props: {
-        color: {
-          type: String,
-          default: function _default() {
-            return '#666666';
-          } },
-
         themeColor: {
           type: String,
           default: function _default() {
@@ -9401,6 +9396,12 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
           type: String,
           default: function _default() {
             return '#000000';
+          } },
+
+        color: {
+          type: String,
+          default: function _default() {
+            return '#666666';
           } } },
 
 
@@ -9642,6 +9643,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   data: function data() {
     return {
       themeColor: '#000000',
+      titleColor: '#666666',
       filterResult: '',
       menuList: [{
         'title': '职位',
@@ -9824,7 +9826,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/index/index.vue:201");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/index/index.vue:202");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 

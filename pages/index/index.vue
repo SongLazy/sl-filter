@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<sl-filter :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
+		<sl-filter :color="titleColor" :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
 		<view class="text">
 			<text>{{filterResult}}</text>
 		</view>
@@ -16,6 +16,7 @@
 		data() {
 			return {
 				themeColor: '#000000',
+				titleColor: '#666666',
 				filterResult: '',
 				menuList: [{
 						'title': '职位',

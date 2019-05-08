@@ -33,6 +33,12 @@
 					return '#000000'
 				}
 			},
+			color: {
+				type: String,
+				default () {
+					return '#666666'
+				}
+			}
 		},
 
 		computed: {

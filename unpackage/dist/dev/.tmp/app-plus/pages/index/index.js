@@ -116,6 +116,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   data: function data() {
     return {
       themeColor: '#000000',
+      titleColor: '#666666',
       filterResult: '',
       menuList: [{
         'title': '职位',
@@ -298,7 +299,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/index/index.vue:201");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/index/index.vue:202");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 

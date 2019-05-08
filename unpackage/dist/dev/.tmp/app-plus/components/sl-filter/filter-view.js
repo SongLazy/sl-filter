@@ -147,12 +147,6 @@ var _default2 =
 
   },
   props: {
-    color: {
-      type: String,
-      default: function _default() {
-        return '#666666';
-      } },
-
     themeColor: {
       type: String,
       default: function _default() {

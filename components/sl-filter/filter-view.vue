@@ -47,12 +47,6 @@
 			};
 		},
 		props: {
-			color: {
-				type: String,
-				default () {
-					return '#666666'
-				}
-			},
 			themeColor: {
 				type: String,
 				default () {

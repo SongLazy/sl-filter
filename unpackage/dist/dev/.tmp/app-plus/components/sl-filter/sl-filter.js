@@ -131,6 +131,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       type: String,
       default: function _default() {
         return '#000000';
+      } },
+
+    color: {
+      type: String,
+      default: function _default() {
+        return '#666666';
       } } },
 
 
