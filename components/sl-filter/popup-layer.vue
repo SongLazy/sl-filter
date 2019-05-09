@@ -109,6 +109,7 @@
 		height: 100%;
 		width: 100%;
 		left: 0px;
+		overflow: hidden;
 	}
 
 	.popup-content {
