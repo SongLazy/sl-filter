@@ -5,7 +5,7 @@ dcloud插件市场地址 [sl-filter](http://ext.dcloud.net.cn/plugin?id=381)
 
 ## 简介
 
-一款使用简单的筛选组件
+一款使用简单的筛选组件，适配app、微信小程序、H5。
 
 >下拉菜单使用了 [popup 弹出层组件](https://ext.dcloud.net.cn/plugin?id=254)
 
