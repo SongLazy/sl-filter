@@ -1069,7 +1069,7 @@ Z(z[1])
 Z([[2,'=='],[[7],[3,'menuIndex']],[[7],[3,'index']]])
 Z([3,'filter-content'])
 Z([[6],[[7],[3,'item']],[3,'isSort']])
-Z([[6],[[6],[[7],[3,'item']],[3,'detailTitle']],[3,'length']])
+Z([[2,'&&'],[[6],[[7],[3,'item']],[3,'detailTitle']],[[6],[[6],[[7],[3,'item']],[3,'detailTitle']],[3,'length']]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_1);return __WXML_GLOBAL__.ops_cached.$gwx_1
 }
 function gz$gwx_2(){
@@ -8881,8 +8881,6 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
     //
     //
     //
-    //
-    //
     var _default2 =
     {
       data: function data() {
@@ -8927,6 +8925,7 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           this.selectDetailList = this.menuList[index].detailList;
         },
         itemTap: function itemTap(index, list, isMutiple, key) {
+
           if (isMutiple == true) {
             list[index].isSelected = !list[index].isSelected;
             if (index == 0) {
@@ -8958,6 +8957,9 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
               }
             }
           }
+
+
+
         },
         resetSelected: function resetSelected(list, key) {
           if (typeof this.result[key] == 'object') {
@@ -8972,6 +8974,9 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
               list[i].isSelected = false;
             }
           }
+
+
+
         },
         sortTap: function sortTap(index, list, key) {
           this.result[key] = list[index].value;
@@ -9197,6 +9202,9 @@ define('components/sl-filter/popup-layer.js',function(require, module, exports, 
           var positionValue = {
             'top': 'bottom:0px;width:100%;',
             'bottom': "top:".concat(this.tabHeight, "px;width:100%;"),
+
+
+
             'left': 'right:0px;height:100%;',
             'right': 'left:0px;height:100%;' };
 
@@ -9454,6 +9462,7 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
           return arr;
         } },
 
+
       onReady: function onReady() {
         var arr = [];
         for (var i = 0; i < this.menuList.length; i++) {
@@ -9463,6 +9472,20 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
         }
         this.statusList = arr;
       },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       data: function data() {
         return {
           down: 'sl-down',

@@ -5,19 +5,17 @@
 				<view v-if="item.isSort">
 					<view class="filter-content-list">
 						<view v-for="(detailItem,idx) in selectDetailList" :key="idx" :class="detailItem.isSelected?'filter-content-list-item-active':'filter-content-list-item-default'"
-						 :style="{'color': detailItem.isSelected?themeColor:'#666666'}" 
-						 @tap="sortTap(idx,selectDetailList,item.key)">
+						 :style="{'color': detailItem.isSelected?themeColor:'#666666'}" @tap="sortTap(idx,selectDetailList,item.key)">
 							<text>{{detailItem.title}}</text>
 						</view>
 					</view>
 				</view>
 				<view v-else>
-					<view class="filter-content-title" v-if="item.detailTitle.length">
+					<view class="filter-content-title" v-if="item.detailTitle && item.detailTitle.length">
 						<text>{{item.detailTitle}}</text>
 					</view>
 					<view class="filter-content-detail">
-						<text v-for="(detailItem,idx) in selectDetailList" :key="idx" class='filter-content-detail-item-default' 
-						:style="{'background-color':detailItem.isSelected?themeColor:'#FFFFFF','color':detailItem.isSelected?'#FFFFFF':'#666666'}"
+						<text v-for="(detailItem,idx) in selectDetailList" :key="idx" class='filter-content-detail-item-default' :style="{'background-color':detailItem.isSelected?themeColor:'#FFFFFF','color':detailItem.isSelected?'#FFFFFF':'#666666'}"
 						 @tap="itemTap(idx,selectDetailList,item.isMutiple,item.key)">
 							{{detailItem.title}}
 						</text>
@@ -60,14 +58,14 @@
 				}
 			}
 		},
-		computed:{
+		computed: {
 			selectedObj() {
 				let obj = {}
-				for (let i = 0;i < this.menuList.length;i++) {
+				for (let i = 0; i < this.menuList.length; i++) {
 					let item = this.menuList[i];
 					if (item.isMutiple) {
 						obj[item.key] = [];
-					} else{
+					} else {
 						obj[item.key] = '';
 					}
 				}
@@ -80,6 +78,7 @@
 				this.selectDetailList = this.menuList[index].detailList
 			},
 			itemTap(index, list, isMutiple, key) {
+				
 				if (isMutiple == true) {
 					list[index].isSelected = !list[index].isSelected;
 					if (index == 0) {
@@ -111,11 +110,14 @@
 						}
 					}
 				}
+				// #ifdef H5
+				this.$forceUpdate();
+				// #endif
 			},
 			resetSelected(list, key) {
 				if (typeof this.result[key] == 'object') {
 					this.result[key] = [];
-				} else{
+				} else {
 					this.result[key] = '';
 				}
 				for (let i = 0; i < list.length; i++) {
@@ -125,6 +127,9 @@
 						list[i].isSelected = false;
 					}
 				}
+				// #ifdef H5
+				this.$forceUpdate();
+				// #endif
 			},
 			sortTap(index, list, key) {
 				this.result[key] = list[index].value;
@@ -140,8 +145,8 @@
 			sureClick() {
 				this.$emit("confirm", this.result);
 			},
-			resetClick(list,key) {
-				this.resetSelected(list,key)
+			resetClick(list, key) {
+				this.resetSelected(list, key)
 			}
 		}
 	}

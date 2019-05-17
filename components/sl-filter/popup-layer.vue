@@ -54,6 +54,9 @@
 				const positionValue = {
 					'top': 'bottom:0px;width:100%;',
 					'bottom': `top:${this.tabHeight}px;width:100%;`,
+					// #ifdef H5
+					'bottom': 'top:94px;width:100%;',
+					// #endif
 					'left': 'right:0px;height:100%;',
 					'right': 'left:0px;height:100%;',
 				};

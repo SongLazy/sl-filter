@@ -61,6 +61,7 @@
 				return arr;
 			}
 		},
+		// #ifndef H5
 		onReady: function() {
 			let arr = [];
 			for (let i = 0; i < this.menuList.length; i++) {
@@ -70,6 +71,20 @@
 			}
 			this.statusList = arr;
 		},
+		// #endif
+		
+		// #ifdef H5
+		created:function(){
+			let arr = [];
+			for (let i = 0; i < this.menuList.length; i++) {
+				arr.push({
+					'isActive': false
+				});
+			}
+			this.statusList = arr;
+			
+		},
+		// #endif
 		data() {
 			return {
 				down: 'sl-down',

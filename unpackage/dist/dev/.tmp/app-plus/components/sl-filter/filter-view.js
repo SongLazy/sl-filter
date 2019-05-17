@@ -134,8 +134,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-//
-//
 var _default2 =
 {
   data: function data() {
@@ -180,6 +178,7 @@ var _default2 =
       this.selectDetailList = this.menuList[index].detailList;
     },
     itemTap: function itemTap(index, list, isMutiple, key) {
+
       if (isMutiple == true) {
         list[index].isSelected = !list[index].isSelected;
         if (index == 0) {
@@ -211,6 +210,9 @@ var _default2 =
           }
         }
       }
+
+
+
     },
     resetSelected: function resetSelected(list, key) {
       if (typeof this.result[key] == 'object') {
@@ -225,6 +227,9 @@ var _default2 =
           list[i].isSelected = false;
         }
       }
+
+
+
     },
     sortTap: function sortTap(index, list, key) {
       this.result[key] = list[index].value;
