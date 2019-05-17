@@ -13,12 +13,13 @@ if(typeof __WXML_GLOBAL__ !== 'undefined'){
 // var Behavior = Behavior || function() {};
 var $gwx;
   
-/*v0.5vv_20180905_syb_scopedata*/global.__wcc_version__='v0.5vv_20180905_syb_scopedata';global.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
+/*v0.5vv_20190312_syb_scopedata*/global.__wcc_version__='v0.5vv_20190312_syb_scopedata';global.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
 var $gwxc
 var $gaic={}
 $gwx=function(path,global){
 if(typeof global === 'undefined') global={};if(typeof __WXML_GLOBAL__ === 'undefined') {__WXML_GLOBAL__={};
-}function _(a,b){if(typeof(b)!='undefined')a.children.push(b);}
+}__WXML_GLOBAL__.modules = __WXML_GLOBAL__.modules || {};
+function _(a,b){if(typeof(b)!='undefined')a.children.push(b);}
 function _v(k){if(typeof(k)!='undefined')return {tag:'virtual','wxKey':k,children:[]};return {tag:'virtual',children:[]};}
 function _n(tag){$gwxc++;if($gwxc>=16000){throw 'Dom limit exceeded, please check if there\'s any mistake you\'ve made.'};return {tag:'wx-'+tag,attr:{},children:[],n:[],raw:{},generics:{}}}
 function _p(a,b){b&&a.properities.push(b);}
@@ -423,8 +424,11 @@ e.stack = e.stack.substring(0,e.stack.indexOf("\n", e.stack.lastIndexOf("at nv_"
 e.stack = e.stack.replace(/\snv_/g," "); 
 e.stack = $gstack(e.stack);	
 if(g.debugInfo)
+{
 e.stack += "\n "+" "+" "+" at "+g.debugInfo[0]+":"+g.debugInfo[1]+":"+g.debugInfo[2];
-throw e;
+console.error(e);
+}
+_r = undefined;
 }
 return should_pass_type_info && (_tb || _ta) ? wh.nh( _r, 'f' ) : _r;
 }
@@ -649,34 +653,32 @@ return false;
 function _da( node, attrname, opindex, raw, o )
 {
 var isaffected = false;
+var value = $gdc( raw, "", 2 );
+if ( o.ap && value && value.constructor===Function ) 
+{
+attrname = "$wxs:" + attrname; 
+node.attr["$gdc"] = $gdc;
+}
 if ( o.is_affected || _ca(raw) ) 
 {
 node.n.push( attrname );
 node.raw[attrname] = raw;
-var value = $gdc( raw, "", 2 );
-return value;
 }
-else
-{
-var value = $gdc( raw, "", 2 );
-return value;
-}
+node.attr[attrname] = value;
 }
 function _r( node, attrname, opindex, env, scope, global ) 
 {
 global.opindex=opindex;
 var o = {}, _env;
 var a = grb( z[opindex], env, scope, global, o );
-a = _da( node, attrname, opindex, a, o );
-node.attr[attrname] = a;
+_da( node, attrname, opindex, a, o );
 }
 function _rz( z, node, attrname, opindex, env, scope, global ) 
 {
 global.opindex=opindex;
 var o = {}, _env;
 var a = grb( z[opindex], env, scope, global, o );
-a = _da( node, attrname, opindex, a, o );
-node.attr[attrname] = a;
+_da( node, attrname, opindex, a, o );
 }
 function _o( opindex, env, scope, global )
 {
@@ -1048,7 +1050,7 @@ if(typeof(global.entrys)==='undefined')global.entrys={};e_=global.entrys;
 var d_={}
 if(typeof(global.defines)==='undefined')global.defines={};d_=global.defines;
 var f_={}
-if(typeof(global.modules)==='undefined')global.modules={};f_=global.modules;
+if(typeof(global.modules)==='undefined')global.modules={};f_=global.modules || {};
 var p_={}
 var cs
 __WXML_GLOBAL__.ops_cached = __WXML_GLOBAL__.ops_cached || {}
@@ -1125,7 +1127,7 @@ Z([[7],[3,'themeColor']])
 }
 __WXML_GLOBAL__.ops_set.$gwx=z;
 __WXML_GLOBAL__.ops_init.$gwx=true;
-var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);throw e;}
+var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);console.error(e);}
 }}}()
 var x=['./components/sl-filter/filter-view.wxml','./components/sl-filter/popup-layer.wxml','./components/sl-filter/sl-filter.wxml','./pages/index/index.wxml'];d_[x[0]]={}
 var m0=function(e,s,r,gg){

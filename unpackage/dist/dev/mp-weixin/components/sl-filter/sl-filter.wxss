@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'sl-font';  
+  src: url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.eot');
+  src: url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.woff2') format('woff2'),
+  url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.svg#iconfont') format('svg');
+}
+.sl-font {
+  font-family: "sl-font" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.sl-down:before {
+  content: "\E61A";
+}
+.sl-up:before {
+  content: "\E61C";
+}
+.select-tab {
+	border-bottom: #F7F7F7 1px solid;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+.arrows {
+	margin-left: 5px;
+}
+.select-tab .select-tab-item {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+.select-tab .select-tab-item text {
+	color: #666666;
+	font-size: 14px;
+}
+

@@ -171,6 +171,7 @@
 		margin-right: 10px;
 		margin-top: 10px;
 		display: inline-block;
+		font-size: 14px;
 	}
 
 	.filter-content-detail-item-default {
@@ -181,6 +182,7 @@
 		margin-right: 10px;
 		margin-top: 10px;
 		display: inline-block;
+		font-size: 14px;
 	}
 
 	.filter-content-footer {
@@ -196,6 +198,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		font-size: 16px;
 	}
 
 	.filter-content-list {
@@ -211,7 +214,7 @@
 
 	.filter-content-list-item-default text {
 		width: 90%;
-		font-size: 16px;
+		font-size: 14px;
 		display: inline-block;
 	}
 
@@ -222,7 +225,7 @@
 	}
 
 	.filter-content-list-item-active text {
-		font-size: 16px;
+		font-size: 14px;
 		width: 90%;
 		display: inline-block;
 	}

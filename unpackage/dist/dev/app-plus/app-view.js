@@ -11,12 +11,13 @@ var __WXML_GLOBAL__ = {
 };
 var $gwx;
 
-/*v0.5vv_20180905_syb_scopedata*/window.__wcc_version__='v0.5vv_20180905_syb_scopedata';window.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
+/*v0.5vv_20190312_syb_scopedata*/window.__wcc_version__='v0.5vv_20190312_syb_scopedata';window.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
 var $gwxc
 var $gaic={}
 $gwx=function(path,global){
 if(typeof global === 'undefined') global={};if(typeof __WXML_GLOBAL__ === 'undefined') {__WXML_GLOBAL__={};
-}function _(a,b){if(typeof(b)!='undefined')a.children.push(b);}
+}__WXML_GLOBAL__.modules = __WXML_GLOBAL__.modules || {};
+function _(a,b){if(typeof(b)!='undefined')a.children.push(b);}
 function _v(k){if(typeof(k)!='undefined')return {tag:'virtual','wxKey':k,children:[]};return {tag:'virtual',children:[]};}
 function _n(tag){$gwxc++;if($gwxc>=16000){throw 'Dom limit exceeded, please check if there\'s any mistake you\'ve made.'};return {tag:'wx-'+tag,attr:{},children:[],n:[],raw:{},generics:{}}}
 function _p(a,b){b&&a.properities.push(b);}
@@ -421,8 +422,11 @@ e.stack = e.stack.substring(0,e.stack.indexOf("\n", e.stack.lastIndexOf("at nv_"
 e.stack = e.stack.replace(/\snv_/g," "); 
 e.stack = $gstack(e.stack);	
 if(g.debugInfo)
+{
 e.stack += "\n "+" "+" "+" at "+g.debugInfo[0]+":"+g.debugInfo[1]+":"+g.debugInfo[2];
-throw e;
+console.error(e);
+}
+_r = undefined;
 }
 return should_pass_type_info && (_tb || _ta) ? wh.nh( _r, 'f' ) : _r;
 }
@@ -647,34 +651,32 @@ return false;
 function _da( node, attrname, opindex, raw, o )
 {
 var isaffected = false;
+var value = $gdc( raw, "", 2 );
+if ( o.ap && value && value.constructor===Function ) 
+{
+attrname = "$wxs:" + attrname; 
+node.attr["$gdc"] = $gdc;
+}
 if ( o.is_affected || _ca(raw) ) 
 {
 node.n.push( attrname );
 node.raw[attrname] = raw;
-var value = $gdc( raw, "", 2 );
-return value;
 }
-else
-{
-var value = $gdc( raw, "", 2 );
-return value;
-}
+node.attr[attrname] = value;
 }
 function _r( node, attrname, opindex, env, scope, global ) 
 {
 global.opindex=opindex;
 var o = {}, _env;
 var a = grb( z[opindex], env, scope, global, o );
-a = _da( node, attrname, opindex, a, o );
-node.attr[attrname] = a;
+_da( node, attrname, opindex, a, o );
 }
 function _rz( z, node, attrname, opindex, env, scope, global ) 
 {
 global.opindex=opindex;
 var o = {}, _env;
 var a = grb( z[opindex], env, scope, global, o );
-a = _da( node, attrname, opindex, a, o );
-node.attr[attrname] = a;
+_da( node, attrname, opindex, a, o );
 }
 function _o( opindex, env, scope, global )
 {
@@ -1049,7 +1051,7 @@ if(typeof(global.entrys)==='undefined')global.entrys={};e_=global.entrys;
 var d_={}
 if(typeof(global.defines)==='undefined')global.defines={};d_=global.defines;
 var f_={}
-if(typeof(global.modules)==='undefined')global.modules={};f_=global.modules;
+if(typeof(global.modules)==='undefined')global.modules={};f_=global.modules || {};
 var p_={}
 var cs
 __WXML_GLOBAL__.ops_cached = __WXML_GLOBAL__.ops_cached || {}
@@ -1176,7 +1178,7 @@ Z([a,[[7],[3,'filterResult']]])
 }
 __WXML_GLOBAL__.ops_set.$gwx=z;
 __WXML_GLOBAL__.ops_init.$gwx=true;
-var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);throw e;}
+var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);console.error(e);}
 }}}()
 var x=['./components/sl-filter/filter-view.wxml','./components/sl-filter/popup-layer.wxml','./components/sl-filter/sl-filter.wxml','./pages/index/index.wxml'];d_[x[0]]={}
 var m0=function(e,s,r,gg){
@@ -1447,10 +1449,10 @@ var BASE_DEVICE_WIDTH = 750;
 var isIOS=navigator.userAgent.match("iPhone");
 var deviceWidth = window.screen.width || 375;
 var deviceDPR = window.devicePixelRatio || 2;
-function checkDeviceWidth() {
+var checkDeviceWidth = window.__checkDeviceWidth__ || function() {
 var newDeviceWidth = window.screen.width || 375
 var newDeviceDPR = window.devicePixelRatio || 2
-const newDeviceHeight = window.screen.height || 375
+var newDeviceHeight = window.screen.height || 375
 if (window.screen.orientation && /^landscape/.test(window.screen.orientation.type || '')) newDeviceWidth = newDeviceHeight
 if (newDeviceWidth !== deviceWidth || newDeviceDPR !== deviceDPR) {
 deviceWidth = newDeviceWidth
@@ -1459,7 +1461,7 @@ deviceDPR = newDeviceDPR
 }
 checkDeviceWidth()
 var eps = 1e-4;
-function transformRPX(number, newDeviceWidth) {
+var transformRPX = window.__transformRpx__ || function(number, newDeviceWidth) {
 if ( number === 0 ) return 0;
 number = number / BASE_DEVICE_WIDTH * ( newDeviceWidth || deviceWidth );
 number = Math.floor(number + eps);
@@ -1545,7 +1547,7 @@ setCssToHead([])();setCssToHead([[2,0]],undefined,{path:"./app.wxss"})();
 __wxAppCode__['app.wxss']=setCssToHead([[2,0]],undefined,{path:"./app.wxss"});    
 __wxAppCode__['app.wxml']=$gwx('./app.wxml');
 
-__wxAppCode__['components/sl-filter/filter-view.wxss']=setCssToHead([".",[1],"filter-content { background-color: #F6F7F8; }\n.",[1],"filter-content-title { border-bottom: #EEEEEE 1px solid; padding: 10px 15px; font-size: 13px; color: #999999; }\n.",[1],"filter-content-detail { padding: 5px 15px; }\n.",[1],"filter-content-detail-item-active { background-color: #D1372C; color: #FFFFFF; padding: 5px 15px; border-radius: 20px; margin-right: 10px; margin-top: 10px; display: inline-block; }\n.",[1],"filter-content-detail-item-default { background-color: #FFFFFF; color: #666666; padding: 5px 15px; border-radius: 20px; margin-right: 10px; margin-top: 10px; display: inline-block; }\n.",[1],"filter-content-footer { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between; width: 100%; height: 45px; margin-top: 10px; }\n.",[1],"filter-content-footer-item { width: 50%; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; }\n.",[1],"filter-content-list { padding: 5px 15px; }\n.",[1],"filter-content-list-item-default { color: #666666; width: 100%; padding: 10px 0px; }\n.",[1],"filter-content-list-item-default wx-text { width: 90%; font-size: 16px; display: inline-block; }\n.",[1],"filter-content-list-item-active { color: #D1372C; width: 100%; padding: 10px 0px; }\n.",[1],"filter-content-list-item-active wx-text { font-size: 16px; width: 90%; display: inline-block; }\n.",[1],"filter-content-list-item-active:after { content: \x27\\2713\x27; }\n",],undefined,{path:"./components/sl-filter/filter-view.wxss"});    
+__wxAppCode__['components/sl-filter/filter-view.wxss']=setCssToHead([".",[1],"filter-content { background-color: #F6F7F8; }\n.",[1],"filter-content-title { border-bottom: #EEEEEE 1px solid; padding: 10px 15px; font-size: 13px; color: #999999; }\n.",[1],"filter-content-detail { padding: 5px 15px; }\n.",[1],"filter-content-detail-item-active { background-color: #D1372C; color: #FFFFFF; padding: 5px 15px; border-radius: 20px; margin-right: 10px; margin-top: 10px; display: inline-block; font-size: 14px; }\n.",[1],"filter-content-detail-item-default { background-color: #FFFFFF; color: #666666; padding: 5px 15px; border-radius: 20px; margin-right: 10px; margin-top: 10px; display: inline-block; font-size: 14px; }\n.",[1],"filter-content-footer { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between; width: 100%; height: 45px; margin-top: 10px; }\n.",[1],"filter-content-footer-item { width: 50%; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; font-size: 16px; }\n.",[1],"filter-content-list { padding: 5px 15px; }\n.",[1],"filter-content-list-item-default { color: #666666; width: 100%; padding: 10px 0px; }\n.",[1],"filter-content-list-item-default wx-text { width: 90%; font-size: 14px; display: inline-block; }\n.",[1],"filter-content-list-item-active { color: #D1372C; width: 100%; padding: 10px 0px; }\n.",[1],"filter-content-list-item-active wx-text { font-size: 14px; width: 90%; display: inline-block; }\n.",[1],"filter-content-list-item-active:after { content: \x27\\2713\x27; }\n",],undefined,{path:"./components/sl-filter/filter-view.wxss"});    
 __wxAppCode__['components/sl-filter/filter-view.wxml']=$gwx('./components/sl-filter/filter-view.wxml');
 
 __wxAppCode__['components/sl-filter/popup-layer.wxss']=setCssToHead([".",[1],"popup-layer { position: fixed; z-index: 999999; background: rgba(0, 0, 0, .3); height: 100%; width: 100%; left: 0px; overflow: hidden; }\n.",[1],"popup-content { position: fixed; z-index: 1000000; background: #FFFFFF; -webkit-transition: all .3s ease; -o-transition: all .3s ease; transition: all .3s ease; }\n",],undefined,{path:"./components/sl-filter/popup-layer.wxss"});    
