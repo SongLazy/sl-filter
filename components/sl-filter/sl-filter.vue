@@ -8,7 +8,7 @@
 		</view>
 		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="false" :navHeight="navHeight"
 		 :tabHeight="tabHeight">
-			<sl-filter-view :themeColor="themeColor" :menuList="menuListTemp" ref="slFilterView" @confirm="filterResult"></sl-filter-view>
+			<sl-filter-view :independence="independence" :themeColor="themeColor" :menuList="menuListTemp" ref="slFilterView" @confirm="filterResult"></sl-filter-view>
 		</popup-layer>
 	</view>
 
@@ -38,6 +38,10 @@
 				default () {
 					return '#666666'
 				}
+			},
+			independence: {
+				type: Boolean,
+				default: false
 			}
 		},
 
@@ -70,6 +74,7 @@
 				});
 			}
 			this.statusList = arr;
+			console.log('independence：',this.independence)
 		},
 		// #endif
 		

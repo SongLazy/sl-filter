@@ -41,7 +41,9 @@
 				selectArr: [],
 				result: {},
 				menuIndex: 0,
-				selectDetailList: []
+				selectDetailList: [],
+				independenceObj: {},
+				selectedKey: ''
 			};
 		},
 		props: {
@@ -56,6 +58,10 @@
 				default () {
 					return []
 				}
+			},
+			independence: {
+				type: Boolean,
+				default: false
 			}
 		},
 		computed: {
@@ -69,16 +75,38 @@
 						obj[item.key] = '';
 					}
 				}
-				return obj;
+				return obj
 			}
 		},
 		methods: {
 			menuTabClick(index) {
 				this.menuIndex = index;
-				this.selectDetailList = this.menuList[index].detailList
+				this.selectDetailList = this.menuList[index].detailList;
+				// 如果是独立菜单
+				if (this.independence) {
+					this.selectedKey = this.menuList[index].key;
+					if (JSON.stringify(this.independenceObj) == '{}') {
+						this.initIndependenceObj(index);
+					} else {
+						for (let key in this.independenceObj) {
+							if (key != this.selectedKey) {
+								this.initIndependenceObj(index);
+								this.resetSelected(this.menuList[index].detailList,this.selectedKey);
+							}
+						}
+					}
+				}
+			},
+			initIndependenceObj(index) {
+				this.independenceObj = {};
+				if (this.menuList[index].isMutiple) {
+					this.independenceObj[this.selectedKey] = [];
+				} else {
+					this.independenceObj[this.selectedKey] = '';
+				}
 			},
 			itemTap(index, list, isMutiple, key) {
-				
+
 				if (isMutiple == true) {
 					list[index].isSelected = !list[index].isSelected;
 					if (index == 0) {
@@ -86,21 +114,42 @@
 					} else {
 						list[0].isSelected = false
 						if (list[index].isSelected) {
-							this.selectedObj[key].push(list[index].value);
+							if (this.independence) {
+								this.independenceObj[this.selectedKey].push(list[index].value);
+							} else {
+								this.selectedObj[key].push(list[index].value);
+							}
 						} else {
 							list[index].isSelected = false;
-							var idx = this.selectedObj[key].indexOf(list[index].value);
-							this.selectedObj[key].splice(idx, 1);
+							if (this.independence) {
+								var idx = this.independenceObj[this.selectedKey].indexOf(list[index].value);
+								this.independenceObj[this.selectedKey].splice(idx, 1);
+							} else {
+								var idx = this.selectedObj[key].indexOf(list[index].value);
+								this.selectedObj[key].splice(idx, 1);
+							}
+
 						}
-						this.result = this.selectedObj;
+						if (this.independence) {
+							this.result = this.independenceObj;
+						} else {
+							this.result = this.selectedObj;
+						}
+
 					}
 				} else {
 					if (index == 0) {
 						this.resetSelected(list, key)
 					} else {
 						list[0].isSelected = false
-						this.selectedObj[key] = list[index].value;
-						this.result = this.selectedObj;
+						if (this.independence) {
+							this.independenceObj[this.selectedKey] = list[index].value;
+							this.result = this.independenceObj;
+						} else {
+							this.selectedObj[key] = list[index].value;
+							this.result = this.selectedObj;
+						}
+
 						for (let i = 0; i < list.length; i++) {
 							if (index == i) {
 								list[i].isSelected = true
@@ -132,7 +181,13 @@
 				// #endif
 			},
 			sortTap(index, list, key) {
-				this.result[key] = list[index].value;
+				if (this.independence) {
+					this.independenceObj[this.selectedKey] = list[index].value;
+					this.result = this.independenceObj;
+				} else{
+					this.result[key] = list[index].value;
+				}
+				
 				for (let i = 0; i < list.length; i++) {
 					if (index == i) {
 						list[i].isSelected = true;

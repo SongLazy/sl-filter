@@ -33,8 +33,20 @@ dcloud插件市场地址 [sl-filter](http://ext.dcloud.net.cn/plugin?id=381)
 属性名 | 类型 | 默认值 | 说明
 ---- | ---- | ---- | ----
 menuList | Array |  | 数组元素的个数为菜单item个数
+independence | Boolean | false | 是否为独立菜单，不设置该字段默认为并列菜单
+titleColor | String | #666666 | menuBar菜单标题颜色
 themeColor | String | #000000 | 按钮选中颜色和确认按钮颜色
 @result | function |  | 选中条件的回调。参数为回调的条件对象
+
+#### independence
+
+> 默认为false，并列菜单
+
+值 | 说明
+---- | ----
+true | 独立菜单。筛选菜单每个子菜单选择完毕点击确定回传当前菜单结果
+false | 并列菜单：筛选菜单各个子菜单选择完毕点击确定后回传所有结果
+
 
 ## 数据源
 
@@ -285,6 +297,24 @@ menuList: [
 
 
 ## 更新记录
+
+### 1.0.6
+
+更新日期：2019.05.19
+
+更新内容：新增属性：independence 默认值：false--并列菜单
+
+属性名 | 类型 | 默认值 | 说明
+---- | ---- | ---- | ----
+independence | Boolean | false | 是否为独立菜单，不设置该字段默认为并列菜单
+
+属性说明：
+
+值 | 说明
+---- | ----
+true | 独立菜单。筛选菜单每个子菜单选择完毕点击确定回传当前菜单结果
+false | 并列菜单：筛选菜单各个子菜单选择完毕点击确定后回传所有结果
+
 
 ### 1.0.5
 

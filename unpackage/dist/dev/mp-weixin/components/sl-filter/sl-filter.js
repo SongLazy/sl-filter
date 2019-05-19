@@ -137,7 +137,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       type: String,
       default: function _default() {
         return '#666666';
-      } } },
+      } },
+
+    independence: {
+      type: Boolean,
+      default: false } },
 
 
 
@@ -161,6 +165,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       return arr;
     } },
 
+
   onReady: function onReady() {
     var arr = [];
     for (var i = 0; i < this.menuList.length; i++) {
@@ -169,7 +174,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
     }
     this.statusList = arr;
+    console.log('independence：', this.independence);
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   data: function data() {
     return {
       down: 'sl-down',

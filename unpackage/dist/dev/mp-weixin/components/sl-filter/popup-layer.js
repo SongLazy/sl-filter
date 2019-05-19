@@ -154,6 +154,9 @@ var _default =
       var positionValue = {
         'top': 'bottom:0px;width:100%;',
         'bottom': "top:".concat(this.tabHeight, "px;width:100%;"),
+
+
+
         'left': 'right:0px;height:100%;',
         'right': 'left:0px;height:100%;' };
 

@@ -1157,6 +1157,7 @@ Z(z[8])
 Z(z[16])
 Z([[4],[[5],[[4],[[5],[[5],[1,'^confirm']],[[4],[[5],[[4],[[5],[1,'filterResult']]]]]]]]])
 Z([3,'slFilterView'])
+Z([[7],[3,'independence']])
 Z([[7],[3,'menuListTemp']])
 Z([[7],[3,'themeColor']])
 })(__WXML_GLOBAL__.ops_cached.$gwx_3);return __WXML_GLOBAL__.ops_cached.$gwx_3
@@ -1176,11 +1177,50 @@ Z([3,'text'])
 Z([a,[[7],[3,'filterResult']]])
 })(__WXML_GLOBAL__.ops_cached.$gwx_4);return __WXML_GLOBAL__.ops_cached.$gwx_4
 }
+function gz$gwx_5(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_5)return __WXML_GLOBAL__.ops_cached.$gwx_5
+__WXML_GLOBAL__.ops_cached.$gwx_5=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'__l'])
+Z([3,'content'])
+Z([3,'__e'])
+Z([[7],[3,'titleColor']])
+Z([[4],[[5],[[4],[[5],[[5],[1,'^result']],[[4],[[5],[[4],[[5],[1,'result']]]]]]]]])
+Z([1,true])
+Z([[7],[3,'menuList']])
+Z([[7],[3,'themeColor']])
+Z([3,'text'])
+Z([a,[[7],[3,'filterResult']]])
+})(__WXML_GLOBAL__.ops_cached.$gwx_5);return __WXML_GLOBAL__.ops_cached.$gwx_5
+}
+function gz$gwx_6(){
+if( __WXML_GLOBAL__.ops_cached.$gwx_6)return __WXML_GLOBAL__.ops_cached.$gwx_6
+__WXML_GLOBAL__.ops_cached.$gwx_6=[];
+(function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'__l'])
+Z([3,'content'])
+Z([3,'demo-content'])
+Z([3,'demo-cell'])
+Z([3,'__e'])
+Z([3,'demo-cell-t'])
+Z([[4],[[5],[[4],[[5],[[5],[1,'tap']],[[4],[[5],[[4],[[5],[1,'toApposition']]]]]]]]])
+Z([3,'并列菜单'])
+Z([3,'demo-cell-b'])
+Z([3,'并列菜单：筛选菜单各个子菜单选择完毕点击确定后回传所有结果'])
+Z(z[3])
+Z(z[4])
+Z(z[5])
+Z([[4],[[5],[[4],[[5],[[5],[1,'tap']],[[4],[[5],[[4],[[5],[1,'toIndependence']]]]]]]]])
+Z([3,'独立菜单'])
+Z(z[8])
+Z([3,'独立菜单：设置插件属性 :independence\x3d\x22true\x22。筛选菜单每个子菜单选择完毕点击确定回传当前菜单结果'])
+})(__WXML_GLOBAL__.ops_cached.$gwx_6);return __WXML_GLOBAL__.ops_cached.$gwx_6
+}
 __WXML_GLOBAL__.ops_set.$gwx=z;
 __WXML_GLOBAL__.ops_init.$gwx=true;
 var nv_require=function(){var nnm={};var nom={};return function(n){return function(){if(!nnm[n]) return undefined;try{if(!nom[n])nom[n]=nnm[n]();return nom[n];}catch(e){e.message=e.message.replace(/nv_/g,'');var tmp = e.stack.substring(0,e.stack.lastIndexOf(n));e.stack = tmp.substring(0,tmp.lastIndexOf('\n'));e.stack = e.stack.replace(/\snv_/g,' ');e.stack = $gstack(e.stack);e.stack += '\n    at ' + n.substring(2);console.error(e);}
 }}}()
-var x=['./components/sl-filter/filter-view.wxml','./components/sl-filter/popup-layer.wxml','./components/sl-filter/sl-filter.wxml','./pages/index/index.wxml'];d_[x[0]]={}
+var x=['./components/sl-filter/filter-view.wxml','./components/sl-filter/popup-layer.wxml','./components/sl-filter/sl-filter.wxml','./pages/apposition/index.wxml','./pages/independence/index.wxml','./pages/index/index.wxml'];d_[x[0]]={}
 var m0=function(e,s,r,gg){
 var z=gz$gwx_1()
 cs.push("./components/sl-filter/filter-view.wxml:view:1:1")
@@ -1385,7 +1425,7 @@ _(oNB,cOB)
 cs.push("./components/sl-filter/sl-filter.wxml:popup-layer:1:492")
 var cZB=_mz(z,'popup-layer',['bind:close',15,'class',1,'data-event-opts',2,'data-ref',3,'direction',4,'isTransNav',5,'navHeight',6,'tabHeight',7,'vueSlots',8],[],e,s,gg)
 cs.push("./components/sl-filter/sl-filter.wxml:sl-filter-view:1:727")
-var h1B=_mz(z,'sl-filter-view',['bind:confirm',24,'class',1,'data-event-opts',2,'data-ref',3,'menuList',4,'themeColor',5],[],e,s,gg)
+var h1B=_mz(z,'sl-filter-view',['bind:confirm',24,'class',1,'data-event-opts',2,'data-ref',3,'independence',4,'menuList',5,'themeColor',6],[],e,s,gg)
 cs.pop()
 _(cZB,h1B)
 cs.pop()
@@ -1398,16 +1438,16 @@ e_[x[2]]={f:m2,j:[],i:[],ti:[],ic:[]}
 d_[x[3]]={}
 var m3=function(e,s,r,gg){
 var z=gz$gwx_4()
-cs.push("./pages/index/index.wxml:view:1:1")
+cs.push("./pages/apposition/index.wxml:view:1:1")
 var c3B=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
-cs.push("./pages/index/index.wxml:sl-filter:1:38")
+cs.push("./pages/apposition/index.wxml:sl-filter:1:38")
 var o4B=_mz(z,'sl-filter',['bind:result',2,'color',1,'data-event-opts',2,'menuList',3,'themeColor',4],[],e,s,gg)
 cs.pop()
 _(c3B,o4B)
-cs.push("./pages/index/index.wxml:view:1:203")
+cs.push("./pages/apposition/index.wxml:view:1:203")
 var l5B=_n('view')
 _rz(z,l5B,'class',7,e,s,gg)
-cs.push("./pages/index/index.wxml:text:1:222")
+cs.push("./pages/apposition/index.wxml:text:1:222")
 var a6B=_n('text')
 var t7B=_oz(z,8,e,s,gg)
 _(a6B,t7B)
@@ -1420,6 +1460,98 @@ _(r,c3B)
 return r
 }
 e_[x[3]]={f:m3,j:[],i:[],ti:[],ic:[]}
+d_[x[4]]={}
+var m4=function(e,s,r,gg){
+var z=gz$gwx_5()
+cs.push("./pages/independence/index.wxml:view:1:1")
+var b9B=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
+cs.push("./pages/independence/index.wxml:sl-filter:1:38")
+var o0B=_mz(z,'sl-filter',['bind:result',2,'color',1,'data-event-opts',2,'independence',3,'menuList',4,'themeColor',5],[],e,s,gg)
+cs.pop()
+_(b9B,o0B)
+cs.push("./pages/independence/index.wxml:view:1:227")
+var xAC=_n('view')
+_rz(z,xAC,'class',8,e,s,gg)
+cs.push("./pages/independence/index.wxml:text:1:246")
+var oBC=_n('text')
+var fCC=_oz(z,9,e,s,gg)
+_(oBC,fCC)
+cs.pop()
+_(xAC,oBC)
+cs.pop()
+_(b9B,xAC)
+cs.pop()
+_(r,b9B)
+return r
+}
+e_[x[4]]={f:m4,j:[],i:[],ti:[],ic:[]}
+d_[x[5]]={}
+var m5=function(e,s,r,gg){
+var z=gz$gwx_6()
+cs.push("./pages/index/index.wxml:view:1:1")
+var hEC=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
+cs.push("./pages/index/index.wxml:view:1:38")
+var oFC=_n('view')
+_rz(z,oFC,'class',2,e,s,gg)
+cs.push("./pages/index/index.wxml:view:1:65")
+var cGC=_n('view')
+_rz(z,cGC,'class',3,e,s,gg)
+cs.push("./pages/index/index.wxml:view:1:89")
+var oHC=_mz(z,'view',['bindtap',4,'class',1,'data-event-opts',2],[],e,s,gg)
+cs.push("./pages/index/index.wxml:text:1:180")
+var lIC=_n('text')
+var aJC=_oz(z,7,e,s,gg)
+_(lIC,aJC)
+cs.pop()
+_(oHC,lIC)
+cs.pop()
+_(cGC,oHC)
+cs.push("./pages/index/index.wxml:view:1:212")
+var tKC=_n('view')
+_rz(z,tKC,'class',8,e,s,gg)
+cs.push("./pages/index/index.wxml:text:1:238")
+var eLC=_n('text')
+var bMC=_oz(z,9,e,s,gg)
+_(eLC,bMC)
+cs.pop()
+_(tKC,eLC)
+cs.pop()
+_(cGC,tKC)
+cs.pop()
+_(oFC,cGC)
+cs.push("./pages/index/index.wxml:view:1:352")
+var oNC=_n('view')
+_rz(z,oNC,'class',10,e,s,gg)
+cs.push("./pages/index/index.wxml:view:1:376")
+var xOC=_mz(z,'view',['bindtap',11,'class',1,'data-event-opts',2],[],e,s,gg)
+cs.push("./pages/index/index.wxml:text:1:469")
+var oPC=_n('text')
+var fQC=_oz(z,14,e,s,gg)
+_(oPC,fQC)
+cs.pop()
+_(xOC,oPC)
+cs.pop()
+_(oNC,xOC)
+cs.push("./pages/index/index.wxml:view:1:501")
+var cRC=_n('view')
+_rz(z,cRC,'class',15,e,s,gg)
+cs.push("./pages/index/index.wxml:text:1:527")
+var hSC=_n('text')
+var oTC=_oz(z,16,e,s,gg)
+_(hSC,oTC)
+cs.pop()
+_(cRC,hSC)
+cs.pop()
+_(oNC,cRC)
+cs.pop()
+_(oFC,oNC)
+cs.pop()
+_(hEC,oFC)
+cs.pop()
+_(r,hEC)
+return r
+}
+e_[x[5]]={f:m5,j:[],i:[],ti:[],ic:[]}
 if(path&&e_[path]){
 window.__wxml_comp_version__=0.02
 return function(env,dd,global){$gwxc=0;var root={"tag":"wx-page"};root.children=[]
@@ -1556,12 +1688,20 @@ __wxAppCode__['components/sl-filter/popup-layer.wxml']=$gwx('./components/sl-fil
 __wxAppCode__['components/sl-filter/sl-filter.wxss']=setCssToHead(["@font-face { font-family: \x27sl-font\x27; src: url(\x27https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.eot\x27); src: url(\x27https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.eot?#iefix\x27) format(\x27embedded-opentype\x27),\n  url(\x27https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.woff2\x27) format(\x27woff2\x27),\n  url(\x27https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.woff\x27) format(\x27woff\x27),\n  url(\x27https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.ttf\x27) format(\x27truetype\x27),\n  url(\x27https://at.alicdn.com/t/font_1176148_b6fcwdlhahp.svg#iconfont\x27) format(\x27svg\x27); }\n.",[1],"sl-font { font-family: \x22sl-font\x22 !important; font-size: 16px; font-style: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }\n.",[1],"sl-down:before { content: \x22\\E61A\x22; }\n.",[1],"sl-up:before { content: \x22\\E61C\x22; }\n.",[1],"select-tab { border-bottom: #F7F7F7 1px solid; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; }\n.",[1],"arrows { margin-left: 5px; }\n.",[1],"select-tab .",[1],"select-tab-item { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; }\n.",[1],"select-tab .",[1],"select-tab-item wx-text { color: #666666; font-size: 14px; }\n",],undefined,{path:"./components/sl-filter/sl-filter.wxss"});    
 __wxAppCode__['components/sl-filter/sl-filter.wxml']=$gwx('./components/sl-filter/sl-filter.wxml');
 
-__wxAppCode__['pages/index/index.wxss']=setCssToHead([".",[1],"text { margin-top: 50px; margin-left: 20px; width: 100%; }\n",],undefined,{path:"./pages/index/index.wxss"});    
+__wxAppCode__['pages/apposition/index.wxss']=setCssToHead([".",[1],"text { margin-top: 50px; margin-left: 20px; width: 100%; }\n",],undefined,{path:"./pages/apposition/index.wxss"});    
+__wxAppCode__['pages/apposition/index.wxml']=$gwx('./pages/apposition/index.wxml');
+
+__wxAppCode__['pages/independence/index.wxss']=setCssToHead([".",[1],"text { margin-top: 50px; margin-left: 20px; width: 100%; }\n",],undefined,{path:"./pages/independence/index.wxss"});    
+__wxAppCode__['pages/independence/index.wxml']=$gwx('./pages/independence/index.wxml');
+
+__wxAppCode__['pages/index/index.wxss']=setCssToHead([".",[1],"demo-content { margin: 50px 15px; }\n.",[1],"demo-cell { padding-top: 50px; }\n.",[1],"demo-cell-t { padding: 10px; border-radius: 5px; border: #EEEEEE 1px solid; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; }\n.",[1],"demo-cell-t wx-text { font-size: 16px; color: #333333; }\n.",[1],"demo-cell-b { margin-top: 10px; }\n.",[1],"demo-cell-b wx-text { font-size: 13px; color: #999999; }\n",],undefined,{path:"./pages/index/index.wxss"});    
 __wxAppCode__['pages/index/index.wxml']=$gwx('./pages/index/index.wxml');
 
 ;var __pageFrameEndTime__ = Date.now();
 (function() {
-        plus.webview.postMessageToUniNView({
-            type: 'UniWebviewReady-' + plus.webview.currentWebview().id
-        }, '__uniapp__service');
+        window.UniLaunchWebviewReady = function(isWebviewReady){
+          // !isWebviewReady && console.log('launchWebview fallback ready')
+          plus.webview.postMessageToUniNView({type: 'UniWebviewReady-' + plus.webview.currentWebview().id}, '__uniapp__service');
+        }
+        UniLaunchWebviewReady(true);
 })();

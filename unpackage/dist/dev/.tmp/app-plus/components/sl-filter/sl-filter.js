@@ -137,7 +137,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       type: String,
       default: function _default() {
         return '#666666';
-      } } },
+      } },
+
+    independence: {
+      type: Boolean,
+      default: false } },
 
 
 
@@ -170,6 +174,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
     }
     this.statusList = arr;
+    console.log('independence：', this.independence, " at components/sl-filter/sl-filter.vue:77");
   },
 
 

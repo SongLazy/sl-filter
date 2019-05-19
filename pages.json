@@ -5,6 +5,18 @@
 			"style": {
 				"navigationBarTitleText": "sl-filter"
 			}
+		},
+		{
+			"path": "pages/apposition/index",
+			"style": {
+				"navigationBarTitleText": "菜单并列"
+			}
+		},
+		{
+			"path": "pages/independence/index",
+			"style": {
+				"navigationBarTitleText": "菜单独立"
+			}
 		}
 	],
 	"globalStyle": {

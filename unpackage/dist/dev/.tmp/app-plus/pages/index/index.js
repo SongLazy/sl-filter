@@ -98,209 +98,49 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var slFilter = function slFilter() {return __webpack_require__.e(/*! import() | components/sl-filter/sl-filter */ "components/sl-filter/sl-filter").then(__webpack_require__.bind(null, /*! @/components/sl-filter/sl-filter.vue */ "../../../../../../Users/songlei/Desktop/dggl/sl-filter/components/sl-filter/sl-filter.vue"));};var _default =
-
-
-
-
-
-
-
-
-
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default =
 {
-  components: {
-    slFilter: slFilter },
-
   data: function data() {
-    return {
-      themeColor: '#000000',
-      titleColor: '#666666',
-      filterResult: '',
-      menuList: [{
-        'title': '职位',
-        'detailTitle': '请选择职位类型（可多选）',
-        'isMutiple': true,
-        'key': 'jobType',
-        'detailList': [{
-          'title': '不限',
-          'value': '' },
+    return {};
 
-        {
-          'title': 'uni-app',
-          'value': 'uni-app' },
-
-        {
-          'title': 'java开发',
-          'value': 'java' },
-
-        {
-          'title': 'web开发',
-          'value': 'web' },
-
-        {
-          'title': 'Android开发',
-          'value': 'Android' },
-
-        {
-          'title': 'iOS开发',
-          'value': 'iOS' },
-
-        {
-          'title': '测试工程师',
-          'value': '测试' },
-
-        {
-          'title': 'UI设计',
-          'value': 'UI' },
-
-        {
-          'title': 'Ruby开发',
-          'value': 'Ruby' },
-
-        {
-          'title': 'C#开发',
-          'value': 'C#' },
-
-        {
-          'title': 'PHP开发',
-          'value': 'php' },
-
-        {
-          'title': 'Python开发',
-          'value': 'Python' }] },
-
-
-
-
-      {
-        'title': '月薪',
-        'key': 'salary',
-        'isMutiple': true,
-        'detailList': [{
-          'title': '不限',
-          'value': '' },
-
-        {
-          'title': '0~2000',
-          'value': '0~2000' },
-
-        {
-          'title': '2000~3000',
-          'value': '2000~3000' },
-
-        {
-          'title': '3000~4000',
-          'value': '3000~4000' },
-
-        {
-          'title': '4000~5000',
-          'value': '4000~5000' },
-
-        {
-          'title': '5000~6000',
-          'value': '5000~6000' },
-
-        {
-          'title': '6000~7000',
-          'value': '6000~7000' },
-
-        {
-          'title': '7000~8000',
-          'value': '7000~8000' },
-
-        {
-          'title': '8000~9000',
-          'value': '8000~9000' },
-
-        {
-          'title': '9000~10000',
-          'value': '9000~10000' },
-
-        {
-          'title': '10000以上',
-          'value': '10000~1000000' }] },
-
-
-
-
-      {
-        'title': '单选',
-        'key': 'single',
-        'isMutiple': false,
-        'detailTitle': '请选择（单选）',
-        'detailList': [{
-          'title': '不限',
-          'value': '' },
-
-        {
-          'title': '条件1',
-          'value': 'test_1' },
-
-        {
-          'title': '条件2',
-          'value': 'test_2' },
-
-        {
-          'title': '条件3',
-          'value': 'test_3' },
-
-        {
-          'title': '条件4',
-          'value': 'test_4' },
-
-        {
-          'title': '条件5',
-          'value': 'test_5' },
-
-        {
-          'title': '条件6',
-          'value': 'test_6' },
-
-        {
-          'title': '条件7',
-          'value': 'test_7' },
-
-        {
-          'title': '条件8',
-          'value': 'test_8' }] },
-
-
-
-      {
-        'title': '排序',
-        'key': 'sort',
-        'isSort': true,
-        'detailList': [{
-          'title': '默认排序',
-          'value': '' },
-
-        {
-          'title': '发布时间',
-          'value': 'add_time' },
-
-        {
-          'title': '薪资最高',
-          'value': 'wages_up' },
-
-        {
-          'title': '离我最近',
-          'value': 'location' }] }] };
-
-
-
-
-
-  },
-  onLoad: function onLoad() {
 
   },
   methods: {
-    result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/index/index.vue:201");
-      this.filterResult = JSON.stringify(val, null, 2);
+    toApposition: function toApposition() {
+      uni.navigateTo({
+        url: '../apposition/index' });
+
+    },
+    toIndependence: function toIndependence() {
+      uni.navigateTo({
+        url: '../independence/index' });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["default"]))
 
 /***/ }),
 

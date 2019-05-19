@@ -36,7 +36,8 @@
     "popGesture": "close",
     "launchwebview": {
       "render": "always",
-      "id": "1"
+      "id": "1",
+      "kernel": "WKWebview"
     },
     "statusbar": {
       "immersed": "supportedDevice",
@@ -82,7 +83,7 @@
     },
     "allowsInlineMediaPlayback": true,
     "uni-app": {
-      "compilerVersion": "1.9.4",
+      "compilerVersion": "1.9.8",
       "control": "v8"
     }
   }

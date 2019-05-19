@@ -6,9 +6,10 @@
 
         <script>
             document.addEventListener('plusready', function() {
-                plus.webview.postMessageToUniNView({
-                    type: 'UniWebviewReady-' + plus.webview.currentWebview().id
-                }, '__uniapp__service');
+                window.UniLaunchWebviewReady = function(isWebviewReady){
+                  plus.webview.postMessageToUniNView({type: 'UniWebviewReady-' + plus.webview.currentWebview().id}, '__uniapp__service');
+                }
+                UniLaunchWebviewReady(true);
             })
         </script>
     </head>

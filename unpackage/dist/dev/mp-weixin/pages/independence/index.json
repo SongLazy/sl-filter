@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "菜单独立",
+  "usingComponents": {
+    "sl-filter": "/components/sl-filter/sl-filter"
+  }
+}

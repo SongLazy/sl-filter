@@ -1,7 +1,32 @@
 
-.text {
-	margin-top: 50px;
-	margin-left: 20px;
-	width: 100%;
+.demo-content {
+	margin: 50px 15px;
+}
+.demo-cell {
+	padding-top: 50px;
+}
+.demo-cell-t {
+	padding: 10px;
+	border-radius: 5px;
+	border: #EEEEEE 1px solid;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+.demo-cell-t text {
+	font-size: 16px;
+	color: #333333;
+}
+.demo-cell-b {
+	margin-top: 10px;
+}
+.demo-cell-b text {
+	font-size: 13px;
+	color: #999999;
 }
 

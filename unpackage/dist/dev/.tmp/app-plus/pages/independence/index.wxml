@@ -1,0 +1,1 @@
+<view class="content" bind:__l="__l"><sl-filter independence="{{true}}" color="{{titleColor}}" themeColor="{{themeColor}}" menuList="{{menuList}}" data-event-opts="{{[['^result',[['result']]]]}}" bind:result="__e"></sl-filter><view class="text"><text>{{filterResult}}</text></view></view>

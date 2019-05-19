@@ -1,6 +1,8 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/apposition/index",
+    "pages/independence/index"
   ],
   "subPackages": [],
   "window": {
@@ -14,6 +16,6 @@
     "autoclose": false
   },
   "appname": "sl-filter",
-  "compilerVersion": "1.9.4",
+  "compilerVersion": "1.9.8",
   "usingComponents": {}
 }

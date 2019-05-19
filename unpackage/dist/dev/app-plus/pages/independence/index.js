@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"text { margin-top: 50px; margin-left: 20px; width: 100%; }\n",],undefined,{path:"./pages/independence/index.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/independence/index.wxml') } }));

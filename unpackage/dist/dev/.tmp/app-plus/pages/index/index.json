@@ -1,6 +1,4 @@
 {
   "navigationBarTitleText": "sl-filter",
-  "usingComponents": {
-    "sl-filter": "/components/sl-filter/sl-filter"
-  }
+  "usingComponents": {}
 }
