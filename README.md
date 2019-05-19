@@ -17,11 +17,11 @@ dcloud插件市场地址 [sl-filter](http://ext.dcloud.net.cn/plugin?id=381)
 
 ### 并列菜单
 
-![apposition]('https://github.com/SongLazy/sl-filter/blob/master/effect/sl-filter1.gif?raw=true' '并列菜单')
+![apposition](https://github.com/SongLazy/sl-filter/blob/master/effect/sl-filter1.gif?raw=true '并列菜单')
 
 ### 独立菜单
 
-![independence]('https://github.com/SongLazy/sl-filter/blob/master/effect/sl-filter2.gif?raw=true' '独立菜单')
+![independence](https://github.com/SongLazy/sl-filter/blob/master/effect/sl-filter2.gif?raw=true '独立菜单')
 
 ## 使用方式
 
