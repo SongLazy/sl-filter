@@ -74,7 +74,6 @@
 				});
 			}
 			this.statusList = arr;
-			console.log('independence：',this.independence)
 		},
 		// #endif
 		

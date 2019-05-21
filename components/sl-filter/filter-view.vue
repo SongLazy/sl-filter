@@ -82,9 +82,9 @@
 			menuTabClick(index) {
 				this.menuIndex = index;
 				this.selectDetailList = this.menuList[index].detailList;
+				this.selectedKey = this.menuList[index].key;
 				// 如果是独立菜单
 				if (this.independence && !this.menuList[index].isSort) {
-					this.selectedKey = this.menuList[index].key;
 					if (JSON.stringify(this.independenceObj) == '{}') {
 						this.initIndependenceObj(index);
 					} else {
@@ -95,6 +95,9 @@
 							}
 						}
 					}
+				}
+				if(this.independence && this.menuList[index].isSort){
+					this.independenceObj = {};
 				}
 				// #ifdef H5
 				this.$forceUpdate();
@@ -188,7 +191,8 @@
 					this.independenceObj[this.selectedKey] = list[index].value;
 					this.result = this.independenceObj;
 				} else{
-					this.result[key] = list[index].value;
+					this.selectedObj[key] = list[index].value;
+					this.result = this.selectedObj;
 				}
 				
 				for (let i = 0; i < list.length; i++) {

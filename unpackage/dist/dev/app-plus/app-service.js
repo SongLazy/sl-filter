@@ -9094,9 +9094,9 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
         menuTabClick: function menuTabClick(index) {
           this.menuIndex = index;
           this.selectDetailList = this.menuList[index].detailList;
+          this.selectedKey = this.menuList[index].key;
           // 如果是独立菜单
           if (this.independence && !this.menuList[index].isSort) {
-            this.selectedKey = this.menuList[index].key;
             if (JSON.stringify(this.independenceObj) == '{}') {
               this.initIndependenceObj(index);
             } else {
@@ -9107,6 +9107,9 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
                 }
               }
             }
+          }
+          if (this.independence && this.menuList[index].isSort) {
+            this.independenceObj = {};
           }
 
 
@@ -9200,7 +9203,8 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
             this.independenceObj[this.selectedKey] = list[index].value;
             this.result = this.independenceObj;
           } else {
-            this.result[key] = list[index].value;
+            this.selectedObj[key] = list[index].value;
+            this.result = this.selectedObj;
           }
 
           for (var i = 0; i < list.length; i++) {
@@ -9698,7 +9702,6 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
 
         }
         this.statusList = arr;
-        console.log('independence：', this.independence, " at components/sl-filter/sl-filter.vue:77");
       },
 
 
