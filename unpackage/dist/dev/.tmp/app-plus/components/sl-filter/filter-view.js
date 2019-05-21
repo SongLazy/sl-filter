@@ -183,7 +183,7 @@ var _default2 =
       this.menuIndex = index;
       this.selectDetailList = this.menuList[index].detailList;
       // 如果是独立菜单
-      if (this.independence) {
+      if (this.independence && !this.menuList[index].isSort) {
         this.selectedKey = this.menuList[index].key;
         if (JSON.stringify(this.independenceObj) == '{}') {
           this.initIndependenceObj(index);
@@ -196,6 +196,9 @@ var _default2 =
           }
         }
       }
+
+
+
     },
     initIndependenceObj: function initIndependenceObj(index) {
       this.independenceObj = {};

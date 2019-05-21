@@ -83,7 +83,7 @@
 				this.menuIndex = index;
 				this.selectDetailList = this.menuList[index].detailList;
 				// 如果是独立菜单
-				if (this.independence) {
+				if (this.independence && !this.menuList[index].isSort) {
 					this.selectedKey = this.menuList[index].key;
 					if (JSON.stringify(this.independenceObj) == '{}') {
 						this.initIndependenceObj(index);
@@ -96,6 +96,9 @@
 						}
 					}
 				}
+				// #ifdef H5
+				this.$forceUpdate();
+				// #endif
 			},
 			initIndependenceObj(index) {
 				this.independenceObj = {};

@@ -1308,7 +1308,7 @@ __wxAppCode__['pages/apposition/index.wxml']=$gwx('./pages/apposition/index.wxml
 __wxAppCode__['pages/independence/index.json']={"navigationBarTitleText":"菜单独立","usingComponents":{"sl-filter":"/components/sl-filter/sl-filter"}};
 __wxAppCode__['pages/independence/index.wxml']=$gwx('./pages/independence/index.wxml');
 
-__wxAppCode__['pages/index/index.json']={"navigationBarTitleText":"sl-filter","usingComponents":{"sl-filter":"/components/sl-filter/sl-filter"}};
+__wxAppCode__['pages/index/index.json']={"navigationBarTitleText":"sl-filter","usingComponents":{}};
 __wxAppCode__['pages/index/index.wxml']=$gwx('./pages/index/index.wxml');
 
 
@@ -9095,7 +9095,7 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           this.menuIndex = index;
           this.selectDetailList = this.menuList[index].detailList;
           // 如果是独立菜单
-          if (this.independence) {
+          if (this.independence && !this.menuList[index].isSort) {
             this.selectedKey = this.menuList[index].key;
             if (JSON.stringify(this.independenceObj) == '{}') {
               this.initIndependenceObj(index);
@@ -9108,6 +9108,9 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
               }
             }
           }
+
+
+
         },
         initIndependenceObj: function initIndependenceObj(index) {
           this.independenceObj = {};
