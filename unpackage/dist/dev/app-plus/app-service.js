@@ -9055,7 +9055,8 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           menuIndex: 0,
           selectDetailList: [],
           independenceObj: {},
-          selectedKey: '' };
+          selectedKey: '',
+          cacheSelectedObj: {} };
 
       },
       props: {
@@ -9081,12 +9082,33 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           var obj = {};
           for (var i = 0; i < this.menuList.length; i++) {
             var item = this.menuList[i];
-            if (item.isMutiple) {
-              obj[item.key] = [];
+            if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) {// 处理并列菜单默认值
+
+              if (item.isMutiple) {
+                obj[item.key] = [];
+                item.detailList[0].isSelected = false;
+                if (!Array.isArray(item.defaultSelectedIndex)) {// 如果默认值不是数组
+                  item.defaultSelectedIndex = [item.defaultSelectedIndex];
+                }
+                for (var j = 0; j < item.defaultSelectedIndex.length; j++) {// 将默认选中的值放入selectedObj
+                  item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
+                  obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value);
+                }
+
+              } else {
+                obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
+                item.detailList[0].isSelected = false;
+                item.detailList[item.defaultSelectedIndex].isSelected = true;
+              }
             } else {
-              obj[item.key] = '';
+              if (item.isMutiple) {
+                obj[item.key] = [];
+              } else {
+                obj[item.key] = '';
+              }
             }
           }
+          this.result = obj;
           return obj;
         } },
 
@@ -9100,17 +9122,45 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
             if (JSON.stringify(this.independenceObj) == '{}') {
               this.initIndependenceObj(index);
             } else {
+
               for (var key in this.independenceObj) {
                 if (key != this.selectedKey) {
                   this.initIndependenceObj(index);
                   this.resetSelected(this.menuList[index].detailList, this.selectedKey);
                 }
               }
+
             }
+
           }
           if (this.independence && this.menuList[index].isSort) {
+
             this.independenceObj = {};
+
+
           }
+          if (this.independence) {
+            var idx = this.menuList[index].defaultSelectedIndex;
+            if (idx != null && idx.toString().length > 0) {// 处理独立菜单默认值
+              if (this.menuList[index].isMutiple) {
+                for (var i = 0; i < idx.length; i++) {
+                  if (this.menuList[index].detailList[idx[i]].isSelected == false) {
+                    this.itemTap(idx[i], this.menuList[index].detailList, true, this.selectedKey);
+                  }
+
+                }
+              } else {
+                if (this.menuList[index].detailList[idx].isSelected == false) {
+
+                  this.itemTap(idx, this.menuList[index].detailList, false, this.selectedKey);
+
+                }
+              }
+
+            }
+          }
+
+
 
 
 
@@ -10115,9 +10165,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       filterResult: '',
       menuList: [{
         'title': '职位',
-        'detailTitle': '请选择职位类型（可多选）',
+        'detailTitle': '请选择职位类型（可多选）(默认值为[1,2,5])',
         'isMutiple': true,
         'key': 'jobType',
+        'defaultSelectedIndex': [1, 2, 5],
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -10224,7 +10275,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '单选',
         'key': 'single',
         'isMutiple': false,
-        'detailTitle': '请选择（单选）',
+        'detailTitle': '请选择（单选）(默认值为1)',
+        'defaultSelectedIndex': 1,
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -10267,6 +10319,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '排序',
         'key': 'sort',
         'isSort': true,
+        'defaultSelectedIndex': 3,
         'detailList': [{
           'title': '默认排序',
           'value': '' },
@@ -10293,7 +10346,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:201");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:204");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 

@@ -143,7 +143,8 @@ var _default2 =
       menuIndex: 0,
       selectDetailList: [],
       independenceObj: {},
-      selectedKey: '' };
+      selectedKey: '',
+      cacheSelectedObj: {} };
 
   },
   props: {
@@ -169,12 +170,33 @@ var _default2 =
       var obj = {};
       for (var i = 0; i < this.menuList.length; i++) {
         var item = this.menuList[i];
-        if (item.isMutiple) {
-          obj[item.key] = [];
+        if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) {// 处理并列菜单默认值
+
+          if (item.isMutiple) {
+            obj[item.key] = [];
+            item.detailList[0].isSelected = false;
+            if (!Array.isArray(item.defaultSelectedIndex)) {// 如果默认值不是数组
+              item.defaultSelectedIndex = [item.defaultSelectedIndex];
+            }
+            for (var j = 0; j < item.defaultSelectedIndex.length; j++) {// 将默认选中的值放入selectedObj
+              item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
+              obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value);
+            }
+
+          } else {
+            obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
+            item.detailList[0].isSelected = false;
+            item.detailList[item.defaultSelectedIndex].isSelected = true;
+          }
         } else {
-          obj[item.key] = '';
+          if (item.isMutiple) {
+            obj[item.key] = [];
+          } else {
+            obj[item.key] = '';
+          }
         }
       }
+      this.result = obj;
       return obj;
     } },
 
@@ -188,17 +210,45 @@ var _default2 =
         if (JSON.stringify(this.independenceObj) == '{}') {
           this.initIndependenceObj(index);
         } else {
+
           for (var key in this.independenceObj) {
             if (key != this.selectedKey) {
               this.initIndependenceObj(index);
               this.resetSelected(this.menuList[index].detailList, this.selectedKey);
             }
           }
+
         }
+
       }
       if (this.independence && this.menuList[index].isSort) {
+
         this.independenceObj = {};
+
+
       }
+      if (this.independence) {
+        var idx = this.menuList[index].defaultSelectedIndex;
+        if (idx != null && idx.toString().length > 0) {// 处理独立菜单默认值
+          if (this.menuList[index].isMutiple) {
+            for (var i = 0; i < idx.length; i++) {
+              if (this.menuList[index].detailList[idx[i]].isSelected == false) {
+                this.itemTap(idx[i], this.menuList[index].detailList, true, this.selectedKey);
+              }
+
+            }
+          } else {
+            if (this.menuList[index].detailList[idx].isSelected == false) {
+
+              this.itemTap(idx, this.menuList[index].detailList, false, this.selectedKey);
+
+            }
+          }
+
+        }
+      }
+
+
 
 
 

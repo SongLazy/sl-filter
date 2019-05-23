@@ -120,9 +120,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       filterResult: '',
       menuList: [{
         'title': '职位',
-        'detailTitle': '请选择职位类型（可多选）',
+        'detailTitle': '请选择职位类型（可多选）(默认值为[1,2,5])',
         'isMutiple': true,
         'key': 'jobType',
+        'defaultSelectedIndex': [1, 2, 5],
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -229,7 +230,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '单选',
         'key': 'single',
         'isMutiple': false,
-        'detailTitle': '请选择（单选）',
+        'detailTitle': '请选择（单选）(默认值为1)',
+        'defaultSelectedIndex': 1,
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -272,6 +274,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '排序',
         'key': 'sort',
         'isSort': true,
+        'defaultSelectedIndex': 3,
         'detailList': [{
           'title': '默认排序',
           'value': '' },
@@ -298,7 +301,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:201");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:204");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 

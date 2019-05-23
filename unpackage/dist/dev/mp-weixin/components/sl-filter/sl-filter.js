@@ -174,7 +174,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
     }
     this.statusList = arr;
-    console.log('independence：', this.independence);
   },
 
 
