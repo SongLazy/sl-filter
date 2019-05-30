@@ -6,7 +6,7 @@
 				<text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text>
 			</view>
 		</view>
-		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="false" :navHeight="navHeight"
+		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
 		 :tabHeight="tabHeight">
 			<sl-filter-view :independence="independence" :themeColor="themeColor" :menuList="menuListTemp" ref="slFilterView" @confirm="filterResult"></sl-filter-view>
 		</popup-layer>
@@ -42,6 +42,14 @@
 			independence: {
 				type: Boolean,
 				default: false
+			},
+			isTransNav: {
+				type: Boolean,
+				default: false
+			},
+			navHeight: {
+				type: Number,
+				default: 0
 			}
 		},
 
@@ -93,7 +101,6 @@
 			return {
 				down: 'sl-down',
 				up: 'sl-up',
-				navHeight: 0,
 				tabHeight: 50,
 				statusList: []
 			};

@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<sl-filter :color="titleColor" :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
+		<sl-filter :isTransNav="true" :navHeight="0" :color="titleColor" :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
 		<view class="text">
 			<text>{{filterResult}}</text>
 		</view>

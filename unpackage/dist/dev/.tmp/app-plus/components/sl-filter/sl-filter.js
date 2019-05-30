@@ -141,7 +141,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
     independence: {
       type: Boolean,
-      default: false } },
+      default: false },
+
+    isTransNav: {
+      type: Boolean,
+      default: false },
+
+    navHeight: {
+      type: Number,
+      default: 0 } },
 
 
 
@@ -193,7 +201,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     return {
       down: 'sl-down',
       up: 'sl-up',
-      navHeight: 0,
       tabHeight: 50,
       statusList: [] };
 

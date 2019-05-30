@@ -1100,7 +1100,7 @@ Z([3,'vue-ref'])
 Z([[4],[[5],[[4],[[5],[[5],[1,'^close']],[[4],[[5],[[4],[[5],[1,'close']]]]]]]]])
 Z([3,'popupRef'])
 Z([3,'bottom'])
-Z([1,false])
+Z([[7],[3,'isTransNav']])
 Z([[7],[3,'navHeight']])
 Z([[7],[3,'tabHeight']])
 Z([[4],[[5],[1,'default']]])
@@ -1122,7 +1122,9 @@ Z([3,'content'])
 Z([3,'__e'])
 Z([[7],[3,'titleColor']])
 Z([[4],[[5],[[4],[[5],[[5],[1,'^result']],[[4],[[5],[[4],[[5],[1,'result']]]]]]]]])
+Z([1,true])
 Z([[7],[3,'menuList']])
+Z([1,0])
 Z([[7],[3,'themeColor']])
 })(__WXML_GLOBAL__.ops_cached.$gwx_4);return __WXML_GLOBAL__.ops_cached.$gwx_4
 }
@@ -1225,7 +1227,7 @@ cs.push("./components/sl-filter/sl-filter.wxml:view:1:1")
 var oR=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 cs.push("./components/sl-filter/sl-filter.wxml:popup-layer:1:492")
 var fS=_mz(z,'popup-layer',['bind:close',2,'class',1,'data-event-opts',2,'data-ref',3,'direction',4,'isTransNav',5,'navHeight',6,'tabHeight',7,'vueSlots',8],[],e,s,gg)
-cs.push("./components/sl-filter/sl-filter.wxml:sl-filter-view:1:727")
+cs.push("./components/sl-filter/sl-filter.wxml:sl-filter-view:1:732")
 var cT=_mz(z,'sl-filter-view',['bind:confirm',11,'class',1,'data-event-opts',2,'data-ref',3,'independence',4,'menuList',5,'themeColor',6],[],e,s,gg)
 cs.pop()
 _(fS,cT)
@@ -1242,7 +1244,7 @@ var z=gz$gwx_4()
 cs.push("./pages/apposition/index.wxml:view:1:1")
 var oV=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 cs.push("./pages/apposition/index.wxml:sl-filter:1:38")
-var cW=_mz(z,'sl-filter',['bind:result',2,'color',1,'data-event-opts',2,'menuList',3,'themeColor',4],[],e,s,gg)
+var cW=_mz(z,'sl-filter',['bind:result',2,'color',1,'data-event-opts',2,'isTransNav',3,'menuList',4,'navHeight',5,'themeColor',6],[],e,s,gg)
 cs.pop()
 _(oV,cW)
 cs.pop()
@@ -1290,7 +1292,7 @@ return root;
 
 
 
-__wxAppCode__['app.json']={"pages":["pages/index/index","pages/apposition/index","pages/independence/index"],"subPackages":[],"window":{"navigationBarTextStyle":"black","navigationBarTitleText":"uni-app","navigationBarBackgroundColor":"#F8F8F8","backgroundColor":"#F8F8F8"},"splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"appname":"sl-filter","compilerVersion":"1.9.8","usingComponents":{}};
+__wxAppCode__['app.json']={"pages":["pages/index/index","pages/apposition/index","pages/independence/index"],"subPackages":[],"window":{"navigationBarTextStyle":"black","navigationBarTitleText":"uni-app","navigationBarBackgroundColor":"#F8F8F8","backgroundColor":"#F8F8F8"},"splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"appname":"sl-filter","compilerVersion":"1.9.9","usingComponents":{}};
 __wxAppCode__['app.wxml']=$gwx('./app.wxml');
 
 __wxAppCode__['components/sl-filter/filter-view.json']={"usingComponents":{},"component":true};
@@ -9466,14 +9468,24 @@ define('components/sl-filter/popup-layer.js',function(require, module, exports, 
       },
       computed: {
         _translate: function _translate() {
-          var transformObj = {
-            'top': "transform:translateY(".concat(-this.translateValue, "%)"),
-            // 'bottom': `transform:translateY(calc(${this.translateValue}% + ${this.tabHeight}px))`,
-            'bottom': "transform:translateY(".concat(this.translateValue, "%)"),
-            'left': "transform:translateX(".concat(-this.translateValue, "%)"),
-            'right': "transform:translateX(".concat(this.translateValue, "%)") };
+          if (this.isTransNav) {
+            var transformObj = {
+              'top': "transform:translateY(".concat(-this.translateValue, "%)"),
+              'bottom': "transform:translateY(calc(".concat(this.translateValue, "% + ").concat(this.navHeight, "px))"),
+              'left': "transform:translateX(".concat(-this.translateValue, "%)"),
+              'right': "transform:translateX(".concat(this.translateValue, "%)") };
 
-          return transformObj[this.direction];
+            return transformObj[this.direction];
+          } else {
+            var _transformObj = {
+              'top': "transform:translateY(".concat(-this.translateValue, "%)"),
+              'bottom': "transform:translateY(".concat(this.translateValue, "%)"),
+              'left': "transform:translateX(".concat(-this.translateValue, "%)"),
+              'right': "transform:translateX(".concat(this.translateValue, "%)") };
+
+            return _transformObj[this.direction];
+          }
+
         },
         _location: function _location() {
           var positionValue = {
@@ -9493,12 +9505,7 @@ define('components/sl-filter/popup-layer.js',function(require, module, exports, 
           var _this = this;
           this.ifshow = true;
           var _open = setTimeout(function () {
-            if (_this.isTransNav) {
-              _this2.translateValue = _this2.navHeight;
-            } else {
-              _this2.translateValue = 0;
-            }
-
+            _this2.translateValue = 0;
             _open = null;
           }, 100);
           var _toggle = setTimeout(function () {
@@ -9719,7 +9726,15 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
 
         independence: {
           type: Boolean,
-          default: false } },
+          default: false },
+
+        isTransNav: {
+          type: Boolean,
+          default: false },
+
+        navHeight: {
+          type: Number,
+          default: 0 } },
 
 
 
@@ -9771,7 +9786,6 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
         return {
           down: 'sl-down',
           up: 'sl-up',
-          navHeight: 0,
           tabHeight: 50,
           statusList: [] };
 

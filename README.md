@@ -46,6 +46,8 @@ menuList | Array |  | 数组元素的个数为菜单item个数
 independence | Boolean | false | 是否为独立菜单，不设置该字段默认为并列菜单
 titleColor | String | #666666 | menuBar菜单标题颜色
 themeColor | String | #000000 | 按钮选中颜色和确认按钮颜色
+isTransNav | Boolean | false | 是否需要设置距离顶部的高度。比如你的导航栏为沉浸式导航栏或者自定义导航栏
+navHeight | Number | 0 | 弹出层距离顶部的高度，需先设置:isTransNav="true"
 @result | function |  | 选中条件的回调。参数为回调的条件对象
 
 #### independence
@@ -316,6 +318,17 @@ menuList: [
 
 
 ## 更新记录
+
+### 1.1.0
+
+更新日期：2019.05.30
+
+更新内容：增加了组件属性：isTransNav和navHeight，可自定义弹出层距离顶部的高度，用于沉浸式导航栏、自定义导航栏或其他需要的场景。
+
+属性名 | 类型 | 默认值 | 说明
+---- | ---- | ---- | ----
+isTransNav | Boolean | false | 是否需要设置距离顶部的高度。比如你的导航栏为沉浸式导航栏或者自定义导航栏。如果不需要，则不用设置此属性
+navHeight | Number | 0 | 弹出层距离顶部的高度，需先设置:isTransNav="true"
 
 ### 1.0.9
 

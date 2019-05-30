@@ -41,14 +41,24 @@
 		},
 		computed: {
 			_translate() {
-				const transformObj = {
-					'top': `transform:translateY(${-this.translateValue}%)`,
-					// 'bottom': `transform:translateY(calc(${this.translateValue}% + ${this.tabHeight}px))`,
-					'bottom': `transform:translateY(${this.translateValue}%)`,
-					'left': `transform:translateX(${-this.translateValue}%)`,
-					'right': `transform:translateX(${this.translateValue}%)`
-				};
-				return transformObj[this.direction]
+				if (this.isTransNav) {
+					const transformObj = {
+						'top': `transform:translateY(${-this.translateValue}%)`,
+						'bottom': `transform:translateY(calc(${this.translateValue}% + ${this.navHeight}px))`,
+						'left': `transform:translateX(${-this.translateValue}%)`,
+						'right': `transform:translateX(${this.translateValue}%)`
+					};
+					return transformObj[this.direction]
+				} else {
+					const transformObj = {
+						'top': `transform:translateY(${-this.translateValue}%)`,
+						'bottom': `transform:translateY(${this.translateValue}%)`,
+						'left': `transform:translateX(${-this.translateValue}%)`,
+						'right': `transform:translateX(${this.translateValue}%)`
+					};
+					return transformObj[this.direction]
+				}
+
 			},
 			_location() {
 				const positionValue = {
@@ -68,12 +78,7 @@
 				let _this = this;
 				this.ifshow = true;
 				let _open = setTimeout(() => {
-					if (_this.isTransNav) {
-						this.translateValue = this.navHeight;
-					} else {
-						this.translateValue = 0;
-					}
-
+					this.translateValue = 0;
 					_open = null;
 				}, 100)
 				let _toggle = setTimeout(() => {

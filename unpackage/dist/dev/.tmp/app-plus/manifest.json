@@ -83,7 +83,7 @@
     },
     "allowsInlineMediaPlayback": true,
     "uni-app": {
-      "compilerVersion": "1.9.8",
+      "compilerVersion": "1.9.9",
       "control": "v8"
     }
   }

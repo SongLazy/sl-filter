@@ -141,14 +141,24 @@ var _default =
   },
   computed: {
     _translate: function _translate() {
-      var transformObj = {
-        'top': "transform:translateY(".concat(-this.translateValue, "%)"),
-        // 'bottom': `transform:translateY(calc(${this.translateValue}% + ${this.tabHeight}px))`,
-        'bottom': "transform:translateY(".concat(this.translateValue, "%)"),
-        'left': "transform:translateX(".concat(-this.translateValue, "%)"),
-        'right': "transform:translateX(".concat(this.translateValue, "%)") };
+      if (this.isTransNav) {
+        var transformObj = {
+          'top': "transform:translateY(".concat(-this.translateValue, "%)"),
+          'bottom': "transform:translateY(calc(".concat(this.translateValue, "% + ").concat(this.navHeight, "px))"),
+          'left': "transform:translateX(".concat(-this.translateValue, "%)"),
+          'right': "transform:translateX(".concat(this.translateValue, "%)") };
 
-      return transformObj[this.direction];
+        return transformObj[this.direction];
+      } else {
+        var _transformObj = {
+          'top': "transform:translateY(".concat(-this.translateValue, "%)"),
+          'bottom': "transform:translateY(".concat(this.translateValue, "%)"),
+          'left': "transform:translateX(".concat(-this.translateValue, "%)"),
+          'right': "transform:translateX(".concat(this.translateValue, "%)") };
+
+        return _transformObj[this.direction];
+      }
+
     },
     _location: function _location() {
       var positionValue = {
@@ -168,12 +178,7 @@ var _default =
       var _this = this;
       this.ifshow = true;
       var _open = setTimeout(function () {
-        if (_this.isTransNav) {
-          _this2.translateValue = _this2.navHeight;
-        } else {
-          _this2.translateValue = 0;
-        }
-
+        _this2.translateValue = 0;
         _open = null;
       }, 100);
       var _toggle = setTimeout(function () {
