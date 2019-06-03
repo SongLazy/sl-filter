@@ -23,6 +23,7 @@
 						'detailTitle': '请选择职位类型（可多选）',
 						'isMutiple': true,
 						'key': 'jobType',
+						'defaultSelectedIndex': [1,2,5],
 						'detailList': [{
 								'title': '不限',
 								'value': ''
@@ -172,6 +173,7 @@
 						'title': '排序',
 						'key': 'sort',
 						'isSort': true,
+						'reflexTitle': true,
 						'detailList': [{
 								'title': '默认排序',
 								'value': ''

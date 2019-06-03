@@ -123,6 +123,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'detailTitle': '请选择职位类型（可多选）',
         'isMutiple': true,
         'key': 'jobType',
+        'defaultSelectedIndex': [1, 2, 5],
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -272,6 +273,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '排序',
         'key': 'sort',
         'isSort': true,
+        'reflexTitle': true,
         'detailList': [{
           'title': '默认排序',
           'value': '' },
@@ -298,7 +300,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/independence/index.vue:201");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/independence/index.vue:203");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 

@@ -1,14 +1,15 @@
 <template>
 	<view class="content">
 		<view class="select-tab" :style="{height: tabHeight+'px'}">
-			<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in menuList" :key="index" @tap="showMenuClick(index)">
+			<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index" @tap="showMenuClick(index)">
 				<text :style="{color:color}">{{item.title}}</text>
 				<text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text>
 			</view>
 		</view>
 		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
 		 :tabHeight="tabHeight">
-			<sl-filter-view :independence="independence" :themeColor="themeColor" :menuList="menuListTemp" ref="slFilterView" @confirm="filterResult"></sl-filter-view>
+			<sl-filter-view :independence="independence" :themeColor="themeColor" :menuList="menuListTemp" ref="slFilterView"
+			 @confirm="filterResult"></sl-filter-view>
 		</popup-layer>
 	</view>
 
@@ -76,25 +77,42 @@
 		// #ifndef H5
 		onReady: function() {
 			let arr = [];
+			let titleArr = [];
+			let r = {};
 			for (let i = 0; i < this.menuList.length; i++) {
 				arr.push({
 					'isActive': false
 				});
+				titleArr.push({
+					'title': this.menuList[i].title,
+					'key': this.menuList[i].key
+				})
+				r[this.menuList[i].key] = this.menuList[i].title;
 			}
 			this.statusList = arr;
+			this.titleList = titleArr;
+			this.tempTitleObj = r;
 		},
 		// #endif
-		
+
 		// #ifdef H5
-		created:function(){
+		created: function() {
 			let arr = [];
+			let titleArr = [];
+			let r = {};
 			for (let i = 0; i < this.menuList.length; i++) {
 				arr.push({
 					'isActive': false
 				});
+				titleArr.push({
+					'title': this.menuList[i].title,
+					'key': this.menuList[i].key
+				});
+				r[this.menuList[i].key] = this.menuList[i].title;
 			}
 			this.statusList = arr;
-			
+			this.titleList = titleArr;
+			this.tempTitleObj = r;
 		},
 		// #endif
 		data() {
@@ -102,11 +120,15 @@
 				down: 'sl-down',
 				up: 'sl-up',
 				tabHeight: 50,
-				statusList: []
+				statusList: [],
+				selectedIndex: '',
+				titleList: [],
+				tempTitleObj: {}
 			};
 		},
 		methods: {
 			showMenuClick(index) {
+				this.selectedIndex = index;
 				if (this.statusList[index].isActive == true) {
 					this.$refs.popupRef.close();
 					this.statusList[index].isActive = false
@@ -125,9 +147,42 @@
 					}
 				}
 			},
-			filterResult(val) {
+			filterResult(obj) {
+				let val = obj.result;
+				let titlesObj = obj.titles;
+				// 处理选项映射到菜单title
+				if (this.independence) {
+					if (!this.menuList[this.selectedIndex].isMutiple || this.menuList[this.selectedIndex].isSort) {
+						let tempTitle = '';
+						for (let i = 0; i < this.menuList[this.selectedIndex].detailList.length; i++) {
+							let item = this.menuList[this.selectedIndex].detailList[i];
+							if (item.value == val[this.menuList[this.selectedIndex].key]) {
+								tempTitle = item.title;
+							}
+						}
+						if (this.menuList[this.selectedIndex].reflexTitle) {
+							this.titleList[this.selectedIndex].title = tempTitle;
+						}
+					}
+				} else {
+					for (let key in titlesObj) {
+						if(!Array.isArray(titlesObj[key])){
+							this.tempTitleObj[key] = titlesObj[key];
+						}
+						
+					}
+					for (let key in this.tempTitleObj) {
+						for (let i = 0; i < this.titleList.length; i++) {
+							if(this.titleList[i].key == key){
+								this.titleList[i].title = this.tempTitleObj[key];
+							}
+						}
+					}
+				}
+				
 				this.$refs.popupRef.close()
 				this.$emit("result", val)
+
 			},
 			close() {
 				for (let i = 0; i < this.statusList.length; i++) {

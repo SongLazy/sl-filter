@@ -73,6 +73,7 @@ isSort | Boolean |  | 为true时，为单选排序筛选方式。不填写此字
 key | String |  | 字段名称，作为result返回的条件的key
 detailList | Array |  | 条件列表
 defaultSelectedIndex | Array/Number |  | 默认选中的选项，可不设置。值为默认选中项的index或index的数组。
+reflexTitle | Boolean | false | 是否将选择的结果映射到菜单title上。只有当isMutiple不为true时生效。
 
 ##### defaultSelectedIndex 默认选项说明
 
@@ -318,6 +319,22 @@ menuList: [
 
 
 ## 更新记录
+
+### 1.1.2
+
+更新日期：2019.06.03
+
+更新内容：数据源属性reflexTitle适配H5。
+
+### 1.1.1
+
+更新日期：2019.06.03
+
+更新内容：增加了数据源属性：reflexTitle，是否将选择的结果映射到菜单title上。只有当isMutiple不为true时生效。
+
+属性名 | 类型 | 默认值 | 说明
+---- | ---- | ---- | ----
+reflexTitle | Boolean | false | 是否将选择的结果映射到菜单title上。只有当isMutiple不为true时生效。
 
 ### 1.1.0
 

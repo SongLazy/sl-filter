@@ -117,6 +117,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
 {
   components: {
     popupLayer: popupLayer,
@@ -141,7 +142,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
     independence: {
       type: Boolean,
-      default: false } },
+      default: false },
+
+    isTransNav: {
+      type: Boolean,
+      default: false },
+
+    navHeight: {
+      type: Number,
+      default: 0 } },
 
 
 
@@ -168,13 +177,30 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   onReady: function onReady() {
     var arr = [];
+    var titleArr = [];
+    var r = {};
     for (var i = 0; i < this.menuList.length; i++) {
       arr.push({
         'isActive': false });
 
+      titleArr.push({
+        'title': this.menuList[i].title,
+        'key': this.menuList[i].key });
+
+      r[this.menuList[i].key] = this.menuList[i].title;
     }
     this.statusList = arr;
+    this.titleList = titleArr;
+    this.tempTitleObj = r;
   },
+
+
+
+
+
+
+
+
 
 
 
@@ -193,13 +219,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     return {
       down: 'sl-down',
       up: 'sl-up',
-      navHeight: 0,
       tabHeight: 50,
-      statusList: [] };
+      statusList: [],
+      selectedIndex: '',
+      titleList: [],
+      tempTitleObj: {} };
 
   },
   methods: {
     showMenuClick: function showMenuClick(index) {
+      this.selectedIndex = index;
       if (this.statusList[index].isActive == true) {
         this.$refs.popupRef.close();
         this.statusList[index].isActive = false;
@@ -218,9 +247,42 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         }
       }
     },
-    filterResult: function filterResult(val) {
+    filterResult: function filterResult(obj) {
+      var val = obj.result;
+      var titlesObj = obj.titles;
+      // 处理选项映射到菜单title
+      if (this.independence) {
+        if (!this.menuList[this.selectedIndex].isMutiple || this.menuList[this.selectedIndex].isSort) {
+          var tempTitle = '';
+          for (var i = 0; i < this.menuList[this.selectedIndex].detailList.length; i++) {
+            var item = this.menuList[this.selectedIndex].detailList[i];
+            if (item.value == val[this.menuList[this.selectedIndex].key]) {
+              tempTitle = item.title;
+            }
+          }
+          if (this.menuList[this.selectedIndex].reflexTitle) {
+            this.titleList[this.selectedIndex].title = tempTitle;
+          }
+        }
+      } else {
+        for (var key in titlesObj) {
+          if (!Array.isArray(titlesObj[key])) {
+            this.tempTitleObj[key] = titlesObj[key];
+          }
+
+        }
+        for (var _key in this.tempTitleObj) {
+          for (var _i = 0; _i < this.titleList.length; _i++) {
+            if (this.titleList[_i].key == _key) {
+              this.titleList[_i].title = this.tempTitleObj[_key];
+            }
+          }
+        }
+      }
+
       this.$refs.popupRef.close();
       this.$emit("result", val);
+
     },
     close: function close() {
       for (var i = 0; i < this.statusList.length; i++) {

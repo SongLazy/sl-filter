@@ -66,42 +66,59 @@
 			}
 		},
 		computed: {
-			selectedObj() {
+			selectedTitleObj() {
 				let obj = {}
 				for (let i = 0; i < this.menuList.length; i++) {
 					let item = this.menuList[i];
-					if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) { // 处理并列菜单默认值
+					obj[item.key] = item.title;
+				}
+				return obj;
+			},
+			selectedObj: {
+				get() {
+					let obj = {}
+					for (let i = 0; i < this.menuList.length; i++) {
+						let item = this.menuList[i];
+						if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) { // 处理并列菜单默认值
 
-						if (item.isMutiple) {
-							obj[item.key] = [];
-							item.detailList[0].isSelected = false;
-							if (!Array.isArray(item.defaultSelectedIndex)) { // 如果默认值不是数组
-								item.defaultSelectedIndex = [item.defaultSelectedIndex];
-							}
-							for (let j = 0; j < item.defaultSelectedIndex.length; j++) { // 将默认选中的值放入selectedObj
-								item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
-								obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value)
-							}
+							if (item.isMutiple) {
+								obj[item.key] = [];
+								item.detailList[0].isSelected = false;
+								if (!Array.isArray(item.defaultSelectedIndex)) { // 如果默认值不是数组
+									item.defaultSelectedIndex = [item.defaultSelectedIndex];
+								}
+								for (let j = 0; j < item.defaultSelectedIndex.length; j++) { // 将默认选中的值放入selectedObj
+									item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
+									obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value)
+								}
 
+							} else {
+								obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
+								this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+								item.detailList[0].isSelected = false;
+								item.detailList[item.defaultSelectedIndex].isSelected = true;
+							}
 						} else {
-							obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
-							item.detailList[0].isSelected = false;
-							item.detailList[item.defaultSelectedIndex].isSelected = true;
-						}
-					} else {
-						if (item.isMutiple) {
-							obj[item.key] = [];
-						} else {
-							obj[item.key] = '';
+							if (item.isMutiple) {
+								obj[item.key] = [];
+							} else {
+								obj[item.key] = '';
+							}
 						}
 					}
+					this.result = obj;
+
+					return obj;
+				},
+				set(newObj) {
+					return newObj;
 				}
-				this.result = obj;
-				return obj
+
 			}
 		},
 		methods: {
 			menuTabClick(index) {
+				
 				this.menuIndex = index;
 				this.selectDetailList = this.menuList[index].detailList;
 				this.selectedKey = this.menuList[index].key;
@@ -110,21 +127,19 @@
 					if (JSON.stringify(this.independenceObj) == '{}') {
 						this.initIndependenceObj(index);
 					} else {
-						
-							for (let key in this.independenceObj) {
-								if (key != this.selectedKey) {
-									this.initIndependenceObj(index);
-									this.resetSelected(this.menuList[index].detailList, this.selectedKey);
-								}
+						for (let key in this.independenceObj) {
+							if (key != this.selectedKey) {
+								this.initIndependenceObj(index);
+								this.resetSelected(this.menuList[index].detailList, this.selectedKey);
 							}
-						
+						}
 					}
-					
+
 				}
 				if (this.independence && this.menuList[index].isSort) {
-					
-						this.independenceObj = {};
-					
+
+					this.independenceObj = {};
+
 
 				}
 				if (this.independence) {
@@ -139,9 +154,9 @@
 							}
 						} else {
 							if (this.menuList[index].detailList[idx].isSelected == false) {
-								
+
 								this.itemTap(idx, this.menuList[index].detailList, false, this.selectedKey);
-								
+
 							}
 						}
 
@@ -150,6 +165,7 @@
 
 
 				// #ifdef H5
+				this.selectedObj = this.selectedObj;
 				this.$forceUpdate();
 				// #endif
 			},
@@ -162,7 +178,6 @@
 				}
 			},
 			itemTap(index, list, isMutiple, key) {
-
 				if (isMutiple == true) {
 					list[index].isSelected = !list[index].isSelected;
 					if (index == 0) {
@@ -204,6 +219,7 @@
 						} else {
 							this.selectedObj[key] = list[index].value;
 							this.result = this.selectedObj;
+							this.selectedTitleObj[key] = list[index].title;
 						}
 
 						for (let i = 0; i < list.length; i++) {
@@ -243,6 +259,7 @@
 				} else {
 					this.selectedObj[key] = list[index].value;
 					this.result = this.selectedObj;
+					this.selectedTitleObj[key] = list[index].title;
 				}
 
 				for (let i = 0; i < list.length; i++) {
@@ -252,10 +269,12 @@
 						list[i].isSelected = false;
 					}
 				}
-				this.$emit("confirm", this.result);
+				let obj = {'result': this.result, 'titles': this.selectedTitleObj}
+				this.$emit("confirm", obj);
 			},
 			sureClick() {
-				this.$emit("confirm", this.result);
+				let obj = {'result': this.result, 'titles': this.selectedTitleObj}
+				this.$emit("confirm", obj);
 			},
 			resetClick(list, key) {
 				this.resetSelected(list, key)

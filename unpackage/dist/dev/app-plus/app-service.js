@@ -1225,9 +1225,9 @@ var m2=function(e,s,r,gg){
 var z=gz$gwx_3()
 cs.push("./components/sl-filter/sl-filter.wxml:view:1:1")
 var oR=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
-cs.push("./components/sl-filter/sl-filter.wxml:popup-layer:1:492")
+cs.push("./components/sl-filter/sl-filter.wxml:popup-layer:1:493")
 var fS=_mz(z,'popup-layer',['bind:close',2,'class',1,'data-event-opts',2,'data-ref',3,'direction',4,'isTransNav',5,'navHeight',6,'tabHeight',7,'vueSlots',8],[],e,s,gg)
-cs.push("./components/sl-filter/sl-filter.wxml:sl-filter-view:1:732")
+cs.push("./components/sl-filter/sl-filter.wxml:sl-filter-view:1:733")
 var cT=_mz(z,'sl-filter-view',['bind:confirm',11,'class',1,'data-event-opts',2,'data-ref',3,'independence',4,'menuList',5,'themeColor',6],[],e,s,gg)
 cs.pop()
 _(fS,cT)
@@ -9080,42 +9080,59 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
 
 
       computed: {
-        selectedObj: function selectedObj() {
+        selectedTitleObj: function selectedTitleObj() {
           var obj = {};
           for (var i = 0; i < this.menuList.length; i++) {
             var item = this.menuList[i];
-            if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) {// 处理并列菜单默认值
+            obj[item.key] = item.title;
+          }
+          return obj;
+        },
+        selectedObj: {
+          get: function get() {
+            var obj = {};
+            for (var i = 0; i < this.menuList.length; i++) {
+              var item = this.menuList[i];
+              if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) {// 处理并列菜单默认值
 
-              if (item.isMutiple) {
-                obj[item.key] = [];
-                item.detailList[0].isSelected = false;
-                if (!Array.isArray(item.defaultSelectedIndex)) {// 如果默认值不是数组
-                  item.defaultSelectedIndex = [item.defaultSelectedIndex];
-                }
-                for (var j = 0; j < item.defaultSelectedIndex.length; j++) {// 将默认选中的值放入selectedObj
-                  item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
-                  obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value);
-                }
+                if (item.isMutiple) {
+                  obj[item.key] = [];
+                  item.detailList[0].isSelected = false;
+                  if (!Array.isArray(item.defaultSelectedIndex)) {// 如果默认值不是数组
+                    item.defaultSelectedIndex = [item.defaultSelectedIndex];
+                  }
+                  for (var j = 0; j < item.defaultSelectedIndex.length; j++) {// 将默认选中的值放入selectedObj
+                    item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
+                    obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value);
+                  }
 
+                } else {
+                  obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
+                  this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+                  item.detailList[0].isSelected = false;
+                  item.detailList[item.defaultSelectedIndex].isSelected = true;
+                }
               } else {
-                obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
-                item.detailList[0].isSelected = false;
-                item.detailList[item.defaultSelectedIndex].isSelected = true;
-              }
-            } else {
-              if (item.isMutiple) {
-                obj[item.key] = [];
-              } else {
-                obj[item.key] = '';
+                if (item.isMutiple) {
+                  obj[item.key] = [];
+                } else {
+                  obj[item.key] = '';
+                }
               }
             }
-          }
-          this.result = obj;
-          return obj;
-        } },
+            this.result = obj;
+
+            return obj;
+          },
+          set: function set(newObj) {
+            return newObj;
+          } } },
+
+
 
       methods: {
         menuTabClick: function menuTabClick(index) {
+
           this.menuIndex = index;
           this.selectDetailList = this.menuList[index].detailList;
           this.selectedKey = this.menuList[index].key;
@@ -9124,14 +9141,12 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
             if (JSON.stringify(this.independenceObj) == '{}') {
               this.initIndependenceObj(index);
             } else {
-
               for (var key in this.independenceObj) {
                 if (key != this.selectedKey) {
                   this.initIndependenceObj(index);
                   this.resetSelected(this.menuList[index].detailList, this.selectedKey);
                 }
               }
-
             }
 
           }
@@ -9166,6 +9181,7 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
 
 
 
+
         },
         initIndependenceObj: function initIndependenceObj(index) {
           this.independenceObj = {};
@@ -9176,7 +9192,6 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           }
         },
         itemTap: function itemTap(index, list, isMutiple, key) {
-
           if (isMutiple == true) {
             list[index].isSelected = !list[index].isSelected;
             if (index == 0) {
@@ -9218,6 +9233,7 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
               } else {
                 this.selectedObj[key] = list[index].value;
                 this.result = this.selectedObj;
+                this.selectedTitleObj[key] = list[index].title;
               }
 
               for (var i = 0; i < list.length; i++) {
@@ -9257,6 +9273,7 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           } else {
             this.selectedObj[key] = list[index].value;
             this.result = this.selectedObj;
+            this.selectedTitleObj[key] = list[index].title;
           }
 
           for (var i = 0; i < list.length; i++) {
@@ -9266,10 +9283,12 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
               list[i].isSelected = false;
             }
           }
-          this.$emit("confirm", this.result);
+          var obj = { 'result': this.result, 'titles': this.selectedTitleObj };
+          this.$emit("confirm", obj);
         },
         sureClick: function sureClick() {
-          this.$emit("confirm", this.result);
+          var obj = { 'result': this.result, 'titles': this.selectedTitleObj };
+          this.$emit("confirm", obj);
         },
         resetClick: function resetClick(list, key) {
           this.resetSelected(list, key);
@@ -9702,6 +9721,7 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
 
 
 
+
     {
       components: {
         popupLayer: popupLayer,
@@ -9761,13 +9781,30 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
 
       onReady: function onReady() {
         var arr = [];
+        var titleArr = [];
+        var r = {};
         for (var i = 0; i < this.menuList.length; i++) {
           arr.push({
             'isActive': false });
 
+          titleArr.push({
+            'title': this.menuList[i].title,
+            'key': this.menuList[i].key });
+
+          r[this.menuList[i].key] = this.menuList[i].title;
         }
         this.statusList = arr;
+        this.titleList = titleArr;
+        this.tempTitleObj = r;
       },
+
+
+
+
+
+
+
+
 
 
 
@@ -9787,11 +9824,15 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
           down: 'sl-down',
           up: 'sl-up',
           tabHeight: 50,
-          statusList: [] };
+          statusList: [],
+          selectedIndex: '',
+          titleList: [],
+          tempTitleObj: {} };
 
       },
       methods: {
         showMenuClick: function showMenuClick(index) {
+          this.selectedIndex = index;
           if (this.statusList[index].isActive == true) {
             this.$refs.popupRef.close();
             this.statusList[index].isActive = false;
@@ -9810,9 +9851,42 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
             }
           }
         },
-        filterResult: function filterResult(val) {
+        filterResult: function filterResult(obj) {
+          var val = obj.result;
+          var titlesObj = obj.titles;
+          // 处理选项映射到菜单title
+          if (this.independence) {
+            if (!this.menuList[this.selectedIndex].isMutiple || this.menuList[this.selectedIndex].isSort) {
+              var tempTitle = '';
+              for (var i = 0; i < this.menuList[this.selectedIndex].detailList.length; i++) {
+                var item = this.menuList[this.selectedIndex].detailList[i];
+                if (item.value == val[this.menuList[this.selectedIndex].key]) {
+                  tempTitle = item.title;
+                }
+              }
+              if (this.menuList[this.selectedIndex].reflexTitle) {
+                this.titleList[this.selectedIndex].title = tempTitle;
+              }
+            }
+          } else {
+            for (var key in titlesObj) {
+              if (!Array.isArray(titlesObj[key])) {
+                this.tempTitleObj[key] = titlesObj[key];
+              }
+
+            }
+            for (var _key in this.tempTitleObj) {
+              for (var _i = 0; _i < this.titleList.length; _i++) {
+                if (this.titleList[_i].key == _key) {
+                  this.titleList[_i].title = this.tempTitleObj[_key];
+                }
+              }
+            }
+          }
+
           this.$refs.popupRef.close();
           this.$emit("result", val);
+
         },
         close: function close() {
           for (var i = 0; i < this.statusList.length; i++) {
@@ -10289,6 +10363,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '单选',
         'key': 'single',
         'isMutiple': false,
+        'reflexTitle': true,
         'detailTitle': '请选择（单选）(默认值为1)',
         'defaultSelectedIndex': 1,
         'detailList': [{
@@ -10333,6 +10408,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '排序',
         'key': 'sort',
         'isSort': true,
+        'reflexTitle': true,
         'defaultSelectedIndex': 3,
         'detailList': [{
           'title': '默认排序',
@@ -10360,7 +10436,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:204");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:206");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 
@@ -10531,6 +10607,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'detailTitle': '请选择职位类型（可多选）',
         'isMutiple': true,
         'key': 'jobType',
+        'defaultSelectedIndex': [1, 2, 5],
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -10680,6 +10757,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'title': '排序',
         'key': 'sort',
         'isSort': true,
+        'reflexTitle': true,
         'detailList': [{
           'title': '默认排序',
           'value': '' },
@@ -10706,7 +10784,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/independence/index.vue:201");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/independence/index.vue:203");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 
