@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<view class="select-tab" :style="{height: tabHeight+'px'}">
+		<view :class="topFixed?'select-tab-fixed-top':'select-tab'" :style="{height: tabHeight+'px'}">
 			<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index" @tap="showMenuClick(index)">
 				<text :style="{color:color}">{{item.title}}</text>
 				<text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text>
@@ -51,6 +51,10 @@
 			navHeight: {
 				type: Number,
 				default: 0
+			},
+			topFixed: {
+				type: Boolean,
+				default: false
 			}
 		},
 
@@ -166,20 +170,20 @@
 					}
 				} else {
 					for (let key in titlesObj) {
-						if(!Array.isArray(titlesObj[key])){
+						if (!Array.isArray(titlesObj[key])) {
 							this.tempTitleObj[key] = titlesObj[key];
 						}
-						
+
 					}
 					for (let key in this.tempTitleObj) {
 						for (let i = 0; i < this.titleList.length; i++) {
-							if(this.titleList[i].key == key){
+							if (this.titleList[i].key == key) {
 								this.titleList[i].title = this.tempTitleObj[key];
 							}
 						}
 					}
 				}
-				
+
 				this.$refs.popupRef.close()
 				this.$emit("result", val)
 
@@ -198,20 +202,38 @@
 
 	.select-tab {
 		border-bottom: #F7F7F7 1px solid;
+		background-color: #FFFFFF;
 		display: flex;
+		width: 100%;
+	}
+
+	.select-tab-fixed-top {
+		border-bottom: #F7F7F7 1px solid;
+		background-color: #FFFFFF;
+		display: flex;
+		width: 100%;
+		position: fixed;
+		/* #ifdef H5 */
+		top: 44px;
+		/* #endif */
+		/* #ifndef H5 */
+		top: 0;
+		/* #endif */
 	}
 
 	.arrows {
 		margin-left: 5px;
 	}
 
-	.select-tab .select-tab-item {
+	.select-tab .select-tab-item,
+	.select-tab-fixed-top .select-tab-item {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 
-	.select-tab .select-tab-item text {
+	.select-tab .select-tab-item text,
+	.select-tab-fixed-top .select-tab-item text{
 		color: #666666;
 		font-size: 14px;
 	}
