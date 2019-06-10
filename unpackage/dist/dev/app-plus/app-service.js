@@ -9197,6 +9197,9 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
             list[index].isSelected = !list[index].isSelected;
             if (index == 0) {
               this.resetSelected(list, key);
+              if (!this.independence) {
+                this.selectedTitleObj[key] = list[index].title;
+              }
             } else {
               list[0].isSelected = false;
               if (list[index].isSelected) {
@@ -9226,6 +9229,9 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           } else {
             if (index == 0) {
               this.resetSelected(list, key);
+              if (!this.independence) {
+                this.selectedTitleObj[key] = list[index].title;
+              }
             } else {
               list[0].isSelected = false;
               if (this.independence) {
