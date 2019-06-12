@@ -1,12 +1,20 @@
 <template>
 	<view class="content">
-		<sl-filter :topFixed="true" :isTransNav="true" :navHeight="0" :color="titleColor" :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
+		<sl-filter :topFixed="true" :isTransNav="true" :navHeight="0" :color="titleColor" :themeColor="themeColor" :menuList="menuList"
+		 @result="result"></sl-filter>
 		<view style="width: 100%;background-color: #0077AA; height: 100px;">
 			<!-- 这是一个没有什么用处的占位view，测试组件会不会被其他view挡住 -->
+			<text>占位view</text>
 		</view>
+
+		<button type="primary" @click="changeMenuList()" style="margin-top: 10px; width: 90%;">动态修改menuList的item</button>
+		<button type="primary" @click="changeMenuListDetailList()" style="margin-top: 10px; width: 90%;">动态修改menuList的detailList</button>
+
 		<view class="text">
 			<text>{{filterResult}}</text>
 		</view>
+
+
 	</view>
 </template>
 
@@ -26,7 +34,7 @@
 						'detailTitle': '请选择职位类型（可多选）(默认值为[1,2,5])',
 						'isMutiple': true,
 						'key': 'jobType',
-						'defaultSelectedIndex': [1,2,5],
+						// 'defaultSelectedIndex': [1,2,5],
 						'detailList': [{
 								'title': '不限',
 								'value': ''
@@ -208,6 +216,62 @@
 			result(val) {
 				console.log('filter_result:' + JSON.stringify(val));
 				this.filterResult = JSON.stringify(val, null, 2)
+			},
+			changeMenuList() {
+				let menuListItem = {
+					'title': '职位',
+					'detailTitle': '请选择职位类型（单选）(默认值为1)',
+					'isMutiple': false,
+					'key': 'jobType',
+					'defaultSelectedIndex': 1,
+					'detailList': [{
+							'title': '不限',
+							'value': ''
+						},
+						{
+							'title': 'new_1',
+							'value': 'new_1'
+						},
+						{
+							'title': 'new_2',
+							'value': 'new_2'
+						},
+						{
+							'title': 'new_3',
+							'value': 'new_3'
+						},
+						{
+							'title': 'new_4',
+							'value': 'new_4'
+						},
+						{
+							'title': 'new_5',
+							'value': 'new_5'
+						}
+					]
+				}
+				this.menuList[0] = menuListItem;
+				this.$forceUpdate();
+			},
+			changeMenuListDetailList() {
+				let tempDetailList = [{
+						'title': '不限',
+						'value': ''
+					},
+					{
+						'title': 'new_1',
+						'value': 'new_1'
+					},
+					{
+						'title': 'new_2',
+						'value': 'new_2'
+					},
+					{
+						'title': 'new_3',
+						'value': 'new_3'
+					}
+				]
+				this.menuList[0].detailList = tempDetailList;
 			}
 		}
 	}

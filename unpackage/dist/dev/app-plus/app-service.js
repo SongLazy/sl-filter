@@ -10291,6 +10291,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
 {
   components: {
     slFilter: slFilter },
@@ -10305,7 +10312,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'detailTitle': '请选择职位类型（可多选）(默认值为[1,2,5])',
         'isMutiple': true,
         'key': 'jobType',
-        'defaultSelectedIndex': [1, 2, 5],
+        // 'defaultSelectedIndex': [1,2,5],
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -10485,8 +10492,64 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:209");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:216");
       this.filterResult = JSON.stringify(val, null, 2);
+    },
+    changeMenuList: function changeMenuList() {
+      var menuListItem = {
+        'title': '职位',
+        'detailTitle': '请选择职位类型（单选）(默认值为1)',
+        'isMutiple': false,
+        'key': 'jobType',
+        'defaultSelectedIndex': 1,
+        'detailList': [{
+          'title': '不限',
+          'value': '' },
+
+        {
+          'title': 'new_1',
+          'value': 'new_1' },
+
+        {
+          'title': 'new_2',
+          'value': 'new_2' },
+
+        {
+          'title': 'new_3',
+          'value': 'new_3' },
+
+        {
+          'title': 'new_4',
+          'value': 'new_4' },
+
+        {
+          'title': 'new_5',
+          'value': 'new_5' }] };
+
+
+
+      this.menuList[0] = menuListItem;
+      this.$forceUpdate();
+    },
+    changeMenuListDetailList: function changeMenuListDetailList() {
+      var tempDetailList = [{
+        'title': '不限',
+        'value': '' },
+
+      {
+        'title': 'new_1',
+        'value': 'new_1' },
+
+      {
+        'title': 'new_2',
+        'value': 'new_2' },
+
+      {
+        'title': 'new_3',
+        'value': 'new_3' }];
+
+
+      this.menuList[0].detailList = tempDetailList;
     } } };exports.default = _default;
 
 /***/ }),

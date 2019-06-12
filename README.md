@@ -159,6 +159,75 @@ menuList: [
 ]
 ```
 
+## 动态修改menuList
+
+在有些场景下，需要根据列表的数据来确定筛选的条件有哪些，此时你可以在请求完数据后动态修改menuList。
+
+例子1： 修改menulistItem，可以同时设置数据源属性，比如单选or多选、默认值等等。注意，修改menuListItem,你必须要在修改数据之后加上``` this.$forceUpdate(); ```
+
+```
+<button type="primary" @click="changeMenuList()" style="margin-top: 10px; width: 60%;">动态修改menuList</button>
+
+changeMenuList() {
+	let menuListItem = {
+		'title': '职位',
+		'detailTitle': '请选择职位类型（可多选）(默认值为[1,2,5])',
+		'isMutiple': true,
+		'key': 'jobType',
+		'defaultSelectedIndex': [1,2],
+		'detailList': [{
+				'title': '不限',
+				'value': ''
+			},
+			{
+				'title': 'new_1',
+				'value': 'new_1'
+			},
+			{
+				'title': 'new_2',
+				'value': 'new_2'
+			},
+			{
+				'title': 'new_3',
+				'value': 'new_3'
+			}
+		]
+	}
+	this.menuList[0] = menuListItem;
+	this.$forceUpdate();
+}
+
+```
+
+例子2：如果你不需要重新设置数据源属性，你也可以直接修改detailList。
+
+```
+<button type="primary" @click="changeMenuListDetailList()" style="margin-top: 10px; width: 90%;">动态修改menuList的detailList</button>
+
+changeMenuListDetailList() {
+	let tempDetailList = [{
+			'title': '不限',
+			'value': ''
+		},
+		{
+			'title': 'new_1',
+			'value': 'new_1'
+		},
+		{
+			'title': 'new_2',
+			'value': 'new_2'
+		},
+		{
+			'title': 'new_3',
+			'value': 'new_3'
+		}
+	]
+	this.menuList[0].detailList = tempDetailList;
+}
+
+```
+
+
 ## 特别说明
 
 * 请严格按照说明设置数据源

@@ -109,6 +109,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
 {
   components: {
     slFilter: slFilter },
@@ -231,6 +234,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'key': 'single',
         'isMutiple': false,
         'detailTitle': '请选择（单选）',
+        'reflexTitle': true,
+        'defaultSelectedIndex': 2,
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -274,6 +279,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'key': 'sort',
         'isSort': true,
         'reflexTitle': true,
+        'defaultSelectedIndex': 2,
         'detailList': [{
           'title': '默认排序',
           'value': '' },
