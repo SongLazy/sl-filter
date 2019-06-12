@@ -1,6 +1,9 @@
 <template>
 	<view class="content">
 		<sl-filter :independence="true" :color="titleColor" :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
+		<view style="width: 100%;background-color: #0077AA; height: 100px;">
+			<!-- 这是一个没有什么用处的占位view，测试组件会不会被其他view挡住 -->
+		</view>
 		<view class="text">
 			<text>{{filterResult}}</text>
 		</view>
@@ -131,6 +134,8 @@
 						'key': 'single',
 						'isMutiple': false,
 						'detailTitle': '请选择（单选）',
+						'reflexTitle': true,
+						'defaultSelectedIndex': 2,
 						'detailList': [{
 								'title': '不限',
 								'value': ''
@@ -174,6 +179,7 @@
 						'key': 'sort',
 						'isSort': true,
 						'reflexTitle': true,
+						'defaultSelectedIndex': 2,
 						'detailList': [{
 								'title': '默认排序',
 								'value': ''

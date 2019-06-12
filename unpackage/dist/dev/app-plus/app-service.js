@@ -1226,9 +1226,9 @@ var m2=function(e,s,r,gg){
 var z=gz$gwx_3()
 cs.push("./components/sl-filter/sl-filter.wxml:view:1:1")
 var oR=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
-cs.push("./components/sl-filter/sl-filter.wxml:popup-layer:1:533")
+cs.push("./components/sl-filter/sl-filter.wxml:popup-layer:1:591")
 var fS=_mz(z,'popup-layer',['bind:close',2,'class',1,'data-event-opts',2,'data-ref',3,'direction',4,'isTransNav',5,'navHeight',6,'tabHeight',7,'vueSlots',8],[],e,s,gg)
-cs.push("./components/sl-filter/sl-filter.wxml:sl-filter-view:1:773")
+cs.push("./components/sl-filter/sl-filter.wxml:sl-filter-view:1:831")
 var cT=_mz(z,'sl-filter-view',['bind:confirm',11,'class',1,'data-event-opts',2,'data-ref',3,'independence',4,'menuList',5,'themeColor',6],[],e,s,gg)
 cs.pop()
 _(fS,cT)
@@ -9290,11 +9290,17 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
               list[i].isSelected = false;
             }
           }
-          var obj = { 'result': this.result, 'titles': this.selectedTitleObj };
+          var obj = {
+            'result': this.result,
+            'titles': this.selectedTitleObj };
+
           this.$emit("confirm", obj);
         },
         sureClick: function sureClick() {
-          var obj = { 'result': this.result, 'titles': this.selectedTitleObj };
+          var obj = {
+            'result': this.result,
+            'titles': this.selectedTitleObj };
+
           this.$emit("confirm", obj);
         },
         resetClick: function resetClick(list, key) {
@@ -9729,6 +9735,8 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
 
 
 
+
+
     {
       components: {
         popupLayer: popupLayer,
@@ -9798,16 +9806,43 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
           arr.push({
             'isActive': false });
 
-          titleArr.push({
-            'title': this.menuList[i].title,
-            'key': this.menuList[i].key });
+          // titleArr.push({
+          // 	'title': this.menuList[i].title,
+          // 	'key': this.menuList[i].key
+          // })
 
           r[this.menuList[i].key] = this.menuList[i].title;
+
+          if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
+            titleArr.push({
+              'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
+              'key': this.menuList[i].key });
+
+          } else {
+            titleArr.push({
+              'title': this.menuList[i].title,
+              'key': this.menuList[i].key });
+
+          }
+
         }
         this.statusList = arr;
         this.titleList = titleArr;
         this.tempTitleObj = r;
       },
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10253,6 +10288,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
 {
   components: {
     slFilter: slFilter },
@@ -10447,7 +10485,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:206");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:209");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 
@@ -10604,6 +10642,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
 {
   components: {
     slFilter: slFilter },
@@ -10726,6 +10767,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'key': 'single',
         'isMutiple': false,
         'detailTitle': '请选择（单选）',
+        'reflexTitle': true,
+        'defaultSelectedIndex': 2,
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -10769,6 +10812,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'key': 'sort',
         'isSort': true,
         'reflexTitle': true,
+        'defaultSelectedIndex': 2,
         'detailList': [{
           'title': '默认排序',
           'value': '' },
@@ -10795,7 +10839,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/independence/index.vue:203");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/independence/index.vue:209");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 

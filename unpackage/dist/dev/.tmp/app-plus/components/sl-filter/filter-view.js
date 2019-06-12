@@ -375,11 +375,17 @@ var _default2 =
           list[i].isSelected = false;
         }
       }
-      var obj = { 'result': this.result, 'titles': this.selectedTitleObj };
+      var obj = {
+        'result': this.result,
+        'titles': this.selectedTitleObj };
+
       this.$emit("confirm", obj);
     },
     sureClick: function sureClick() {
-      var obj = { 'result': this.result, 'titles': this.selectedTitleObj };
+      var obj = {
+        'result': this.result,
+        'titles': this.selectedTitleObj };
+
       this.$emit("confirm", obj);
     },
     resetClick: function resetClick(list, key) {

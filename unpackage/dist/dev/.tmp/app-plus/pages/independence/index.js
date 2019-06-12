@@ -109,6 +109,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
 {
   components: {
     slFilter: slFilter },
@@ -231,6 +234,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'key': 'single',
         'isMutiple': false,
         'detailTitle': '请选择（单选）',
+        'reflexTitle': true,
+        'defaultSelectedIndex': 2,
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -274,6 +279,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'key': 'sort',
         'isSort': true,
         'reflexTitle': true,
+        'defaultSelectedIndex': 2,
         'detailList': [{
           'title': '默认排序',
           'value': '' },
@@ -300,7 +306,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/independence/index.vue:203");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/independence/index.vue:209");
       this.filterResult = JSON.stringify(val, null, 2);
     } } };exports.default = _default;
 

@@ -1,9 +1,11 @@
 <template>
 	<view class="content">
-		<view :class="topFixed?'select-tab-fixed-top':'select-tab'" :style="{height: tabHeight+'px'}">
-			<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index" @tap="showMenuClick(index)">
-				<text :style="{color:color}">{{item.title}}</text>
-				<text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text>
+		<view :style="{height: tabHeight + 1 +'px'}">
+			<view :class="topFixed?'select-tab-fixed-top':'select-tab'" :style="{height: tabHeight+'px'}">
+				<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index" @tap="showMenuClick(index)">
+					<text :style="{color:color}">{{item.title}}</text>
+					<text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text>
+				</view>
 			</view>
 		</view>
 		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
@@ -87,11 +89,25 @@
 				arr.push({
 					'isActive': false
 				});
-				titleArr.push({
-					'title': this.menuList[i].title,
-					'key': this.menuList[i].key
-				})
+				// titleArr.push({
+				// 	'title': this.menuList[i].title,
+				// 	'key': this.menuList[i].key
+				// })
+				
 				r[this.menuList[i].key] = this.menuList[i].title;
+				
+				if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
+					titleArr.push({
+						'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
+						'key': this.menuList[i].key
+					})
+				} else {
+					titleArr.push({
+						'title': this.menuList[i].title,
+						'key': this.menuList[i].key
+					})
+				}
+				
 			}
 			this.statusList = arr;
 			this.titleList = titleArr;
@@ -108,11 +124,24 @@
 				arr.push({
 					'isActive': false
 				});
-				titleArr.push({
-					'title': this.menuList[i].title,
-					'key': this.menuList[i].key
-				});
+				// titleArr.push({
+				// 	'title': this.menuList[i].title,
+				// 	'key': this.menuList[i].key
+				// });
 				r[this.menuList[i].key] = this.menuList[i].title;
+				
+				if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
+					titleArr.push({
+						'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
+						'key': this.menuList[i].key
+					})
+				} else {
+					titleArr.push({
+						'title': this.menuList[i].title,
+						'key': this.menuList[i].key
+					})
+				}
+
 			}
 			this.statusList = arr;
 			this.titleList = titleArr;
@@ -233,7 +262,7 @@
 	}
 
 	.select-tab .select-tab-item text,
-	.select-tab-fixed-top .select-tab-item text{
+	.select-tab-fixed-top .select-tab-item text {
 		color: #666666;
 		font-size: 14px;
 	}

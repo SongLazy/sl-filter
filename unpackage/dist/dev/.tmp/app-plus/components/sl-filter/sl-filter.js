@@ -118,6 +118,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
 {
   components: {
     popupLayer: popupLayer,
@@ -187,16 +189,43 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       arr.push({
         'isActive': false });
 
-      titleArr.push({
-        'title': this.menuList[i].title,
-        'key': this.menuList[i].key });
+      // titleArr.push({
+      // 	'title': this.menuList[i].title,
+      // 	'key': this.menuList[i].key
+      // })
 
       r[this.menuList[i].key] = this.menuList[i].title;
+
+      if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
+        titleArr.push({
+          'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
+          'key': this.menuList[i].key });
+
+      } else {
+        titleArr.push({
+          'title': this.menuList[i].title,
+          'key': this.menuList[i].key });
+
+      }
+
     }
     this.statusList = arr;
     this.titleList = titleArr;
     this.tempTitleObj = r;
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

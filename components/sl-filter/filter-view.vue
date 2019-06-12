@@ -118,7 +118,7 @@
 		},
 		methods: {
 			menuTabClick(index) {
-				
+
 				this.menuIndex = index;
 				this.selectDetailList = this.menuList[index].detailList;
 				this.selectedKey = this.menuList[index].key;
@@ -182,7 +182,7 @@
 					list[index].isSelected = !list[index].isSelected;
 					if (index == 0) {
 						this.resetSelected(list, key)
-						if(!this.independence){
+						if (!this.independence) {
 							this.selectedTitleObj[key] = list[index].title;
 						}
 					} else {
@@ -214,7 +214,7 @@
 				} else {
 					if (index == 0) {
 						this.resetSelected(list, key)
-						if(!this.independence){
+						if (!this.independence) {
 							this.selectedTitleObj[key] = list[index].title;
 						}
 					} else {
@@ -275,11 +275,17 @@
 						list[i].isSelected = false;
 					}
 				}
-				let obj = {'result': this.result, 'titles': this.selectedTitleObj}
+				let obj = {
+					'result': this.result,
+					'titles': this.selectedTitleObj
+				}
 				this.$emit("confirm", obj);
 			},
 			sureClick() {
-				let obj = {'result': this.result, 'titles': this.selectedTitleObj}
+				let obj = {
+					'result': this.result,
+					'titles': this.selectedTitleObj
+				}
 				this.$emit("confirm", obj);
 			},
 			resetClick(list, key) {
