@@ -351,7 +351,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
       this.menuList[0] = menuListItem;
-      this.$forceUpdate();
+      this.$refs.slFilter.resetMenuList(this.menuList);
     },
     changeMenuListDetailList: function changeMenuListDetailList() {
       var tempDetailList = [{
@@ -372,6 +372,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
       this.menuList[0].detailList = tempDetailList;
+      this.$refs.slFilter.resetMenuList(this.menuList);
     } } };exports.default = _default;
 
 /***/ }),

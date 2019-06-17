@@ -126,10 +126,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     slFilterView: slFilterView },
 
   props: {
-    menuList: Array,
-    default: function _default() {
-      return [];
-    },
+    menuList: {
+      type: Array,
+      default: function _default() {
+        return [];
+      } },
+
     themeColor: {
       type: String,
       default: function _default() {
@@ -260,6 +262,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   },
   methods: {
+    resetMenuList: function resetMenuList(val) {
+      console.log('resetMenuList', " at components/sl-filter/sl-filter.vue:166");
+      this.menuList = val;
+      this.$forceUpdate();
+    },
     showMenuClick: function showMenuClick(index) {
       this.selectedIndex = index;
       if (this.statusList[index].isActive == true) {

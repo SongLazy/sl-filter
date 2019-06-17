@@ -76,6 +76,7 @@ detailList | Array |  | 条件列表
 defaultSelectedIndex | Array/Number |  | 默认选中的选项，可不设置。值为默认选中项的index或index的数组。
 reflexTitle | Boolean | false | 是否将选择的结果映射到菜单title上。只有当isMutiple不为true时生效。
 
+
 ##### defaultSelectedIndex 默认选项说明
 
 值类型 | 示例 | 说明
@@ -161,20 +162,32 @@ menuList: [
 
 ## 动态修改menuList
 
+方法 | 参数 | 说明 | 使用示例
+---- | ---- | ---- | ----
+resetMenuList(newMenuList) | 新的数据源 | 动态修改数据源的方法。使用此方法，必须给sl-filter设置ref。 | 以:ref="'slFilter'"为例：```this$refs.slFilter.resetMenuList(newMenuList)```
+
 在有些场景下，需要根据列表的数据来确定筛选的条件有哪些，此时你可以在请求完数据后动态修改menuList。
 
-例子1： 修改menulistItem，可以同时设置数据源属性，比如单选or多选、默认值等等。注意，修改menuListItem,你必须要在修改数据之后加上``` this.$forceUpdate(); ```
+想这样做，你需要给sl-filter设置一个ref。以:ref="'slFilter'"为例：
+
+例子1： 修改menulistItem，可以同时设置数据源属性，比如单选or多选、默认值等等。
 
 ```
+<sl-filter :ref="'slFilter'" :topFixed="true" :isTransNav="true" :navHeight="0" :color="titleColor" :themeColor="themeColor" :menuList="menuList"
+		 @result="result"></sl-filter>
+
 <button type="primary" @click="changeMenuList()" style="margin-top: 10px; width: 60%;">动态修改menuList</button>
+
+...
+...
 
 changeMenuList() {
 	let menuListItem = {
 		'title': '职位',
-		'detailTitle': '请选择职位类型（可多选）(默认值为[1,2,5])',
-		'isMutiple': true,
+		'detailTitle': '请选择职位类型（单选）(默认值为1)',
+		'isMutiple': false,
 		'key': 'jobType',
-		'defaultSelectedIndex': [1,2],
+		'defaultSelectedIndex': 1,
 		'detailList': [{
 				'title': '不限',
 				'value': ''
@@ -194,7 +207,7 @@ changeMenuList() {
 		]
 	}
 	this.menuList[0] = menuListItem;
-	this.$forceUpdate();
+	this.$refs.slFilter.resetMenuList(this.menuList)
 }
 
 ```
@@ -202,7 +215,13 @@ changeMenuList() {
 例子2：如果你不需要重新设置数据源属性，你也可以直接修改detailList。
 
 ```
+<sl-filter :ref="'slFilter'" :topFixed="true" :isTransNav="true" :navHeight="0" :color="titleColor" :themeColor="themeColor" :menuList="menuList"
+		 @result="result"></sl-filter>
+		 
 <button type="primary" @click="changeMenuListDetailList()" style="margin-top: 10px; width: 90%;">动态修改menuList的detailList</button>
+
+...
+...
 
 changeMenuListDetailList() {
 	let tempDetailList = [{
@@ -223,6 +242,7 @@ changeMenuListDetailList() {
 		}
 	]
 	this.menuList[0].detailList = tempDetailList;
+	this.$refs.slFilter.resetMenuList(this.menuList)
 }
 
 ```
@@ -389,6 +409,16 @@ changeMenuListDetailList() {
 
 
 ## 更新记录
+
+### 1.1.7
+
+更新日期：2019.06.13
+
+更新内容：新增动态修改数据源的方法
+
+方法 | 参数 | 说明 | 使用示例
+---- | ---- | ---- | ----
+resetMenuList(newMenuList) | 新的数据源 | 动态修改数据源的方法。使用此方法，必须给sl-filter设置ref。 | 以:ref="'slFilter'"为例：```this$refs.slFilter.resetMenuList(newMenuList)```
 
 ### 1.1.6
 

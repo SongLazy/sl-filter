@@ -26,9 +26,11 @@
 			slFilterView
 		},
 		props: {
-			menuList: Array,
-			default () {
-				return []
+			menuList: {
+				type: Array,
+				default () {
+					return []
+				}
 			},
 			themeColor: {
 				type: String,
@@ -160,6 +162,10 @@
 			};
 		},
 		methods: {
+			resetMenuList(val){
+				this.menuList = val;
+				this.$forceUpdate();
+			},
 			showMenuClick(index) {
 				this.selectedIndex = index;
 				if (this.statusList[index].isActive == true) {

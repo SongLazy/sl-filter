@@ -1120,13 +1120,15 @@ __WXML_GLOBAL__.ops_cached.$gwx_4=[];
 Z([3,'__l'])
 Z([3,'content'])
 Z([3,'__e'])
+Z([3,'vue-ref'])
 Z([[7],[3,'titleColor']])
 Z([[4],[[5],[[4],[[5],[[5],[1,'^result']],[[4],[[5],[[4],[[5],[1,'result']]]]]]]]])
+Z([3,'slFilter'])
 Z([1,true])
 Z([[7],[3,'menuList']])
 Z([1,0])
 Z([[7],[3,'themeColor']])
-Z(z[5])
+Z(z[7])
 })(__WXML_GLOBAL__.ops_cached.$gwx_4);return __WXML_GLOBAL__.ops_cached.$gwx_4
 }
 function gz$gwx_5(){
@@ -1245,7 +1247,7 @@ var z=gz$gwx_4()
 cs.push("./pages/apposition/index.wxml:view:1:1")
 var oV=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 cs.push("./pages/apposition/index.wxml:sl-filter:1:38")
-var cW=_mz(z,'sl-filter',['bind:result',2,'color',1,'data-event-opts',2,'isTransNav',3,'menuList',4,'navHeight',5,'themeColor',6,'topFixed',7],[],e,s,gg)
+var cW=_mz(z,'sl-filter',['bind:result',2,'class',1,'color',2,'data-event-opts',3,'data-ref',4,'isTransNav',5,'menuList',6,'navHeight',7,'themeColor',8,'topFixed',9],[],e,s,gg)
 cs.pop()
 _(oV,cW)
 cs.pop()
@@ -9743,10 +9745,12 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
         slFilterView: slFilterView },
 
       props: {
-        menuList: Array,
-        default: function _default() {
-          return [];
-        },
+        menuList: {
+          type: Array,
+          default: function _default() {
+            return [];
+          } },
+
         themeColor: {
           type: String,
           default: function _default() {
@@ -9877,6 +9881,11 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
 
       },
       methods: {
+        resetMenuList: function resetMenuList(val) {
+          console.log('resetMenuList', " at components/sl-filter/sl-filter.vue:166");
+          this.menuList = val;
+          this.$forceUpdate();
+        },
         showMenuClick: function showMenuClick(index) {
           this.selectedIndex = index;
           if (this.statusList[index].isActive == true) {
@@ -10298,6 +10307,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
 {
   components: {
     slFilter: slFilter },
@@ -10492,7 +10502,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:216");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:217");
       this.filterResult = JSON.stringify(val, null, 2);
     },
     changeMenuList: function changeMenuList() {
@@ -10529,7 +10539,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
       this.menuList[0] = menuListItem;
-      this.$forceUpdate();
+      this.$refs.slFilter.resetMenuList(this.menuList);
     },
     changeMenuListDetailList: function changeMenuListDetailList() {
       var tempDetailList = [{
@@ -10550,6 +10560,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
       this.menuList[0].detailList = tempDetailList;
+      this.$refs.slFilter.resetMenuList(this.menuList);
     } } };exports.default = _default;
 
 /***/ }),

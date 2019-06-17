@@ -119,6 +119,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
 {
   components: {
     slFilter: slFilter },
@@ -313,7 +314,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:216");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:217");
       this.filterResult = JSON.stringify(val, null, 2);
     },
     changeMenuList: function changeMenuList() {
@@ -350,7 +351,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
       this.menuList[0] = menuListItem;
-      this.$forceUpdate();
+      this.$refs.slFilter.resetMenuList(this.menuList);
     },
     changeMenuListDetailList: function changeMenuListDetailList() {
       var tempDetailList = [{
@@ -371,6 +372,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
       this.menuList[0].detailList = tempDetailList;
+      this.$refs.slFilter.resetMenuList(this.menuList);
     } } };exports.default = _default;
 
 /***/ }),
