@@ -124,10 +124,6 @@ var _default =
 
     navHeight: {
       type: Number,
-      default: 0 },
-
-    tabHeight: {
-      type: Number,
       default: 0 } },
 
 
@@ -163,10 +159,7 @@ var _default =
     _location: function _location() {
       var positionValue = {
         'top': 'bottom:0px;width:100%;',
-        'bottom': "top:".concat(this.tabHeight, "px;width:100%;"),
-
-
-
+        'bottom': 'top:0px;width:100%;',
         'left': 'right:0px;height:100%;',
         'right': 'left:0px;height:100%;' };
 
@@ -190,7 +183,7 @@ var _default =
       if (this.timer !== null || !this.iftoggle) {
         return;
       }
-      this.translateValue = -100 - this.navHeight - this.tabHeight;
+      this.translateValue = -100 - this.navHeight;
 
       this.timer = setTimeout(function () {
         _this3.ifshow = false;

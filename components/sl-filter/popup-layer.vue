@@ -1,9 +1,9 @@
 <template>
-	<view v-show="ifshow" @tap="ableClose" @touchmove.stop.prevent class="popup-layer">
+	<scroll-view scroll-y v-show="ifshow" @tap="ableClose" @touchmove.stop.prevent class="popup-layer">
 		<view ref="popRef" class="popup-content" @tap.stop="stopEvent" :style="_location">
 			<slot></slot>
 		</view>
-	</view>
+	</scroll-view>
 </template>
 
 <script>
@@ -23,10 +23,6 @@
 				default: false
 			},
 			navHeight: {
-				type: Number,
-				default: 0
-			},
-			tabHeight: {
 				type: Number,
 				default: 0
 			}
@@ -63,10 +59,7 @@
 			_location() {
 				const positionValue = {
 					'top': 'bottom:0px;width:100%;',
-					'bottom': `top:${this.tabHeight}px;width:100%;`,
-					// #ifdef H5
-					'bottom': 'top:94px;width:100%;',
-					// #endif
+					'bottom': 'top:0px;width:100%;',
 					'left': 'right:0px;height:100%;',
 					'right': 'left:0px;height:100%;',
 				};
@@ -90,7 +83,7 @@
 				if (this.timer !== null || !this.iftoggle) {
 					return;
 				}
-				this.translateValue = -100 - this.navHeight - this.tabHeight;
+				this.translateValue = -100 - this.navHeight;
 
 				this.timer = setTimeout(() => {
 					this.ifshow = false;
@@ -111,17 +104,17 @@
 
 <style>
 	.popup-layer {
-		position: fixed;
+		position: absolute;
 		z-index: 999999;
 		background: rgba(0, 0, 0, .3);
-		height: 100%;
+		height: calc(100% - 50px);
 		width: 100%;
 		left: 0px;
 		overflow: hidden;
 	}
 
 	.popup-content {
-		position: fixed;
+		position: absolute;
 		z-index: 1000000;
 		background: #FFFFFF;
 		transition: all .3s ease;

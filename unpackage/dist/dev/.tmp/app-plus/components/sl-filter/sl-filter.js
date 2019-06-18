@@ -263,7 +263,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     resetMenuList: function resetMenuList(val) {
-      console.log('resetMenuList', " at components/sl-filter/sl-filter.vue:166");
       this.menuList = val;
       this.$forceUpdate();
     },

@@ -1163,27 +1163,27 @@ var oB=_n('view')
 _rz(z,oB,'bind:__l',0,e,s,gg)
 var xC=_v()
 _(oB,xC)
-cs.push("./components/sl-filter/filter-view.wxml:block:1:74")
+cs.push("./components/sl-filter/filter-view.wxml:block:1:53")
 var oD=function(cF,fE,hG,gg){
 var cI=_v()
 _(hG,cI)
 if(_oz(z,5,cF,fE,gg)){cI.wxVkey=1
-cs.push("./components/sl-filter/filter-view.wxml:block:1:158")
-cs.push("./components/sl-filter/filter-view.wxml:view:1:194")
+cs.push("./components/sl-filter/filter-view.wxml:block:1:137")
+cs.push("./components/sl-filter/filter-view.wxml:view:1:173")
 var oJ=_n('view')
 _rz(z,oJ,'class',6,cF,fE,gg)
 var lK=_v()
 _(oJ,lK)
 if(_oz(z,7,cF,fE,gg)){lK.wxVkey=1
-cs.push("./components/sl-filter/filter-view.wxml:block:1:223")
+cs.push("./components/sl-filter/filter-view.wxml:block:1:202")
 cs.pop()
 }
 else{lK.wxVkey=2
-cs.push("./components/sl-filter/filter-view.wxml:block:1:766")
+cs.push("./components/sl-filter/filter-view.wxml:block:1:745")
 var aL=_v()
 _(lK,aL)
 if(_oz(z,8,cF,fE,gg)){aL.wxVkey=1
-cs.push("./components/sl-filter/filter-view.wxml:block:1:787")
+cs.push("./components/sl-filter/filter-view.wxml:block:1:766")
 cs.pop()
 }
 aL.wxXCkey=1
@@ -1208,11 +1208,11 @@ e_[x[0]]={f:m0,j:[],i:[],ti:[],ic:[]}
 d_[x[1]]={}
 var m1=function(e,s,r,gg){
 var z=gz$gwx_2()
-cs.push("./components/sl-filter/popup-layer.wxml:view:1:1")
-var eN=_mz(z,'view',['bind:__l',0,'bindtap',1,'catchtouchmove',1,'class',2,'data-event-opts',3,'hidden',4],[],e,s,gg)
-cs.push("./components/sl-filter/popup-layer.wxml:view:1:191")
+cs.push("./components/sl-filter/popup-layer.wxml:scroll-view:1:1")
+var eN=_mz(z,'scroll-view',['scrollY',-1,'bind:__l',0,'bindtap',1,'catchtouchmove',1,'class',2,'data-event-opts',3,'hidden',4],[],e,s,gg)
+cs.push("./components/sl-filter/popup-layer.wxml:view:1:207")
 var bO=_mz(z,'view',['catchtap',6,'class',1,'data-event-opts',2,'data-ref',3,'style',4],[],e,s,gg)
-cs.push("./components/sl-filter/popup-layer.wxml:slot:1:343")
+cs.push("./components/sl-filter/popup-layer.wxml:slot:1:359")
 var oP=_n('slot')
 cs.pop()
 _(bO,oP)
@@ -9051,6 +9051,8 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
     //
     //
     //
+    //
+    //
     var _default2 =
     {
       data: function data() {
@@ -9485,10 +9487,6 @@ define('components/sl-filter/popup-layer.js',function(require, module, exports, 
 
         navHeight: {
           type: Number,
-          default: 0 },
-
-        tabHeight: {
-          type: Number,
           default: 0 } },
 
 
@@ -9524,10 +9522,7 @@ define('components/sl-filter/popup-layer.js',function(require, module, exports, 
         _location: function _location() {
           var positionValue = {
             'top': 'bottom:0px;width:100%;',
-            'bottom': "top:".concat(this.tabHeight, "px;width:100%;"),
-
-
-
+            'bottom': 'top:0px;width:100%;',
             'left': 'right:0px;height:100%;',
             'right': 'left:0px;height:100%;' };
 
@@ -9551,7 +9546,7 @@ define('components/sl-filter/popup-layer.js',function(require, module, exports, 
           if (this.timer !== null || !this.iftoggle) {
             return;
           }
-          this.translateValue = -100 - this.navHeight - this.tabHeight;
+          this.translateValue = -100 - this.navHeight;
 
           this.timer = setTimeout(function () {
             _this3.ifshow = false;
@@ -9882,7 +9877,6 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
       },
       methods: {
         resetMenuList: function resetMenuList(val) {
-          console.log('resetMenuList', " at components/sl-filter/sl-filter.vue:166");
           this.menuList = val;
           this.$forceUpdate();
         },
@@ -10466,6 +10460,390 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
         {
           'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
+          'value': 'test_8' },
+
+        {
+          'title': '条件1',
+          'value': 'test_1' },
+
+        {
+          'title': '条件2',
+          'value': 'test_2' },
+
+        {
+          'title': '条件3',
+          'value': 'test_3' },
+
+        {
+          'title': '条件4',
+          'value': 'test_4' },
+
+        {
+          'title': '条件5',
+          'value': 'test_5' },
+
+        {
+          'title': '条件6',
+          'value': 'test_6' },
+
+        {
+          'title': '条件7',
+          'value': 'test_7' },
+
+        {
+          'title': '条件8',
           'value': 'test_8' }] },
 
 
@@ -10502,7 +10880,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   methods: {
     result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:217");
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:601");
       this.filterResult = JSON.stringify(val, null, 2);
     },
     changeMenuList: function changeMenuList() {

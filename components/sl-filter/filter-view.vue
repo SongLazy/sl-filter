@@ -1,6 +1,7 @@
 <template>
+	
 	<view>
-		<view class="home-section" style="padding: 0px 0px;">
+		<view style="padding: 0px 0px;">
 			<view class="filter-content" v-for="(item, index) in menuList" :key="index" v-if="menuIndex == index">
 				<view v-if="item.isSort">
 					<view class="filter-content-list">
@@ -32,6 +33,7 @@
 			</view>
 		</view>
 	</view>
+	
 </template>
 
 <script>
