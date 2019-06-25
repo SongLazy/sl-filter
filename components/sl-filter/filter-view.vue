@@ -1,5 +1,5 @@
 <template>
-	
+
 	<view>
 		<view style="padding: 0px 0px;">
 			<view class="filter-content" v-for="(item, index) in menuList" :key="index" v-if="menuIndex == index">
@@ -33,7 +33,7 @@
 			</view>
 		</view>
 	</view>
-	
+
 </template>
 
 <script>
@@ -46,7 +46,8 @@
 				selectDetailList: [],
 				independenceObj: {},
 				selectedKey: '',
-				cacheSelectedObj: {}
+				cacheSelectedObj: {},
+				defaultSelectedTitleObj: {}
 			};
 		},
 		props: {
@@ -76,41 +77,12 @@
 				}
 				return obj;
 			},
+			defaultSelectedObj() { // 保存初始状态
+				return this.getSelectedObj()
+			},
 			selectedObj: {
 				get() {
-					let obj = {}
-					for (let i = 0; i < this.menuList.length; i++) {
-						let item = this.menuList[i];
-						if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) { // 处理并列菜单默认值
-
-							if (item.isMutiple) {
-								obj[item.key] = [];
-								item.detailList[0].isSelected = false;
-								if (!Array.isArray(item.defaultSelectedIndex)) { // 如果默认值不是数组
-									item.defaultSelectedIndex = [item.defaultSelectedIndex];
-								}
-								for (let j = 0; j < item.defaultSelectedIndex.length; j++) { // 将默认选中的值放入selectedObj
-									item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
-									obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value)
-								}
-
-							} else {
-								obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
-								this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
-								item.detailList[0].isSelected = false;
-								item.detailList[item.defaultSelectedIndex].isSelected = true;
-							}
-						} else {
-							if (item.isMutiple) {
-								obj[item.key] = [];
-							} else {
-								obj[item.key] = '';
-							}
-						}
-					}
-					this.result = obj;
-
-					return obj;
+					return this.getSelectedObj()
 				},
 				set(newObj) {
 					return newObj;
@@ -119,8 +91,121 @@
 			}
 		},
 		methods: {
-			menuTabClick(index) {
+			getSelectedObj() {
+				let obj = {}
+				for (let i = 0; i < this.menuList.length; i++) {
+					let item = this.menuList[i];
+					if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) { // 处理并列菜单默认值
 
+						if (item.isMutiple) {
+							obj[item.key] = [];
+							item.detailList[0].isSelected = false;
+							if (!Array.isArray(item.defaultSelectedIndex)) { // 如果默认值不是数组
+								item.defaultSelectedIndex = [item.defaultSelectedIndex];
+							}
+							for (let j = 0; j < item.defaultSelectedIndex.length; j++) { // 将默认选中的值放入selectedObj
+								item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
+								obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value)
+							}
+
+						} else {
+							obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
+							this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+							this.defaultSelectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+							item.detailList[0].isSelected = false;
+							item.detailList[item.defaultSelectedIndex].isSelected = true;
+						}
+					} else {
+						if (item.isMutiple) {
+							obj[item.key] = [];
+						} else {
+							obj[item.key] = '';
+						}
+					}
+				}
+				this.result = obj;
+				return obj;
+			},
+			// 重置所有选项，包括默认选项，并更新result
+			resetAllSelect(callback) {
+				let titles = [];
+				for (let i = 0; i < this.menuList.length; i++) {
+					this.resetSelected(this.menuList[i].detailList,this.menuList[i].key);
+					titles[this.menuList[i].key] = this.menuList[i].title;
+				}
+				let obj = {
+					'result': this.result,
+					'titles': titles,
+					'isReset': true
+				}
+				this.$emit("confirm", obj);
+				callback(this.result);
+			},
+			// 重置选项为设置的默认值，并更新result
+			resetSelectToDefault(callback) {
+				for (let i = 0; i < this.menuList.length; i++) {
+					this.selectDetailList = this.menuList[i].detailList;
+
+					if (this.menuList[i].defaultSelectedIndex) {
+						if (Array.isArray(this.menuList[i].defaultSelectedIndex)) { // 把所有默认的为false的点为true
+							for (let j = 0; j < this.menuList[i].defaultSelectedIndex.length; j++) {
+								if (this.selectDetailList[this.menuList[i].defaultSelectedIndex[j]].isSelected == false) {
+									this.itemTap(this.menuList[i].defaultSelectedIndex[j], this.selectDetailList, this.menuList[i].isMutiple, this
+										.menuList[i].key)
+								}
+							}
+						} else {
+							this.itemTap(this.menuList[i].defaultSelectedIndex, this.selectDetailList, this.menuList[i].isMutiple, this.menuList[
+								i].key)
+						}
+
+						// 获取非默认项的下标
+						let unDefaultSelectedIndexArr = this.getUnDefaultSelectedIndex(this.menuList[i])
+						// 把所有不是默认的为true的点为false
+						for (let j = 0; j < unDefaultSelectedIndexArr.length; j++) {
+							if (this.selectDetailList[unDefaultSelectedIndexArr[j]].isSelected == true) {
+								this.itemTap(unDefaultSelectedIndexArr[j], this.selectDetailList, this.menuList[i].isMutiple, this
+										.menuList[i].key)
+							}
+						}
+					}
+
+
+				}
+
+				this.selectedObj = this.defaultSelectedObj;
+				this.result = this.defaultSelectedObj;
+				let obj = {
+					'result': this.result,
+					'titles': this.defaultSelectedTitleObj,
+					'isReset': true
+				}
+				this.$emit("confirm", obj);
+				callback(this.result)
+			},
+			getUnDefaultSelectedIndex(menuListItem) { // 获取非默认项
+				let tempDefault = menuListItem.defaultSelectedIndex;
+				if (!Array.isArray(tempDefault)) {
+					tempDefault = [tempDefault];
+				}
+				// 获取所有项的下标 组成新的数组
+				let all = [];
+				for (let i = 0; i < menuListItem.detailList.length; i++) {
+					all.push(i)
+				}
+				// 将默认选中的数组与所有项的数组的不同值合并为一个新数组
+				var unDefaultSelectedIndex = tempDefault.filter(function(v) {
+					return !(all.indexOf(v) > -1)
+				}).concat(all.filter(function(v) {
+					return !(tempDefault.indexOf(v) > -1)
+				}));
+				return unDefaultSelectedIndex;
+			},
+			resetMenuList(val) {
+				this.menuList = val;
+				this.$emit('update:menuList', val)
+			},
+			menuTabClick(index) {
 				this.menuIndex = index;
 				this.selectDetailList = this.menuList[index].detailList;
 				this.selectedKey = this.menuList[index].key;
@@ -246,8 +331,10 @@
 			resetSelected(list, key) {
 				if (typeof this.result[key] == 'object') {
 					this.result[key] = [];
+					this.selectedTitleObj[key] = list[0].title;
 				} else {
 					this.result[key] = '';
+					this.selectedTitleObj[key] = list[0].title;
 				}
 				for (let i = 0; i < list.length; i++) {
 					if (i == 0) {
@@ -279,14 +366,16 @@
 				}
 				let obj = {
 					'result': this.result,
-					'titles': this.selectedTitleObj
+					'titles': this.selectedTitleObj,
+					'isReset': false
 				}
 				this.$emit("confirm", obj);
 			},
 			sureClick() {
 				let obj = {
 					'result': this.result,
-					'titles': this.selectedTitleObj
+					'titles': this.selectedTitleObj,
+					'isReset': false
 				}
 				this.$emit("confirm", obj);
 			},

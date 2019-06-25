@@ -10,8 +10,8 @@
 		</view>
 		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
 		 :tabHeight="tabHeight">
-			<sl-filter-view :independence="independence" :themeColor="themeColor" :menuList="menuListTemp" ref="slFilterView"
-			 @confirm="filterResult"></sl-filter-view>
+			<sl-filter-view :ref="'slFilterView'" :independence="independence" :themeColor="themeColor" :menuList.sync="menuListTemp"
+			 ref="slFilterView" @confirm="filterResult"></sl-filter-view>
 		</popup-layer>
 	</view>
 
@@ -66,20 +66,13 @@
 			itemWidth() {
 				return 'calc(100%/2)'
 			},
-			menuListTemp() {
-				let arr = this.menuList;
-				for (let i = 0; i < arr.length; i++) {
-					let item = arr[i];
-					for (let j = 0; j < item.detailList.length; j++) {
-						let d_item = item.detailList[j];
-						if (j == 0) {
-							d_item.isSelected = true
-						} else {
-							d_item.isSelected = false
-						}
-					}
+			menuListTemp: {
+				get() {
+					return this.getMenuListTemp();
+				},
+				set(newObj) {
+					return newObj;
 				}
-				return arr;
 			}
 		},
 		// #ifndef H5
@@ -95,9 +88,9 @@
 				// 	'title': this.menuList[i].title,
 				// 	'key': this.menuList[i].key
 				// })
-				
+
 				r[this.menuList[i].key] = this.menuList[i].title;
-				
+
 				if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
 					titleArr.push({
 						'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
@@ -109,7 +102,7 @@
 						'key': this.menuList[i].key
 					})
 				}
-				
+
 			}
 			this.statusList = arr;
 			this.titleList = titleArr;
@@ -131,7 +124,7 @@
 				// 	'key': this.menuList[i].key
 				// });
 				r[this.menuList[i].key] = this.menuList[i].title;
-				
+
 				if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
 					titleArr.push({
 						'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
@@ -162,9 +155,38 @@
 			};
 		},
 		methods: {
-			resetMenuList(val){
+			getMenuListTemp() {
+				let arr = this.menuList;
+				for (let i = 0; i < arr.length; i++) {
+					let item = arr[i];
+					for (let j = 0; j < item.detailList.length; j++) {
+						let d_item = item.detailList[j];
+						if (j == 0) {
+							d_item.isSelected = true
+						} else {
+							d_item.isSelected = false
+						}
+					}
+				}
+				return arr;
+			},
+			// 重置所有选项，包括默认选项，并更新result
+			resetAllSelect(callback) {
+				this.$refs.slFilterView.resetAllSelect(function(e){
+					callback(e);
+				});
+			},
+			// 重置选项为设置的默认值，并更新result
+			resetSelectToDefault(callback) {
+				this.$refs.slFilterView.resetSelectToDefault(function(e){
+					callback(e);
+				});
+			},
+			resetMenuList(val) {
 				this.menuList = val;
+				this.$emit('update:menuList', val)
 				this.$forceUpdate();
+				this.$refs.slFilterView.resetMenuList(val)
 			},
 			showMenuClick(index) {
 				this.selectedIndex = index;
@@ -220,7 +242,12 @@
 				}
 
 				this.$refs.popupRef.close()
-				this.$emit("result", val)
+				if (obj.isReset) {
+					
+				} else{
+					this.$emit("result", val)
+				}
+				
 
 			},
 			close() {

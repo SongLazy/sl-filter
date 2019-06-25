@@ -120,6 +120,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
 {
   components: {
     slFilter: slFilter },
@@ -134,7 +136,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'detailTitle': '请选择职位类型（可多选）(默认值为[1,2,5])',
         'isMutiple': true,
         'key': 'jobType',
-        // 'defaultSelectedIndex': [1,2,5],
+        'defaultSelectedIndex': [1, 2, 5],
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -671,7 +673,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'key': 'sort',
         'isSort': true,
         'reflexTitle': true,
-        'defaultSelectedIndex': 3,
+        'defaultSelectedIndex': 2,
         'detailList': [{
           'title': '默认排序',
           'value': '' },
@@ -697,10 +699,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   },
   methods: {
-    result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:601");
-      this.filterResult = JSON.stringify(val, null, 2);
-    },
     changeMenuList: function changeMenuList() {
       var menuListItem = {
         'title': '职位',
@@ -757,6 +755,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
       this.menuList[0].detailList = tempDetailList;
       this.$refs.slFilter.resetMenuList(this.menuList);
+    },
+    result: function result(val) {
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:660");
+      this.filterResult = JSON.stringify(val, null, 2);
+    },
+    // 重置所有选项，包括默认选项，并更新result
+    resetAllSelect: function resetAllSelect() {
+      this.$refs.slFilter.resetAllSelect(function (result) {
+        console.log('重置之后回调的result:' + JSON.stringify(result), " at pages/apposition/index.vue:666");
+      });
+    },
+    // 重置选项为设置的默认值，并更新result
+    resetSelectToDefault: function resetSelectToDefault() {
+      this.$refs.slFilter.resetSelectToDefault(function (result) {
+        console.log('重置为默认值之后回调的result:' + JSON.stringify(result), " at pages/apposition/index.vue:672");
+      });
     } } };exports.default = _default;
 
 /***/ }),

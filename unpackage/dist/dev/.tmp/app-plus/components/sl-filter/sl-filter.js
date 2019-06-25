@@ -166,21 +166,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     itemWidth: function itemWidth() {
       return 'calc(100%/2)';
     },
-    menuListTemp: function menuListTemp() {
-      var arr = this.menuList;
-      for (var i = 0; i < arr.length; i++) {
-        var item = arr[i];
-        for (var j = 0; j < item.detailList.length; j++) {
-          var d_item = item.detailList[j];
-          if (j == 0) {
-            d_item.isSelected = true;
-          } else {
-            d_item.isSelected = false;
-          }
-        }
-      }
-      return arr;
-    } },
+    menuListTemp: {
+      get: function get() {
+        return this.getMenuListTemp();
+      },
+      set: function set(newObj) {
+        return newObj;
+      } } },
+
 
 
   onReady: function onReady() {
@@ -262,9 +255,38 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   },
   methods: {
+    getMenuListTemp: function getMenuListTemp() {
+      var arr = this.menuList;
+      for (var i = 0; i < arr.length; i++) {
+        var item = arr[i];
+        for (var j = 0; j < item.detailList.length; j++) {
+          var d_item = item.detailList[j];
+          if (j == 0) {
+            d_item.isSelected = true;
+          } else {
+            d_item.isSelected = false;
+          }
+        }
+      }
+      return arr;
+    },
+    // 重置所有选项，包括默认选项，并更新result
+    resetAllSelect: function resetAllSelect(callback) {
+      this.$refs.slFilterView.resetAllSelect(function (e) {
+        callback(e);
+      });
+    },
+    // 重置选项为设置的默认值，并更新result
+    resetSelectToDefault: function resetSelectToDefault(callback) {
+      this.$refs.slFilterView.resetSelectToDefault(function (e) {
+        callback(e);
+      });
+    },
     resetMenuList: function resetMenuList(val) {
       this.menuList = val;
+      this.$emit('update:menuList', val);
       this.$forceUpdate();
+      this.$refs.slFilterView.resetMenuList(val);
     },
     showMenuClick: function showMenuClick(index) {
       this.selectedIndex = index;
@@ -320,7 +342,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       }
 
       this.$refs.popupRef.close();
-      this.$emit("result", val);
+      if (obj.isReset) {
+
+      } else {
+        this.$emit("result", val);
+      }
+
 
     },
     close: function close() {

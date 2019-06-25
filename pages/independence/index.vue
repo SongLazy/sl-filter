@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<sl-filter :independence="true" :color="titleColor" :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
+		<sl-filter :independence="true" :color="titleColor" :themeColor="themeColor" :menuList.sync="menuList" @result="result"></sl-filter>
 		<view style="width: 100%;background-color: #0077AA; height: 100px;">
 			<!-- 这是一个没有什么用处的占位view，测试组件会不会被其他view挡住 -->
 		</view>

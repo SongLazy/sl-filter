@@ -9,6 +9,8 @@
 
 		<button type="primary" @click="changeMenuList()" style="margin-top: 10px; width: 90%;">动态修改menuList的item</button>
 		<button type="primary" @click="changeMenuListDetailList()" style="margin-top: 10px; width: 90%;">动态修改menuList的detailList</button>
+		<button type="primary" @click="resetAllSelect()" style="margin-top: 10px; width: 90%;">重置选项(包括默认项)</button>
+		<button type="primary" @click="resetSelectToDefault()" style="margin-top: 10px; width: 90%;">重置选项为默认值</button>
 
 		<view class="text">
 			<text>{{filterResult}}</text>
@@ -34,7 +36,7 @@
 						'detailTitle': '请选择职位类型（可多选）(默认值为[1,2,5])',
 						'isMutiple': true,
 						'key': 'jobType',
-						// 'defaultSelectedIndex': [1,2,5],
+						'defaultSelectedIndex': [1,2,5],
 						'detailList': [{
 								'title': '不限',
 								'value': ''
@@ -571,7 +573,7 @@
 						'key': 'sort',
 						'isSort': true,
 						'reflexTitle': true,
-						'defaultSelectedIndex': 3,
+						'defaultSelectedIndex': 2,
 						'detailList': [{
 								'title': '默认排序',
 								'value': ''
@@ -597,10 +599,6 @@
 
 		},
 		methods: {
-			result(val) {
-				console.log('filter_result:' + JSON.stringify(val));
-				this.filterResult = JSON.stringify(val, null, 2)
-			},
 			changeMenuList() {
 				let menuListItem = {
 					'title': '职位',
@@ -657,6 +655,22 @@
 				]
 				this.menuList[0].detailList = tempDetailList;
 				this.$refs.slFilter.resetMenuList(this.menuList)
+			},
+			result(val) {
+				console.log('filter_result:' + JSON.stringify(val));
+				this.filterResult = JSON.stringify(val, null, 2)
+			},
+			// 重置所有选项，包括默认选项，并更新result
+			resetAllSelect() {
+				this.$refs.slFilter.resetAllSelect(function(result){
+					console.log('重置之后回调的result:'+JSON.stringify(result))
+				})
+			},
+			// 重置选项为设置的默认值，并更新result
+			resetSelectToDefault() {
+				this.$refs.slFilter.resetSelectToDefault(function(result){
+					console.log('重置为默认值之后回调的result:'+JSON.stringify(result))
+				})
 			}
 		}
 	}

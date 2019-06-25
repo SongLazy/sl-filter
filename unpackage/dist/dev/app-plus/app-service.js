@@ -1105,11 +1105,13 @@ Z([[7],[3,'navHeight']])
 Z([[7],[3,'tabHeight']])
 Z([[4],[[5],[1,'default']]])
 Z(z[2])
+Z(z[2])
 Z(z[3])
-Z([[4],[[5],[[4],[[5],[[5],[1,'^confirm']],[[4],[[5],[[4],[[5],[1,'filterResult']]]]]]]]])
+Z([[4],[[5],[[5],[[5],[[4],[[5],[[5],[1,'^updateMenuList']],[[4],[[5],[[4],[[5],[[5],[[5],[1,'__set_sync']],[[4],[[5],[[5],[[5],[1,'$0']],[1,'menuListTemp']],[1,'$event']]]],[[4],[[5],[1,'']]]]]]]]]],[[4],[[5],[[5],[1,'^updateMenuList']],[[4],[[5],[[4],[[5],[[5],[[5],[1,'__set_sync']],[[4],[[5],[[5],[[5],[1,'$0']],[1,'menuListTemp']],[1,'$event']]]],[[4],[[5],[1,'']]]]]]]]]],[[4],[[5],[[5],[1,'^confirm']],[[4],[[5],[[4],[[5],[1,'filterResult']]]]]]]]])
 Z([3,'slFilterView'])
 Z([[7],[3,'independence']])
 Z([[7],[3,'menuListTemp']])
+Z(z[15])
 Z([[7],[3,'themeColor']])
 })(__WXML_GLOBAL__.ops_cached.$gwx_3);return __WXML_GLOBAL__.ops_cached.$gwx_3
 }
@@ -1138,8 +1140,9 @@ __WXML_GLOBAL__.ops_cached.$gwx_5=[];
 Z([3,'__l'])
 Z([3,'content'])
 Z([3,'__e'])
+Z(z[2])
 Z([[7],[3,'titleColor']])
-Z([[4],[[5],[[4],[[5],[[5],[1,'^result']],[[4],[[5],[[4],[[5],[1,'result']]]]]]]]])
+Z([[4],[[5],[[5],[[5],[[4],[[5],[[5],[1,'^updateMenuList']],[[4],[[5],[[4],[[5],[[5],[[5],[1,'__set_sync']],[[4],[[5],[[5],[[5],[1,'$0']],[1,'menuList']],[1,'$event']]]],[[4],[[5],[1,'']]]]]]]]]],[[4],[[5],[[5],[1,'^updateMenuList']],[[4],[[5],[[4],[[5],[[5],[[5],[1,'__set_sync']],[[4],[[5],[[5],[[5],[1,'$0']],[1,'menuList']],[1,'$event']]]],[[4],[[5],[1,'']]]]]]]]]],[[4],[[5],[[5],[1,'^result']],[[4],[[5],[[4],[[5],[1,'result']]]]]]]]])
 Z([1,true])
 Z([[7],[3,'menuList']])
 Z([[7],[3,'themeColor']])
@@ -1231,7 +1234,7 @@ var oR=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 cs.push("./components/sl-filter/sl-filter.wxml:popup-layer:1:591")
 var fS=_mz(z,'popup-layer',['bind:close',2,'class',1,'data-event-opts',2,'data-ref',3,'direction',4,'isTransNav',5,'navHeight',6,'tabHeight',7,'vueSlots',8],[],e,s,gg)
 cs.push("./components/sl-filter/sl-filter.wxml:sl-filter-view:1:831")
-var cT=_mz(z,'sl-filter-view',['bind:confirm',11,'class',1,'data-event-opts',2,'data-ref',3,'independence',4,'menuList',5,'themeColor',6],[],e,s,gg)
+var cT=_mz(z,'sl-filter-view',['bind:confirm',11,'bind:updateMenuList',1,'class',2,'data-event-opts',3,'data-ref',4,'independence',5,'menuList',6,'ref',7,'themeColor',8],[],e,s,gg)
 cs.pop()
 _(fS,cT)
 cs.pop()
@@ -1261,7 +1264,7 @@ var z=gz$gwx_5()
 cs.push("./pages/independence/index.wxml:view:1:1")
 var lY=_mz(z,'view',['bind:__l',0,'class',1],[],e,s,gg)
 cs.push("./pages/independence/index.wxml:sl-filter:1:38")
-var aZ=_mz(z,'sl-filter',['bind:result',2,'color',1,'data-event-opts',2,'independence',3,'menuList',4,'themeColor',5],[],e,s,gg)
+var aZ=_mz(z,'sl-filter',['bind:result',2,'bind:updateMenuList',1,'color',2,'data-event-opts',3,'independence',4,'menuList',5,'themeColor',6],[],e,s,gg)
 cs.pop()
 _(lY,aZ)
 cs.pop()
@@ -9063,7 +9066,8 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           selectDetailList: [],
           independenceObj: {},
           selectedKey: '',
-          cacheSelectedObj: {} };
+          cacheSelectedObj: {},
+          defaultSelectedTitleObj: {} };
 
       },
       props: {
@@ -9093,41 +9097,12 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           }
           return obj;
         },
+        defaultSelectedObj: function defaultSelectedObj() {// 保存初始状态
+          return this.getSelectedObj();
+        },
         selectedObj: {
           get: function get() {
-            var obj = {};
-            for (var i = 0; i < this.menuList.length; i++) {
-              var item = this.menuList[i];
-              if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) {// 处理并列菜单默认值
-
-                if (item.isMutiple) {
-                  obj[item.key] = [];
-                  item.detailList[0].isSelected = false;
-                  if (!Array.isArray(item.defaultSelectedIndex)) {// 如果默认值不是数组
-                    item.defaultSelectedIndex = [item.defaultSelectedIndex];
-                  }
-                  for (var j = 0; j < item.defaultSelectedIndex.length; j++) {// 将默认选中的值放入selectedObj
-                    item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
-                    obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value);
-                  }
-
-                } else {
-                  obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
-                  this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
-                  item.detailList[0].isSelected = false;
-                  item.detailList[item.defaultSelectedIndex].isSelected = true;
-                }
-              } else {
-                if (item.isMutiple) {
-                  obj[item.key] = [];
-                } else {
-                  obj[item.key] = '';
-                }
-              }
-            }
-            this.result = obj;
-
-            return obj;
+            return this.getSelectedObj();
           },
           set: function set(newObj) {
             return newObj;
@@ -9136,8 +9111,121 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
 
 
       methods: {
-        menuTabClick: function menuTabClick(index) {
+        getSelectedObj: function getSelectedObj() {
+          var obj = {};
+          for (var i = 0; i < this.menuList.length; i++) {
+            var item = this.menuList[i];
+            if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) {// 处理并列菜单默认值
 
+              if (item.isMutiple) {
+                obj[item.key] = [];
+                item.detailList[0].isSelected = false;
+                if (!Array.isArray(item.defaultSelectedIndex)) {// 如果默认值不是数组
+                  item.defaultSelectedIndex = [item.defaultSelectedIndex];
+                }
+                for (var j = 0; j < item.defaultSelectedIndex.length; j++) {// 将默认选中的值放入selectedObj
+                  item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
+                  obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value);
+                }
+
+              } else {
+                obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
+                this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+                this.defaultSelectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+                item.detailList[0].isSelected = false;
+                item.detailList[item.defaultSelectedIndex].isSelected = true;
+              }
+            } else {
+              if (item.isMutiple) {
+                obj[item.key] = [];
+              } else {
+                obj[item.key] = '';
+              }
+            }
+          }
+          this.result = obj;
+          return obj;
+        },
+        // 重置所有选项，包括默认选项，并更新result
+        resetAllSelect: function resetAllSelect(callback) {
+          var titles = [];
+          for (var i = 0; i < this.menuList.length; i++) {
+            this.resetSelected(this.menuList[i].detailList, this.menuList[i].key);
+            titles[this.menuList[i].key] = this.menuList[i].title;
+          }
+          var obj = {
+            'result': this.result,
+            'titles': titles,
+            'isReset': true };
+
+          this.$emit("confirm", obj);
+          callback(this.result);
+        },
+        // 重置选项为设置的默认值，并更新result
+        resetSelectToDefault: function resetSelectToDefault(callback) {
+          for (var i = 0; i < this.menuList.length; i++) {
+            this.selectDetailList = this.menuList[i].detailList;
+
+            if (this.menuList[i].defaultSelectedIndex) {
+              if (Array.isArray(this.menuList[i].defaultSelectedIndex)) {// 把所有默认的为false的点为true
+                for (var j = 0; j < this.menuList[i].defaultSelectedIndex.length; j++) {
+                  if (this.selectDetailList[this.menuList[i].defaultSelectedIndex[j]].isSelected == false) {
+                    this.itemTap(this.menuList[i].defaultSelectedIndex[j], this.selectDetailList, this.menuList[i].isMutiple, this.
+                    menuList[i].key);
+                  }
+                }
+              } else {
+                this.itemTap(this.menuList[i].defaultSelectedIndex, this.selectDetailList, this.menuList[i].isMutiple, this.menuList[
+                i].key);
+              }
+
+              // 获取非默认项的下标
+              var unDefaultSelectedIndexArr = this.getUnDefaultSelectedIndex(this.menuList[i]);
+              // 把所有不是默认的为true的点为false
+              for (var _j = 0; _j < unDefaultSelectedIndexArr.length; _j++) {
+                if (this.selectDetailList[unDefaultSelectedIndexArr[_j]].isSelected == true) {
+                  this.itemTap(unDefaultSelectedIndexArr[_j], this.selectDetailList, this.menuList[i].isMutiple, this.
+                  menuList[i].key);
+                }
+              }
+            }
+
+
+          }
+
+          this.selectedObj = this.defaultSelectedObj;
+          this.result = this.defaultSelectedObj;
+          var obj = {
+            'result': this.result,
+            'titles': this.defaultSelectedTitleObj,
+            'isReset': true };
+
+          this.$emit("confirm", obj);
+          callback(this.result);
+        },
+        getUnDefaultSelectedIndex: function getUnDefaultSelectedIndex(menuListItem) {// 获取非默认项
+          var tempDefault = menuListItem.defaultSelectedIndex;
+          if (!Array.isArray(tempDefault)) {
+            tempDefault = [tempDefault];
+          }
+          // 获取所有项的下标 组成新的数组
+          var all = [];
+          for (var i = 0; i < menuListItem.detailList.length; i++) {
+            all.push(i);
+          }
+          // 将默认选中的数组与所有项的数组的不同值合并为一个新数组
+          var unDefaultSelectedIndex = tempDefault.filter(function (v) {
+            return !(all.indexOf(v) > -1);
+          }).concat(all.filter(function (v) {
+            return !(tempDefault.indexOf(v) > -1);
+          }));
+          return unDefaultSelectedIndex;
+        },
+        resetMenuList: function resetMenuList(val) {
+          this.menuList = val;
+          this.$emit('update:menuList', val);
+        },
+        menuTabClick: function menuTabClick(index) {
           this.menuIndex = index;
           this.selectDetailList = this.menuList[index].detailList;
           this.selectedKey = this.menuList[index].key;
@@ -9263,8 +9351,10 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
         resetSelected: function resetSelected(list, key) {
           if (typeof this.result[key] == 'object') {
             this.result[key] = [];
+            this.selectedTitleObj[key] = list[0].title;
           } else {
             this.result[key] = '';
+            this.selectedTitleObj[key] = list[0].title;
           }
           for (var i = 0; i < list.length; i++) {
             if (i == 0) {
@@ -9296,14 +9386,16 @@ define('components/sl-filter/filter-view.js',function(require, module, exports, 
           }
           var obj = {
             'result': this.result,
-            'titles': this.selectedTitleObj };
+            'titles': this.selectedTitleObj,
+            'isReset': false };
 
           this.$emit("confirm", obj);
         },
         sureClick: function sureClick() {
           var obj = {
             'result': this.result,
-            'titles': this.selectedTitleObj };
+            'titles': this.selectedTitleObj,
+            'isReset': false };
 
           this.$emit("confirm", obj);
         },
@@ -9780,21 +9872,14 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
         itemWidth: function itemWidth() {
           return 'calc(100%/2)';
         },
-        menuListTemp: function menuListTemp() {
-          var arr = this.menuList;
-          for (var i = 0; i < arr.length; i++) {
-            var item = arr[i];
-            for (var j = 0; j < item.detailList.length; j++) {
-              var d_item = item.detailList[j];
-              if (j == 0) {
-                d_item.isSelected = true;
-              } else {
-                d_item.isSelected = false;
-              }
-            }
-          }
-          return arr;
-        } },
+        menuListTemp: {
+          get: function get() {
+            return this.getMenuListTemp();
+          },
+          set: function set(newObj) {
+            return newObj;
+          } } },
+
 
 
       onReady: function onReady() {
@@ -9876,9 +9961,38 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
 
       },
       methods: {
+        getMenuListTemp: function getMenuListTemp() {
+          var arr = this.menuList;
+          for (var i = 0; i < arr.length; i++) {
+            var item = arr[i];
+            for (var j = 0; j < item.detailList.length; j++) {
+              var d_item = item.detailList[j];
+              if (j == 0) {
+                d_item.isSelected = true;
+              } else {
+                d_item.isSelected = false;
+              }
+            }
+          }
+          return arr;
+        },
+        // 重置所有选项，包括默认选项，并更新result
+        resetAllSelect: function resetAllSelect(callback) {
+          this.$refs.slFilterView.resetAllSelect(function (e) {
+            callback(e);
+          });
+        },
+        // 重置选项为设置的默认值，并更新result
+        resetSelectToDefault: function resetSelectToDefault(callback) {
+          this.$refs.slFilterView.resetSelectToDefault(function (e) {
+            callback(e);
+          });
+        },
         resetMenuList: function resetMenuList(val) {
           this.menuList = val;
+          this.$emit('update:menuList', val);
           this.$forceUpdate();
+          this.$refs.slFilterView.resetMenuList(val);
         },
         showMenuClick: function showMenuClick(index) {
           this.selectedIndex = index;
@@ -9934,7 +10048,12 @@ define('components/sl-filter/sl-filter.js',function(require, module, exports, wi
           }
 
           this.$refs.popupRef.close();
-          this.$emit("result", val);
+          if (obj.isReset) {
+
+          } else {
+            this.$emit("result", val);
+          }
+
 
         },
         close: function close() {
@@ -10302,6 +10421,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
 {
   components: {
     slFilter: slFilter },
@@ -10316,7 +10437,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'detailTitle': '请选择职位类型（可多选）(默认值为[1,2,5])',
         'isMutiple': true,
         'key': 'jobType',
-        // 'defaultSelectedIndex': [1,2,5],
+        'defaultSelectedIndex': [1, 2, 5],
         'detailList': [{
           'title': '不限',
           'value': '' },
@@ -10853,7 +10974,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         'key': 'sort',
         'isSort': true,
         'reflexTitle': true,
-        'defaultSelectedIndex': 3,
+        'defaultSelectedIndex': 2,
         'detailList': [{
           'title': '默认排序',
           'value': '' },
@@ -10879,10 +11000,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   },
   methods: {
-    result: function result(val) {
-      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:601");
-      this.filterResult = JSON.stringify(val, null, 2);
-    },
     changeMenuList: function changeMenuList() {
       var menuListItem = {
         'title': '职位',
@@ -10939,6 +11056,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
       this.menuList[0].detailList = tempDetailList;
       this.$refs.slFilter.resetMenuList(this.menuList);
+    },
+    result: function result(val) {
+      console.log('filter_result:' + JSON.stringify(val), " at pages/apposition/index.vue:660");
+      this.filterResult = JSON.stringify(val, null, 2);
+    },
+    // 重置所有选项，包括默认选项，并更新result
+    resetAllSelect: function resetAllSelect() {
+      this.$refs.slFilter.resetAllSelect(function (result) {
+        console.log('重置之后回调的result:' + JSON.stringify(result), " at pages/apposition/index.vue:666");
+      });
+    },
+    // 重置选项为设置的默认值，并更新result
+    resetSelectToDefault: function resetSelectToDefault() {
+      this.$refs.slFilter.resetSelectToDefault(function (result) {
+        console.log('重置为默认值之后回调的result:' + JSON.stringify(result), " at pages/apposition/index.vue:672");
+      });
     } } };exports.default = _default;
 
 /***/ }),

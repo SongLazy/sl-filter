@@ -27,7 +27,7 @@ dcloud插件市场地址 [sl-filter](http://ext.dcloud.net.cn/plugin?id=381)
 
 在`script`中引用组件
 
-```Vue
+```vue
  	import slFilter from '@/components/sl-filter/sl-filter.vue';
  	export default {
 		components: {
@@ -94,7 +94,7 @@ value | String |  | 条件值
 
 ### 数据源格式
 
-```Vue
+```vue
 menuList: [
 	{
 		'title': '菜单1',
@@ -160,7 +160,8 @@ menuList: [
 ]
 ```
 
-## 动态修改menuList
+## 方法
+### 动态修改menuList
 
 方法 | 参数 | 说明 | 使用示例
 ---- | ---- | ---- | ----
@@ -172,7 +173,7 @@ resetMenuList(newMenuList) | 新的数据源 | 动态修改数据源的方法。
 
 例子1： 修改menulistItem，可以同时设置数据源属性，比如单选or多选、默认值等等。
 
-```
+```vue
 <sl-filter :ref="'slFilter'" :topFixed="true" :isTransNav="true" :navHeight="0" :color="titleColor" :themeColor="themeColor" :menuList="menuList"
 		 @result="result"></sl-filter>
 
@@ -214,7 +215,7 @@ changeMenuList() {
 
 例子2：如果你不需要重新设置数据源属性，你也可以直接修改detailList。
 
-```
+```vue
 <sl-filter :ref="'slFilter'" :topFixed="true" :isTransNav="true" :navHeight="0" :color="titleColor" :themeColor="themeColor" :menuList="menuList"
 		 @result="result"></sl-filter>
 		 
@@ -247,6 +248,43 @@ changeMenuListDetailList() {
 
 ```
 
+### 重置选项
+
+
+方法 | 参数 | 说明 | 使用示例
+---- | ---- | ---- | ----
+resetAllSelect(function(result){}) | 重置之后的回调，回调参数```result```为重置之后的结果 | 重置所有选项，包括默认选项。使用此方法，必须给sl-filter设置ref。 | 见下方
+resetSelectToDefault(function(result){}) | 重置之后的回调，回调参数```result```为重置之后的结果 | 重置为设置的默认选项。使用此方法，必须给sl-filter设置ref。 | 见下方
+
+有时你需要重置所有菜单的选项，此时每个菜单的重置按钮并不能满足需求，组件提供了两个重置选项的方法，并在方法的参数中通过回调的方式将更新后的结果返回，以便满足不同的业务需求。
+
+使用示例：
+
+
+```vue
+<sl-filter :ref="'slFilter'" :topFixed="true" :isTransNav="true" :navHeight="0" :color="titleColor" :themeColor="themeColor" :menuList="menuList"
+		 @result="result"></sl-filter>
+		 
+<button type="primary" @click="resetAllSelect()" style="margin-top: 10px; width: 90%;">重置选项(包括默认项)</button>
+<button type="primary" @click="resetSelectToDefault()" style="margin-top: 10px; width: 90%;">重置选项为默认值</button>
+
+...
+...
+
+// 重置所有选项，包括默认选项，并更新result
+resetAllSelect() {
+	this.$refs.slFilter.resetAllSelect(function(result){
+		console.log('重置之后回调的result:'+JSON.stringify(result))
+	})
+},
+// 重置选项为设置的默认值，并更新result
+resetSelectToDefault() {
+	this.$refs.slFilter.resetSelectToDefault(function(result){
+		console.log('重置为默认值之后回调的result:'+JSON.stringify(result))
+	})
+}
+
+```
 
 ## 特别说明
 
@@ -259,7 +297,7 @@ changeMenuListDetailList() {
 
 详细代码见 [github demo](https://github.com/SongLazy/sl-filter)
 
-```Vue
+```vue
 <template>
 	<view class="content">
 		<sl-filter :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
@@ -410,6 +448,12 @@ changeMenuListDetailList() {
 
 ## 更新记录
 
+### 1.1.9
+
+更新日期：2019.06.26
+
+更新内容：增加了重置选项的方法，用于满足需要重置所有菜单选项的场景。分为 重置选项（包括默认值）和 重置为默认值。具体说明请看文档。
+
 ### 1.1.8
 
 更新日期：2019.06.18
@@ -485,7 +529,7 @@ reflexTitle | Boolean | false | 是否将选择的结果映射到菜单title上�
 属性名 | 类型 | 默认值 | 说明
 ---- | ---- | ---- | ----
 isTransNav | Boolean | false | 是否需要设置距离顶部的高度。比如你的导航栏为沉浸式导航栏或者自定义导航栏。如果不需要，则不用设置此属性
-navHeight | Number | 0 | 弹出层距离顶部的高度，需先设置:isTransNav="true"
+navHeight | Number | 0 | 单位px。弹出层距离顶部的高度，需先设置:isTransNav="true"
 
 ### 1.0.9
 
@@ -503,6 +547,8 @@ defaultSelectedIndex | Array/Number |  | 默认选中的选项，可不设置。
 ---- | ---- | ----
 Array | 'defaultSelectedIndex': [1,2,5] | 当菜单为多选时('isMutiple': true)，如果默认选中多个选项，可将defaultSelectedIndex设置为数组。单选菜单和排序菜单请不要设置数组。
 Number | 'defaultSelectedIndex': 1 | 当菜单为单选或多选菜单只有一个默认值时，可设置为Number，如果你不小心设置为了String类型，也是没问题的。
+
+
 
 
 ### 1.0.8

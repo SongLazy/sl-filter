@@ -146,7 +146,8 @@ var _default2 =
       selectDetailList: [],
       independenceObj: {},
       selectedKey: '',
-      cacheSelectedObj: {} };
+      cacheSelectedObj: {},
+      defaultSelectedTitleObj: {} };
 
   },
   props: {
@@ -176,41 +177,12 @@ var _default2 =
       }
       return obj;
     },
+    defaultSelectedObj: function defaultSelectedObj() {// 保存初始状态
+      return this.getSelectedObj();
+    },
     selectedObj: {
       get: function get() {
-        var obj = {};
-        for (var i = 0; i < this.menuList.length; i++) {
-          var item = this.menuList[i];
-          if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) {// 处理并列菜单默认值
-
-            if (item.isMutiple) {
-              obj[item.key] = [];
-              item.detailList[0].isSelected = false;
-              if (!Array.isArray(item.defaultSelectedIndex)) {// 如果默认值不是数组
-                item.defaultSelectedIndex = [item.defaultSelectedIndex];
-              }
-              for (var j = 0; j < item.defaultSelectedIndex.length; j++) {// 将默认选中的值放入selectedObj
-                item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
-                obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value);
-              }
-
-            } else {
-              obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
-              this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
-              item.detailList[0].isSelected = false;
-              item.detailList[item.defaultSelectedIndex].isSelected = true;
-            }
-          } else {
-            if (item.isMutiple) {
-              obj[item.key] = [];
-            } else {
-              obj[item.key] = '';
-            }
-          }
-        }
-        this.result = obj;
-
-        return obj;
+        return this.getSelectedObj();
       },
       set: function set(newObj) {
         return newObj;
@@ -219,8 +191,121 @@ var _default2 =
 
 
   methods: {
-    menuTabClick: function menuTabClick(index) {
+    getSelectedObj: function getSelectedObj() {
+      var obj = {};
+      for (var i = 0; i < this.menuList.length; i++) {
+        var item = this.menuList[i];
+        if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) {// 处理并列菜单默认值
 
+          if (item.isMutiple) {
+            obj[item.key] = [];
+            item.detailList[0].isSelected = false;
+            if (!Array.isArray(item.defaultSelectedIndex)) {// 如果默认值不是数组
+              item.defaultSelectedIndex = [item.defaultSelectedIndex];
+            }
+            for (var j = 0; j < item.defaultSelectedIndex.length; j++) {// 将默认选中的值放入selectedObj
+              item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
+              obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value);
+            }
+
+          } else {
+            obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
+            this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+            this.defaultSelectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+            item.detailList[0].isSelected = false;
+            item.detailList[item.defaultSelectedIndex].isSelected = true;
+          }
+        } else {
+          if (item.isMutiple) {
+            obj[item.key] = [];
+          } else {
+            obj[item.key] = '';
+          }
+        }
+      }
+      this.result = obj;
+      return obj;
+    },
+    // 重置所有选项，包括默认选项，并更新result
+    resetAllSelect: function resetAllSelect(callback) {
+      var titles = [];
+      for (var i = 0; i < this.menuList.length; i++) {
+        this.resetSelected(this.menuList[i].detailList, this.menuList[i].key);
+        titles[this.menuList[i].key] = this.menuList[i].title;
+      }
+      var obj = {
+        'result': this.result,
+        'titles': titles,
+        'isReset': true };
+
+      this.$emit("confirm", obj);
+      callback(this.result);
+    },
+    // 重置选项为设置的默认值，并更新result
+    resetSelectToDefault: function resetSelectToDefault(callback) {
+      for (var i = 0; i < this.menuList.length; i++) {
+        this.selectDetailList = this.menuList[i].detailList;
+
+        if (this.menuList[i].defaultSelectedIndex) {
+          if (Array.isArray(this.menuList[i].defaultSelectedIndex)) {// 把所有默认的为false的点为true
+            for (var j = 0; j < this.menuList[i].defaultSelectedIndex.length; j++) {
+              if (this.selectDetailList[this.menuList[i].defaultSelectedIndex[j]].isSelected == false) {
+                this.itemTap(this.menuList[i].defaultSelectedIndex[j], this.selectDetailList, this.menuList[i].isMutiple, this.
+                menuList[i].key);
+              }
+            }
+          } else {
+            this.itemTap(this.menuList[i].defaultSelectedIndex, this.selectDetailList, this.menuList[i].isMutiple, this.menuList[
+            i].key);
+          }
+
+          // 获取非默认项的下标
+          var unDefaultSelectedIndexArr = this.getUnDefaultSelectedIndex(this.menuList[i]);
+          // 把所有不是默认的为true的点为false
+          for (var _j = 0; _j < unDefaultSelectedIndexArr.length; _j++) {
+            if (this.selectDetailList[unDefaultSelectedIndexArr[_j]].isSelected == true) {
+              this.itemTap(unDefaultSelectedIndexArr[_j], this.selectDetailList, this.menuList[i].isMutiple, this.
+              menuList[i].key);
+            }
+          }
+        }
+
+
+      }
+
+      this.selectedObj = this.defaultSelectedObj;
+      this.result = this.defaultSelectedObj;
+      var obj = {
+        'result': this.result,
+        'titles': this.defaultSelectedTitleObj,
+        'isReset': true };
+
+      this.$emit("confirm", obj);
+      callback(this.result);
+    },
+    getUnDefaultSelectedIndex: function getUnDefaultSelectedIndex(menuListItem) {// 获取非默认项
+      var tempDefault = menuListItem.defaultSelectedIndex;
+      if (!Array.isArray(tempDefault)) {
+        tempDefault = [tempDefault];
+      }
+      // 获取所有项的下标 组成新的数组
+      var all = [];
+      for (var i = 0; i < menuListItem.detailList.length; i++) {
+        all.push(i);
+      }
+      // 将默认选中的数组与所有项的数组的不同值合并为一个新数组
+      var unDefaultSelectedIndex = tempDefault.filter(function (v) {
+        return !(all.indexOf(v) > -1);
+      }).concat(all.filter(function (v) {
+        return !(tempDefault.indexOf(v) > -1);
+      }));
+      return unDefaultSelectedIndex;
+    },
+    resetMenuList: function resetMenuList(val) {
+      this.menuList = val;
+      this.$emit('update:menuList', val);
+    },
+    menuTabClick: function menuTabClick(index) {
       this.menuIndex = index;
       this.selectDetailList = this.menuList[index].detailList;
       this.selectedKey = this.menuList[index].key;
@@ -346,8 +431,10 @@ var _default2 =
     resetSelected: function resetSelected(list, key) {
       if (typeof this.result[key] == 'object') {
         this.result[key] = [];
+        this.selectedTitleObj[key] = list[0].title;
       } else {
         this.result[key] = '';
+        this.selectedTitleObj[key] = list[0].title;
       }
       for (var i = 0; i < list.length; i++) {
         if (i == 0) {
@@ -379,14 +466,16 @@ var _default2 =
       }
       var obj = {
         'result': this.result,
-        'titles': this.selectedTitleObj };
+        'titles': this.selectedTitleObj,
+        'isReset': false };
 
       this.$emit("confirm", obj);
     },
     sureClick: function sureClick() {
       var obj = {
         'result': this.result,
-        'titles': this.selectedTitleObj };
+        'titles': this.selectedTitleObj,
+        'isReset': false };
 
       this.$emit("confirm", obj);
     },
