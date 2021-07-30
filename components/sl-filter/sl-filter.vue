@@ -73,76 +73,39 @@
 				set(newObj) {
 					return newObj;
 				}
-			}
-		},
-		// #ifndef H5
-		onReady: function() {
-			let arr = [];
-			let titleArr = [];
-			let r = {};
-			for (let i = 0; i < this.menuList.length; i++) {
-				arr.push({
-					'isActive': false
-				});
-				// titleArr.push({
-				// 	'title': this.menuList[i].title,
-				// 	'key': this.menuList[i].key
-				// })
-
-				r[this.menuList[i].key] = this.menuList[i].title;
-
-				if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
-					titleArr.push({
-						'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
-						'key': this.menuList[i].key
-					})
-				} else {
-					titleArr.push({
-						'title': this.menuList[i].title,
-						'key': this.menuList[i].key
-					})
+			},
+			titleList(){
+				// 使用计算属性来替换生命周期，这样App H5 Ios 都可以兼容
+				let arr = [];
+				let titleArr = [];
+				let r = {};
+				console.log(this.menuList)
+				for (let i = 0; i < this.menuList.length; i++) {
+					arr.push({
+						'isActive': false
+					});				
+					r[this.menuList[i].key] = this.menuList[i].title;
+				
+					if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
+						titleArr.push({
+							'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
+							'key': this.menuList[i].key
+						})
+					} else {
+						titleArr.push({
+							'title': this.menuList[i].title,
+							'key': this.menuList[i].key
+						})
+					}
+				
 				}
-
+				this.statusList = arr;
+				
+				this.tempTitleObj = r;
+				return titleArr;
 			}
-			this.statusList = arr;
-			this.titleList = titleArr;
-			this.tempTitleObj = r;
 		},
-		// #endif
 
-		// #ifdef H5
-		created: function() {
-			let arr = [];
-			let titleArr = [];
-			let r = {};
-			for (let i = 0; i < this.menuList.length; i++) {
-				arr.push({
-					'isActive': false
-				});
-				// titleArr.push({
-				// 	'title': this.menuList[i].title,
-				// 	'key': this.menuList[i].key
-				// });
-				r[this.menuList[i].key] = this.menuList[i].title;
-
-				if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
-					titleArr.push({
-						'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
-						'key': this.menuList[i].key
-					})
-				} else {
-					titleArr.push({
-						'title': this.menuList[i].title,
-						'key': this.menuList[i].key
-					})
-				}
-
-			}
-			this.statusList = arr;
-			this.titleList = titleArr;
-			this.tempTitleObj = r;
-		},
-		// #endif
 		data() {
 			return {
 				down: 'sl-down',
@@ -150,7 +113,6 @@
 				tabHeight: 50,
 				statusList: [],
 				selectedIndex: '',
-				titleList: [],
 				tempTitleObj: {}
 			};
 		},
